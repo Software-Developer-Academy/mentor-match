@@ -2,7 +2,20 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+### Setup DB
+
+1. Either run it locally or create a cloud DB.
+
+#### Local
+
+1. `docker run --name mongodb -d -p 27017:27017 mongodb/mongodb-community-server:latest`
+
+### Copy .env.example to .env.local
+
+1. `cp .env.example .env.local`
+1. Modify the `MONGO_URI` string to your DB connection _(the default string is for local DB connection)_
+
+Run the development server:
 
 ```bash
 npm run dev
