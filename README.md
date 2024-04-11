@@ -2,6 +2,33 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+### Clone the Repository
+
+1. Open your terminal or command prompt.
+2. Navigate to the directory where you want to clone the repository.
+3. Run the following command to clone the repository:
+
+    ```bash
+    git clone <repository-url>
+    ```
+
+    Replace `<repository-url>` with the actual URL of the repository.
+
+### Create a New Branch
+
+After cloning the repository, it's a good practice to create a new branch for your feature work. Here's how you can do it:
+
+1. Navigate to the cloned repository directory.
+2. Run the following command to create a new branch:
+
+    ```bash
+    git checkout -b <branch-name>
+    ```
+
+    Replace `<branch-name>` with the name of your new branch.
+
+Remember, it's a good practice to name the branch something that describes the feature you're working on.
+
 ### Setup DB
 
 1. Either run it locally or create a cloud DB.
