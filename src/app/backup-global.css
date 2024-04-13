@@ -1,0 +1,22 @@
+
+
+  @layer base {
+    :root {
+
+        /* modified colors */
+      /* updated to design */
+      --primary: 196 100% 27%;
+      --primary-foreground: 0 0 100%;
+      --primary-accent: 56 163 202;
+
+      --secondary: 73 52% 60%;
+      --secondary-foreground: 0 0 0;
+      --secondary-accent: 56 163 202;
+      
+      --tertiary: 37 98% 53%;
+      --tertiary-foreground: 0 0 0;
+      --tertiary-accent: 56 163 202;
+
+      --mmgray: #E5E5E5;
+    }
+  }
