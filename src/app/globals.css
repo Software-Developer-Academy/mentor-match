@@ -1,6 +1,6 @@
 @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+@tailwind components;
+@tailwind utilities;
 
   @layer base {
     :root {
@@ -28,8 +28,10 @@
       --tertiary-accent: 37 91 73;
 
       --mmgray: #E5E5E5;
-      
+      --mmgray-accent: #767676;
+
       --muted: 210 40% 96.1%;
+      /* --muted-foreground: 215.4 16.3% 46.9%; */
       --muted-foreground: 215.4 16.3% 46.9%;
 
       --accent: 210 40% 96.1%;
@@ -87,3 +89,16 @@
       @apply bg-background text-foreground;
     }
   }
+
+  h1 {
+    font-family: var(--andada-pro);
+    font-weight: bold;
+    font-size: 64px;
+  }
+
+  p {
+    font-family: var(--poppins);
+    font-weight: 300;
+    font-size: 16px;
+  }
+

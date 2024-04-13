@@ -10,15 +10,15 @@ const buttonVariants = cva(
 		variants: {
 			variant: {
 				default:
-					"bg-gradient-to-r from-primary to-primary-accent text-primary-foreground hover:bg-gradient-to-l from-primary to-primary-accent",
+					"bg-gradient-to-r from-primary to-primary-accent text-primary-foreground hover:from-primary-accent hover:to-primary-accent",
 				destructive:
 					"bg-destructive text-destructive-foreground hover:bg-destructive/90",
 				outline:
 					"border border-input bg-background hover:bg-accent hover:text-accent-foreground",
 				secondary:
-					"bg-gradient-to-r from-secondary to-secondary-accent text-primary-foreground hover:bg-gradient-to-l from-secondary to-secondary-accent",
+					"bg-gradient-to-r from-secondary to-secondary-accent text-primary-foreground hover:from-secondary-accent hover:to-secondary-accent",
 				tertiary:
-					"bg-gradient-to-r from-tertiary to-tertiary-accent text-primary-foreground hover:bg-gradient-to-l from-tertiary to-tertiary-accent",
+					"bg-gradient-to-r from-tertiary to-tertiary-accent text-primary-foreground hover:from-tertiary-accent hover:to-tertiary-accent",
 				ghost: "hover:bg-accent hover:text-accent-foreground",
 				link: "text-primary underline-offset-4 hover:underline",
 			},

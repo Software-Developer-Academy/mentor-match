@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { GradButton } from "@/components/ui/grad-button";
 import React from "react";
+import TestForm from "@/components/TestForm";
 
 const AccountQuestionnaire = () => {
 	return (
@@ -15,6 +16,8 @@ const AccountQuestionnaire = () => {
 			<GradButton>hi</GradButton>
 			<GradButton variant="secondary">hi</GradButton>
 			<GradButton variant={"tertiary"}>hi</GradButton>
+
+			<TestForm />
 		</div>
 	);
 };

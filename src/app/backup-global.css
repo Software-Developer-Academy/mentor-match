@@ -18,5 +18,8 @@
       --tertiary-accent: 56 163 202;
 
       --mmgray: #E5E5E5;
+      --mmgray-accent: #767676;
+
+      --muted-foreground: #767676;
     }
   }
