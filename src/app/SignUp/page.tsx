@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { GradButton } from "@/components/ui/grad-button";
+import SignUpImage from "@/components/ui/signup-image";
 
 const SignUp = () => {
   return (
@@ -9,7 +11,7 @@ const SignUp = () => {
             <h1 className="flex flex-col font-bold text-6xl text-white mb-5">
               Welcome to
             </h1>
-            <h1 className="flex flex-col text-6xl text-[#87CE63] mb-10">
+            <h1 className="flex flex-col text-6xl text-[#87ce64] mb-10">
               Mentor Match
             </h1>
             <p className="flex text-3xl text-white">
@@ -17,12 +19,7 @@ const SignUp = () => {
             </p>
           </div>
           <div className="flex mt-24">
-            <Image
-              src="/images/SignupGraphic.svg"
-              width={1000}
-              height={1000}
-              alt="Mentor Match Image describing the app"
-            />
+            <SignUpImage />
           </div>
         </div>
         <div className="flex flex-col justify-center items-center px-10 mb-10 w-1/2">
@@ -76,9 +73,9 @@ const SignUp = () => {
                 />
               </div>
               <div className="mb-10">
-                <button className="bg-[#00658A]  hover:bg-[#2f91b4] text-white font-bold py-2 px-4 w-full rounded size-12">
+                <GradButton variant="default" className="w-full">
                   Sign Up
-                </button>
+                </GradButton>
               </div>
               <div className="flex justify-center mb-5 ">
                 <p className="text-black font-semibold text-xl">
