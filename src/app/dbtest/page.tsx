@@ -18,10 +18,10 @@ const dbTest = () => {
 
    // code to enter sample data to the database here
    const sampleUser = new UserModel({
-      name: "John Doe",
-      email: "john@example.com",
+      name: "Kalpesh KD",
+      email: "kd@example.com",
       password: "password123",
-      userIntro: "Hello, my name is John and I am a software developer",
+      userIntro: "Hello, my name is KD and I am a software developer",
       userRole: UserRole.Admin,
       userSkills: ["JavaScript", "React"],
       yearsOfProfessionalExperience: 5,
