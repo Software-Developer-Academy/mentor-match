@@ -16,7 +16,7 @@ export interface User extends Document {
    email: string;
    password: string;
    userIntro: string;
-   userRole: string;
+   userRole: [string];
    userSkills: [];
    yearsOfProfessionalExperience: number;
    timeZoneUTCOffset: number;
@@ -40,10 +40,9 @@ const UserSchema: Schema<User> = new Schema({
    },
    userIntro: {
       type: String,
-      required: true,
    },
    userRole: {
-      type: String,
+      type: [String],
       required: true,
    },
    userSkills: {
@@ -51,15 +50,20 @@ const UserSchema: Schema<User> = new Schema({
    },
    yearsOfProfessionalExperience: {
       type: Number,
+      min: 0,
+      max: 100,
    },
    timeZoneUTCOffset: {
       type: Number,
+      min: -12,
+      max: 12,
    },
    availability: {
       type: String,
    },
    meetingPreference: {
       type: String,
+      enum: Object.values(MeetingPreference),
    },
 });
 
