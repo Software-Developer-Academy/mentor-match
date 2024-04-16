@@ -15,8 +15,8 @@ const SignUp = () => {
 
   const signUpSchema = z.object({
     fullName: z.string()
-      .min(A, { message: `Name must be at least ${A} characters long` })
-      .max(B, { message: `Name must be no more than ${B} characters long` })
+      .min(MIN_NAME_LENGTH, { message: `Name must be at least ${MIN_NAME_LENGTH} characters long` })
+      .max(MAX_NAME_LENGTH, { message: `Name must be no more than ${MAX_NAME_LENGTH} characters long` })
       .regex(/^[a-zA-Z'-]+$/, { message: "Name can only include alphabetical characters, hyphens, and apostrophes" }),
     email: z.string()
       .email({ message: "Please enter a valid email" }),
