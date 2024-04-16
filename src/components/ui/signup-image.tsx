@@ -1,6 +1,13 @@
 const SignUpImage = () => {
   return (
-    <svg class="signup" width="854" height="571" viewBox="0 0 854 571" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      class="signup"
+      width="854"
+      height="571"
+      viewBox="0 0 854 571"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M468.355 121.134C466.485 111.763 453.614 94.8004 431.156 95.4179C405.013 96.1443 394.029 125.547 398.332 150.809L405.304 159.799C405.304 159.799 429.123 151.681 424.185 124.348C424.185 124.348 466.522 130.414 468.373 121.152L468.355 121.134Z"
         fill="#181818"
