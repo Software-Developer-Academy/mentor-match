@@ -1,8 +1,41 @@
+'use client'
+
 import Image from "next/image";
 import { GradButton } from "@/components/ui/grad-button";
 import SignUpImage from "@/components/ui/signup-image";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
 const SignUp = () => {
+
+  // Example values for A and B
+  const A = 3; // Minimum length
+  const B = 30; // Maximum length
+
+  const signUpSchema = z.object({
+    fullName: z.string()
+      .min(A, { message: `Name must be at least ${A} characters long` })
+      .max(B, { message: `Name must be no more than ${B} characters long` })
+      .regex(/^[a-zA-Z'-]+$/, { message: "Name can only include alphabetical characters, hyphens, and apostrophes" }),
+    email: z.string()
+      .email({ message: "Please enter a valid email" }),
+    password: z.string()
+      .min(8, { message: "Password must be at least 8 characters long" })
+      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, { message: "Password must include uppercase, lowercase, number, and special character" }),
+    confirmPassword: z.string()
+  }).refine(data => data.password === data.confirmPassword, {
+    message: "Passwords must match",
+    path: ["confirmPassword"]
+  });
+
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(signUpSchema)
+  });
+
+  // Callback for when the data is valid.
+  const onSubmit = (data: any) => console.log(data);
+
   return (
     <section className="h-full">
       <div className="flex flex-1 self-center">
@@ -35,42 +68,58 @@ const SignUp = () => {
             <h2 className="text-3xl mb-5 font-semibold">Create your account</h2>
           </div>
           <div className="flex items-center px-12 mb-10 w-full">
-            <form action="" className="w-full">
-              <div className="flex mb-10">
+            <form onSubmit={handleSubmit(onSubmit)} action="" className="w-full">
+              <div className="mb-4">
                 <input
                   type="text"
                   placeholder="Full Name"
                   maxLength={200}
                   className="w-full bg-gray-300 text-black size-12 placeholder:text-black border px-4 rounded"
                   required
+                  {...register("fullName")}
                 />
+                {errors.fullName?.message && typeof errors.fullName.message === 'string' && (
+                  <p className="text-red-500 text-sm mt-1">{errors.fullName.message}</p>
+                )}
               </div>
-              <div className="flex mb-10">
+              <div className="mb-4">
                 <input
                   type="email"
                   placeholder="Email"
                   maxLength={200}
                   className="w-full bg-gray-300 text-black size-12 placeholder:text-black border px-4 rounded"
                   required
+                  {...register("email")}
                 />
+                {errors.email?.message && typeof errors.email.message === 'string' && (
+                  <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+                )}
               </div>
-              <div className="mb-10">
+              <div className="mb-4">
                 <input
                   type="password"
                   placeholder="Password"
                   maxLength={64}
                   className="w-full bg-gray-300 text-black size-12 placeholder:text-black border px-4 rounded"
                   required
+                  {...register("password")}
                 />
+                {errors.password?.message && typeof errors.password.message === 'string' && (
+                  <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+                )}
               </div>
-              <div className="mb-10">
+              <div className="mb-4">
                 <input
                   type="password"
                   placeholder="Confirm Password"
                   maxLength={64}
                   className="w-full bg-gray-300 text-black size-12 placeholder:text-black border px-4 rounded"
                   required
+                  {...register("confirmPassword")}
                 />
+                {errors.confirmPassword?.message && typeof errors.confirmPassword.message === 'string' && (
+                  <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>
+                )}
               </div>
               <div className="mb-10">
                 <GradButton variant="default" className="w-full">
