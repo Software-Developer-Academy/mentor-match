@@ -10,8 +10,8 @@ import { useForm } from "react-hook-form";
 const SignUp = () => {
 
   // Example values for A and B
-  const A = 3; // Minimum length
-  const B = 30; // Maximum length
+  const MIN_NAME_LENGTH = 3; // Minimum length
+  const MAX_NAME_LENGTH = 30; // Maximum length
 
   const signUpSchema = z.object({
     fullName: z.string()
