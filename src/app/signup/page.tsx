@@ -38,6 +38,7 @@ const SignUp = () => {
             <form action="" className="w-full">
               <div className="flex mb-10">
                 <input
+                  autoFocus
                   type="text"
                   placeholder="Full Name"
                   maxLength={200}
