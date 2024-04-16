@@ -68,7 +68,7 @@ const SignUp = () => {
             <h2 className="text-3xl mb-5 font-semibold">Create your account</h2>
           </div>
           <div className="flex items-center px-12 mb-10 w-full">
-            <form onSubmit={handleSubmit(onSubmit)} action="" className="w-full">
+            <form onSubmit={handleSubmit(onSubmit)} className="w-full">
               <div className="mb-4">
                 <input
                   type="text"
