@@ -2,6 +2,16 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+## Contributing
+
+### Join us in project discussion
+
+<a href="https://discord.gg/mg4mvCjE"><img src="https://img.shields.io/badge/discord-%237289DA.svg?&style=for-the-badge&logo=discord&logoColor=white " /></a>
+<a href="https://www.figma.com/file/Fiz0RIIZkZsgnzGDPb603b/Mentor-Match?type=design&node-id=8-2&mode=design"><img src="https://img.shields.io/badge/figma-%23F24E1E.svg?&style=for-the-badge&logo=figma&logoColor=white" /></a>
+
+- Click the icon or link: https://discord.gg/mg4mvCjE
+- Click the icon or link: https://www.figma.com/file/Fiz0RIIZkZsgnzGDPb603b/Mentor-Match?type=design&node-id=8-2&mode=design
+
 ### Clone the Repository
 
 1. Open your terminal or command prompt.
