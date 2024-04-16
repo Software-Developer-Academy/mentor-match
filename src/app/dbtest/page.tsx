@@ -1,18 +1,7 @@
 import { connectMongo } from "@/lib/db";
 import UserModel, { UserRole, MeetingPreference } from "@/lib/User/model";
 import React from "react";
-// import TestForm from "@/components/TestForm";
 
-/**
- * Connects to the MongoDB database and saves a sample user to the database.
- *
- * This function is used to test the database connection and perform a sample data
- * insertion operation. It creates a new `UserModel` instance with sample data and
- * saves it to the database.
- *
- * @returns A React component that displays a message indicating that the sample
- * data has been entered.
- */
 const dbTest = () => {
    connectMongo();
 
