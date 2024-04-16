@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import Image from "next/image";
 import { GradButton } from "@/components/ui/grad-button";
@@ -8,28 +8,47 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 const SignUp = () => {
-
   const MIN_NAME_LENGTH = 3;
   const MAX_NAME_LENGTH = 30;
 
-  const signUpSchema = z.object({
-    fullName: z.string()
-      .min(MIN_NAME_LENGTH, { message: `Name must be at least ${MIN_NAME_LENGTH} characters long` })
-      .max(MAX_NAME_LENGTH, { message: `Name must be no more than ${MAX_NAME_LENGTH} characters long` })
-      .regex(/^[a-zA-Z'-]+(?: [a-zA-Z'-]+)*$/, { message: "Name can only include alphabetical characters, hyphens, apostrophes, and internal spaces" }),
-    email: z.string()
-      .email({ message: "Please enter a valid email" }),
-    password: z.string()
-      .min(8, { message: "Password must be at least 8 characters long" })
-      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, { message: "Password must include uppercase, lowercase, number, and special character" }),
-    confirmPassword: z.string()
-  }).refine(data => data.password === data.confirmPassword, {
-    message: "Passwords must match",
-    path: ["confirmPassword"]
-  });
+  const signUpSchema = z
+    .object({
+      fullName: z
+        .string()
+        .min(MIN_NAME_LENGTH, {
+          message: `Name must be at least ${MIN_NAME_LENGTH} characters long`,
+        })
+        .max(MAX_NAME_LENGTH, {
+          message: `Name must be no more than ${MAX_NAME_LENGTH} characters long`,
+        })
+        .regex(/^[a-zA-Z'-]+(?: [a-zA-Z'-]+)*$/, {
+          message:
+            "Name can only include alphabetical characters, hyphens, apostrophes, and internal spaces",
+        }),
+      email: z.string().email({ message: "Please enter a valid email" }),
+      password: z
+        .string()
+        .min(8, { message: "Password must be at least 8 characters long" })
+        .regex(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+          {
+            message:
+              "Password must include uppercase, lowercase, number, and special character",
+          },
+        ),
+      confirmPassword: z.string(),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: "Passwords must match",
+      path: ["confirmPassword"],
+    });
 
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: zodResolver(signUpSchema)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(signUpSchema),
   });
 
   // Callback for when the data is valid.
@@ -78,9 +97,12 @@ const SignUp = () => {
                   required
                   {...register("fullName")}
                 />
-                {errors.fullName?.message && typeof errors.fullName.message === 'string' && (
-                  <p className="text-red-500 text-sm mt-1">{errors.fullName.message}</p>
-                )}
+                {errors.fullName?.message &&
+                  typeof errors.fullName.message === "string" && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.fullName.message}
+                    </p>
+                  )}
               </div>
               <div className="mb-4">
                 <input
@@ -91,9 +113,12 @@ const SignUp = () => {
                   required
                   {...register("email")}
                 />
-                {errors.email?.message && typeof errors.email.message === 'string' && (
-                  <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
-                )}
+                {errors.email?.message &&
+                  typeof errors.email.message === "string" && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.email.message}
+                    </p>
+                  )}
               </div>
               <div className="mb-4">
                 <input
@@ -104,9 +129,12 @@ const SignUp = () => {
                   required
                   {...register("password")}
                 />
-                {errors.password?.message && typeof errors.password.message === 'string' && (
-                  <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
-                )}
+                {errors.password?.message &&
+                  typeof errors.password.message === "string" && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.password.message}
+                    </p>
+                  )}
               </div>
               <div className="mb-4">
                 <input
@@ -117,9 +145,12 @@ const SignUp = () => {
                   required
                   {...register("confirmPassword")}
                 />
-                {errors.confirmPassword?.message && typeof errors.confirmPassword.message === 'string' && (
-                  <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>
-                )}
+                {errors.confirmPassword?.message &&
+                  typeof errors.confirmPassword.message === "string" && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.confirmPassword.message}
+                    </p>
+                  )}
               </div>
               <div className="mb-10">
                 <GradButton variant="default" className="w-full">
