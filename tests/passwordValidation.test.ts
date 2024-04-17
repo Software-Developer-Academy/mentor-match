@@ -16,14 +16,14 @@ test("password validation", async (t) => {
     "should reject a password without uppercase letters",
     async () => {
       assert.strictEqual(passwordRegex.test("password11."), false);
-    }
+    },
   );
 
   await t.test(
     "should reject a password without lowercase letters",
     async () => {
       assert.strictEqual(passwordRegex.test("PASSWORD11."), false);
-    }
+    },
   );
 
   await t.test("should reject a password without numbers", async () => {
@@ -34,6 +34,6 @@ test("password validation", async (t) => {
     "should reject a password without special characters",
     async () => {
       assert.strictEqual(passwordRegex.test("Password11"), false);
-    }
+    },
   );
 });
