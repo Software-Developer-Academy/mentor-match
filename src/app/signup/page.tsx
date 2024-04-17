@@ -6,6 +6,7 @@ import SignUpImage from "@/components/ui/signup-image";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { passwordRegex } from "@/lib/utils";
 
 const SignUp = () => {
   const MIN_NAME_LENGTH = 3;
@@ -29,13 +30,10 @@ const SignUp = () => {
       password: z
         .string()
         .min(8, { message: "Password must be at least 8 characters long" })
-        .regex(
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,}$/,
-          {
-            message:
-              "Password must include uppercase, lowercase, number, and special character",
-          }
-        ),
+        .regex(passwordRegex, {
+          message:
+            "Password must include uppercase, lowercase, number, and special character",
+        }),
       confirmPassword: z.string(),
     })
     .refine((data) => data.password === data.confirmPassword, {

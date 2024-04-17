@@ -1,8 +1,9 @@
 const test = require("node:test");
 const assert = require("node:assert");
 
-const passwordRegex =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,}$/;
+//import { passwordRegex } from "../src/lib/utils";
+
+const { passwordRegex } = require("../src/lib/utils");
 
 test("password validation", async (t) => {
   await t.test("should accept a valid password", async () => {
