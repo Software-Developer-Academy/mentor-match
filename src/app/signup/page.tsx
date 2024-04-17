@@ -50,10 +50,6 @@ const SignUp = () => {
     resolver: zodResolver(signUpSchema),
   });
 
-  const onSubmit = (data: any) => {
-    signupUser(data);
-  };
-
   return (
     <section className="h-full">
       <div className="flex flex-1 self-center">
@@ -86,7 +82,11 @@ const SignUp = () => {
             <h2 className="text-3xl mb-5 font-semibold">Create your account</h2>
           </div>
           <div className="flex items-center px-12 mb-10 w-full">
-            <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+            <form
+              // @ts-ignore
+              onSubmit={handleSubmit((data) => signupUser(data))}
+              className="w-full"
+            >
               <div className="mb-4">
                 <input
                   autoFocus
