@@ -10,7 +10,7 @@ const cached: {
 export async function connectMongo() {
   if (!MONGO_URI) {
     throw new Error(
-      "Please define the MONGO_URI environment variable inside .env.local"
+      "Please define the MONGO_URI environment variable inside .env.local",
     );
   }
 
@@ -31,6 +31,6 @@ export async function connectMongo() {
     cached.promise = undefined;
     throw e;
   }
-  
+
   return cached.connection;
 }
