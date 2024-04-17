@@ -15,9 +15,9 @@ export interface User extends Document {
    name: string;
    email: string;
    password: string;
-   userIntro: string;
-   userRole: [string];
-   userSkills: [];
+   intro: string;
+   role: [string];
+   skills: [];
    yearsOfProfessionalExperience: number;
    timeZoneUTCOffset: number;
    availability: string;
@@ -38,14 +38,14 @@ const UserSchema: Schema<User> = new Schema({
       type: String,
       required: true,
    },
-   userIntro: {
+   intro: {
       type: String,
    },
-   userRole: {
+   role: {
       type: [String],
       required: true,
    },
-   userSkills: {
+   skills: {
       type: [String],
    },
    yearsOfProfessionalExperience: {
