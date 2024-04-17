@@ -83,7 +83,7 @@ const SignUp = () => {
           </div>
           <div className="flex items-center px-12 mb-10 w-full">
             <form
-              // @ts-ignore
+              // @ts-expect-error Type mismatch
               onSubmit={handleSubmit((data) => signupUser(data))}
               className="w-full"
             >

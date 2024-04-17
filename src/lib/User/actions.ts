@@ -15,7 +15,7 @@ export async function signupUser(fields: Fields) {
   const { fullName, email, password, confirmPassword } = fields;
 
   if (!fullName || !email || !password || !confirmPassword) {
-    throw new Error("Must fill in all values");
+    throw new Error("Must fill in all values.");
   }
 
   if (password !== confirmPassword) {
