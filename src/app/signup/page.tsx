@@ -49,9 +49,6 @@ const SignUp = () => {
     resolver: zodResolver(signUpSchema),
   });
 
-  // Callback for when the data is valid.
-  const onSubmit = (data: any) => console.log(data);
-
   return (
     <section className="h-full">
       <div className="flex flex-1 self-center">
@@ -84,7 +81,10 @@ const SignUp = () => {
             <h2 className="text-3xl mb-5 font-semibold">Create your account</h2>
           </div>
           <div className="flex items-center px-12 mb-10 w-full">
-            <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+            <form
+              onSubmit={handleSubmit((data) => console.log(data))}
+              className="w-full"
+            >
               <div className="mb-4">
                 <input
                   autoFocus

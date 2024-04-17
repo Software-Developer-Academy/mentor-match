@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { connectMongo } from "@/lib/db";
-import UserModel, { UserRole, MeetingPreference } from "@/lib/User/model";
+import UserModel from "@/lib/User/model";
 
 export async function POST(request: NextRequest) {
   try {
@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
     await connectMongo();
 
     // Extract test data from request body
-    let payload = await request.json();
+    const payload = await request.json();
     const user = new UserModel(payload);
     await user.save();
 
