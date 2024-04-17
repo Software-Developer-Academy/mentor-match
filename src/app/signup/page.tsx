@@ -7,6 +7,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { passwordRegex } from "@/lib/utils";
+import { signupUser } from "@/lib/User/actions";
 
 const SignUp = () => {
   const MIN_NAME_LENGTH = 3;
@@ -49,8 +50,9 @@ const SignUp = () => {
     resolver: zodResolver(signUpSchema),
   });
 
-  // Callback for when the data is valid.
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (data: any) => {
+    signupUser(data);
+  };
 
   return (
     <section className="h-full">
