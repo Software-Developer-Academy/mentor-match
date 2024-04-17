@@ -1,9 +1,7 @@
-const test = require("node:test");
-const assert = require("node:assert");
+import test from "node:test";
+import assert from "node:assert";
 
-//import { passwordRegex } from "../src/lib/utils";
-
-const { passwordRegex } = require("../src/lib/utils");
+import { passwordRegex } from "@/lib/utils";
 
 test("password validation", async (t) => {
   await t.test("should accept a valid password", async () => {
