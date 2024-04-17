@@ -7,6 +7,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { passwordRegex } from "@/lib/utils";
+import { signupUser } from "@/lib/User/actions";
 
 const SignUp = () => {
   const MIN_NAME_LENGTH = 3;
@@ -82,7 +83,8 @@ const SignUp = () => {
           </div>
           <div className="flex items-center px-12 mb-10 w-full">
             <form
-              onSubmit={handleSubmit((data) => console.log(data))}
+              // @ts-expect-error Type mismatch
+              onSubmit={handleSubmit((data) => signupUser(data))}
               className="w-full"
             >
               <div className="mb-4">
