@@ -6,6 +6,8 @@ import SignUpImage from "@/components/ui/signup-image";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { passwordRegex } from "@/lib/utils";
+import { signupUser } from "@/lib/User/actions";
 
 const SignUp = () => {
   const MIN_NAME_LENGTH = 3;
@@ -29,13 +31,10 @@ const SignUp = () => {
       password: z
         .string()
         .min(8, { message: "Password must be at least 8 characters long" })
-        .regex(
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-          {
-            message:
-              "Password must include uppercase, lowercase, number, and special character",
-          },
-        ),
+        .regex(passwordRegex, {
+          message:
+            "Password must include uppercase, lowercase, number, and special character",
+        }),
       confirmPassword: z.string(),
     })
     .refine((data) => data.password === data.confirmPassword, {
@@ -50,9 +49,6 @@ const SignUp = () => {
   } = useForm({
     resolver: zodResolver(signUpSchema),
   });
-
-  // Callback for when the data is valid.
-  const onSubmit = (data: any) => console.log(data);
 
   return (
     <section className="h-full">
@@ -86,7 +82,11 @@ const SignUp = () => {
             <h2 className="text-3xl mb-5 font-semibold">Create your account</h2>
           </div>
           <div className="flex items-center px-12 mb-10 w-full">
-            <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+            <form
+              // @ts-expect-error Type mismatch
+              onSubmit={handleSubmit((data) => signupUser(data))}
+              className="w-full"
+            >
               <div className="mb-4">
                 <input
                   autoFocus
