@@ -7,11 +7,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [20.x]
-
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
@@ -23,5 +21,7 @@ jobs:
         id: build
         env:
           CI: true
+      - run: npm run format:check
+        if: success() || steps.build.conclusion == 'failure'
       - run: npm run test
         if: success() || steps.build.conclusion == 'failure'
