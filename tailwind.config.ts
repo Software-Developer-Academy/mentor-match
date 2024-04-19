@@ -40,8 +40,8 @@ const config = {
           accent: "hsl(var(--tertiary-accent))",
         },
         mmgray: {
-          DEFAULT: "var(--mmgray)",
-          accent: "var(--mmgray-accent)",
+          DEFAULT: "hsl(var(--mmgray))",
+          accent: "hsl(var(--mmgray-accent))",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
@@ -49,7 +49,7 @@ const config = {
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",
-          foreground: "var(--mmgray-accent)",
+          foreground: "hsl(var(--mmgray-accent))",
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",

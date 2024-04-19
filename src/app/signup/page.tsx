@@ -1,14 +1,21 @@
 "use client";
 
-import Image from "next/image";
 import { GradButton } from "@/components/ui/grad-button";
 import SignUpImage from "@/components/ui/signup-image";
+import { SignUpFieldErrors, signupUser } from "@/lib/User/actions";
+import { EMAIL_ALREADY_EXISTS_MSG, signUpSchema } from "@/lib/User/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Image from "next/image";
+import { useCallback, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { signupUser } from "@/lib/User/actions";
-import { signUpSchema } from "@/lib/User/validations";
 
 const SignUp = () => {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [serverErrors, setServerErrors] = useState<
+    SignUpFieldErrors | undefined
+  >();
+  const emailBeforeSubmission = useRef("");
+
   const {
     register,
     handleSubmit,
@@ -16,6 +23,15 @@ const SignUp = () => {
   } = useForm({
     resolver: zodResolver(signUpSchema),
   });
+
+  const combinedErrors = useCallback(() => {
+    return {
+      ...serverErrors,
+      ...errors,
+    };
+  }, [serverErrors, errors])();
+
+  const emailValidation = register("email");
 
   return (
     <section className="h-full">
@@ -50,74 +66,139 @@ const SignUp = () => {
           </div>
           <div className="flex items-center px-12 mb-10 w-full">
             <form
-              // @ts-expect-error Type mismatch
-              onSubmit={handleSubmit((data) => signupUser(data))}
+              ref={formRef}
+              onSubmit={handleSubmit(async (data) => {
+                const error = await signupUser(new FormData(formRef.current!));
+
+                if (error?.email?.length) {
+                  emailBeforeSubmission.current = data.email;
+                }
+
+                setServerErrors((prevError) => {
+                  if (!prevError) {
+                    return error;
+                  } else {
+                    return {
+                      ...prevError,
+                      ...error,
+                    };
+                  }
+                });
+              })}
               className="w-full"
+              noValidate
             >
               <div className="mb-4">
                 <input
                   autoFocus
+                  autoComplete="name"
                   type="text"
                   placeholder="Full Name"
-                  maxLength={200}
-                  className="w-full bg-gray-300 text-black size-12 placeholder:text-black border px-4 rounded"
-                  required
+                  aria-errormessage="fullNameError"
+                  className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
                   {...register("fullName")}
                 />
-                {errors.fullName?.message &&
-                  typeof errors.fullName.message === "string" && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.fullName.message}
-                    </p>
-                  )}
+                {combinedErrors.fullName && (
+                  <p id="fullNameError" className="text-red-500 text-sm mt-1">
+                    {Array.isArray(combinedErrors.fullName) ? (
+                      <>{combinedErrors.fullName[0]}</>
+                    ) : typeof combinedErrors.fullName.message === "string" ? (
+                      <>{combinedErrors.fullName.message}</>
+                    ) : (
+                      <>Invalid input</>
+                    )}
+                  </p>
+                )}
               </div>
               <div className="mb-4">
                 <input
                   type="email"
+                  autoComplete="email"
                   placeholder="Email"
-                  maxLength={200}
-                  className="w-full bg-gray-300 text-black size-12 placeholder:text-black border px-4 rounded"
-                  required
-                  {...register("email")}
+                  aria-errormessage="emailError"
+                  className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
+                  {...emailValidation}
+                  onChange={(e) => {
+                    if (emailBeforeSubmission.current === e.target.value) {
+                      setServerErrors((prevError) => {
+                        if (prevError) {
+                          return {
+                            ...prevError,
+                            email: [EMAIL_ALREADY_EXISTS_MSG],
+                          };
+                        }
+                      });
+                    } else if (serverErrors?.email) {
+                      setServerErrors((prevError) => {
+                        if (prevError) {
+                          return {
+                            ...prevError,
+                            email: undefined,
+                          };
+                        }
+                      });
+                    }
+
+                    emailValidation.onChange(e);
+                  }}
                 />
-                {errors.email?.message &&
-                  typeof errors.email.message === "string" && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.email.message}
-                    </p>
-                  )}
+                {combinedErrors.email && (
+                  <p id="emailError" className="text-red-500 text-sm mt-1">
+                    {Array.isArray(combinedErrors.email) ? (
+                      <>{combinedErrors.email[0]}</>
+                    ) : typeof combinedErrors.email.message === "string" ? (
+                      <>{combinedErrors.email.message}</>
+                    ) : (
+                      <>Invalid input</>
+                    )}
+                  </p>
+                )}
               </div>
               <div className="mb-4">
                 <input
                   type="password"
+                  autoComplete="new-password"
                   placeholder="Password"
-                  maxLength={64}
-                  className="w-full bg-gray-300 text-black size-12 placeholder:text-black border px-4 rounded"
-                  required
+                  aria-errormessage="passwordError"
+                  className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
                   {...register("password")}
                 />
-                {errors.password?.message &&
-                  typeof errors.password.message === "string" && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.password.message}
-                    </p>
-                  )}
+                {combinedErrors.password && (
+                  <p id="passwordError" className="text-red-500 text-sm mt-1">
+                    {Array.isArray(combinedErrors.password) ? (
+                      <>{combinedErrors.password[0]}</>
+                    ) : typeof combinedErrors.password.message === "string" ? (
+                      <>{combinedErrors.password.message}</>
+                    ) : (
+                      <>Invalid input</>
+                    )}
+                  </p>
+                )}
               </div>
               <div className="mb-4">
                 <input
                   type="password"
+                  autoComplete="new-password"
                   placeholder="Confirm Password"
-                  maxLength={64}
-                  className="w-full bg-gray-300 text-black size-12 placeholder:text-black border px-4 rounded"
-                  required
+                  aria-errormessage="confirmPasswordError"
+                  className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
                   {...register("confirmPassword")}
                 />
-                {errors.confirmPassword?.message &&
-                  typeof errors.confirmPassword.message === "string" && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.confirmPassword.message}
-                    </p>
-                  )}
+                {combinedErrors.confirmPassword && (
+                  <p
+                    id="confirmPasswordError"
+                    className="text-red-500 text-sm mt-1"
+                  >
+                    {Array.isArray(combinedErrors.confirmPassword) ? (
+                      <>{combinedErrors.confirmPassword[0]}</>
+                    ) : typeof combinedErrors.confirmPassword.message ===
+                      "string" ? (
+                      <>{combinedErrors.confirmPassword.message}</>
+                    ) : (
+                      <>Invalid input</>
+                    )}
+                  </p>
+                )}
               </div>
               <div className="mb-10">
                 <GradButton variant="default" className="w-full">
