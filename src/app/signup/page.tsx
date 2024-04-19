@@ -1,17 +1,21 @@
 "use client";
 
-import Image from "next/image";
 import { GradButton } from "@/components/ui/grad-button";
 import SignUpImage from "@/components/ui/signup-image";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { passwordRegex } from "@/lib/utils";
 import { signupUser } from "@/lib/User/actions";
+import { passwordRegex } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Image from "next/image";
+import { useMemo, useRef, useState } from "react";
+import { useFormState } from "react-dom";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 const SignUp = () => {
   const MIN_NAME_LENGTH = 3;
   const MAX_NAME_LENGTH = 30;
+  const MAX_EMAIL_LENGTH = 200;
+  const MAX_PASSWORD_LENGTH = 64;
 
   const signUpSchema = z
     .object({
@@ -42,13 +46,55 @@ const SignUp = () => {
       path: ["confirmPassword"],
     });
 
+  const formRef = useRef<HTMLFormElement>(null);
+  const [state, formAction] = useFormState(signupUser, undefined);
+  const previousEmailValue = useMemo(() => {
+    return state
+      ? state.find((s) => s.field === "email")?.previousValue?.toString() || ""
+      : "";
+  }, [state]);
+  const previousFullNameValue = useMemo(() => {
+    return state
+      ? state.find((s) => s.field === "fullName")?.previousValue?.toString() ||
+          ""
+      : "";
+  }, [state]);
+  const previousPasswordValue = useMemo(() => {
+    return state
+      ? state.find((s) => s.field === "password")?.previousValue?.toString() ||
+          ""
+      : "";
+  }, [state]);
+  const previousConfirmPasswordValue = useMemo(() => {
+    return state
+      ? state
+          .find((s) => s.field === "confirmPassword")
+          ?.previousValue?.toString() || ""
+      : "";
+  }, [state]);
+  const emailError = useMemo(() => {
+    return state?.find((error) => error.field === "email")?.message;
+  }, [state]);
+
+  const [showEmailStateError, setShowEmailStateError] = useState(
+    previousEmailValue !== "",
+  );
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(signUpSchema),
+    defaultValues: {
+      fullName: previousFullNameValue || "",
+      email: previousEmailValue || "",
+      password: previousPasswordValue || "",
+      confirmPassword: previousConfirmPasswordValue || "",
+    },
   });
+
+  const emailValidator = register("email");
 
   return (
     <section className="h-full">
@@ -83,18 +129,20 @@ const SignUp = () => {
           </div>
           <div className="flex items-center px-12 mb-10 w-full">
             <form
-              // @ts-expect-error Type mismatch
-              onSubmit={handleSubmit((data) => signupUser(data))}
+              ref={formRef}
+              action={formAction}
+              onSubmit={handleSubmit(() => formRef.current?.submit())}
               className="w-full"
             >
               <div className="mb-4">
                 <input
                   autoFocus
+                  autoComplete="given-name"
                   type="text"
                   placeholder="Full Name"
-                  maxLength={200}
-                  className="w-full bg-gray-300 text-black size-12 placeholder:text-black border px-4 rounded"
-                  required
+                  maxLength={MAX_EMAIL_LENGTH}
+                  defaultValue={previousFullNameValue}
+                  className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
                   {...register("fullName")}
                 />
                 {errors.fullName?.message &&
@@ -107,26 +155,43 @@ const SignUp = () => {
               <div className="mb-4">
                 <input
                   type="email"
+                  autoComplete="email"
                   placeholder="Email"
-                  maxLength={200}
-                  className="w-full bg-gray-300 text-black size-12 placeholder:text-black border px-4 rounded"
-                  required
-                  {...register("email")}
+                  maxLength={MAX_EMAIL_LENGTH}
+                  defaultValue={previousEmailValue}
+                  className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
+                  ref={emailValidator.ref}
+                  onBlur={emailValidator.onBlur}
+                  name={emailValidator.name}
+                  onChange={(evt) => {
+                    if (previousEmailValue) {
+                      setShowEmailStateError(
+                        evt.target.value === previousEmailValue,
+                      );
+                    }
+
+                    emailValidator.onChange(evt);
+                  }}
                 />
                 {errors.email?.message &&
+                  !showEmailStateError &&
                   typeof errors.email.message === "string" && (
                     <p className="text-red-500 text-sm mt-1">
                       {errors.email.message}
                     </p>
                   )}
+                {emailError && showEmailStateError && (
+                  <p className="text-red-500 text-sm mt-1">{emailError}</p>
+                )}
               </div>
               <div className="mb-4">
                 <input
                   type="password"
+                  autoComplete="new-password"
                   placeholder="Password"
-                  maxLength={64}
-                  className="w-full bg-gray-300 text-black size-12 placeholder:text-black border px-4 rounded"
-                  required
+                  defaultValue={previousPasswordValue}
+                  maxLength={MAX_PASSWORD_LENGTH}
+                  className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
                   {...register("password")}
                 />
                 {errors.password?.message &&
@@ -139,10 +204,11 @@ const SignUp = () => {
               <div className="mb-4">
                 <input
                   type="password"
+                  autoComplete="new-password"
                   placeholder="Confirm Password"
-                  maxLength={64}
-                  className="w-full bg-gray-300 text-black size-12 placeholder:text-black border px-4 rounded"
-                  required
+                  maxLength={MAX_PASSWORD_LENGTH}
+                  defaultValue={previousConfirmPasswordValue}
+                  className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
                   {...register("confirmPassword")}
                 />
                 {errors.confirmPassword?.message &&

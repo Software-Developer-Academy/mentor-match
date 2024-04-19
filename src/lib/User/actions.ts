@@ -1,25 +1,72 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import UserModel from "./model";
 import { connectMongo } from "../db";
+import UserModel from "./model";
 
-type Fields = {
-  fullName: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
+type FormError = {
+  field: string;
+  previousValue?: string | FormDataEntryValue | null;
+  message: string;
 };
 
-export async function signupUser(fields: Fields) {
-  const { fullName, email, password, confirmPassword } = fields;
+export async function signupUser(
+  _: FormError[] | undefined,
+  data: FormData,
+): Promise<FormError[] | undefined> {
+  const fullName = data.get("fullName");
+  const email = data.get("email");
+  const password = data.get("password");
+  const confirmPassword = data.get("confirmPassword");
 
   if (!fullName || !email || !password || !confirmPassword) {
-    throw new Error("Must fill in all values.");
+    return [
+      {
+        field: "fullName",
+        previousValue: fullName,
+        message: !fullName ? "Full name is required." : "",
+      },
+      {
+        field: "email",
+        previousValue: email,
+        message: !email ? "Email is required." : "",
+      },
+      {
+        field: "password",
+        previousValue: password,
+        message: !password ? "Password is required." : "",
+      },
+      {
+        field: "confirmPassword",
+        previousValue: confirmPassword,
+        message: !confirmPassword ? "Please confirm your password." : "",
+      },
+    ];
   }
 
   if (password !== confirmPassword) {
-    throw new Error("Password Confirm must match password.");
+    return [
+      {
+        field: "fullName",
+        previousValue: fullName,
+        message: "",
+      },
+      {
+        field: "email",
+        previousValue: email,
+        message: "",
+      },
+      {
+        field: "confirmPassword",
+        previousValue: confirmPassword,
+        message: "Passwords do not match.",
+      },
+      {
+        field: "password",
+        previousValue: password,
+        message: "Passwords do not match.",
+      },
+    ];
   }
 
   await connectMongo();
@@ -29,7 +76,28 @@ export async function signupUser(fields: Fields) {
   });
 
   if (existingUserWithEmail) {
-    throw new Error("User already exists.");
+    return [
+      {
+        field: "fullName",
+        previousValue: fullName,
+        message: "",
+      },
+      {
+        field: "email",
+        previousValue: email,
+        message: "An account with this email already exists.",
+      },
+      {
+        field: "password",
+        previousValue: password,
+        message: "",
+      },
+      {
+        field: "confirmPassword",
+        previousValue: confirmPassword,
+        message: "",
+      },
+    ];
   }
 
   try {
@@ -40,7 +108,9 @@ export async function signupUser(fields: Fields) {
     });
   } catch (e) {
     console.error(e);
-    throw new Error("Failed to create user.");
+    throw new Error(
+      "We encountered a problem creating your account. Please try again.",
+    );
   }
 
   return redirect("/");
