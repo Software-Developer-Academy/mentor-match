@@ -12,7 +12,6 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "target": "ESNext",
     "plugins": [
       {
         "name": "next"
