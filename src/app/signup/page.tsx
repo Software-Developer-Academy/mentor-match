@@ -2,20 +2,46 @@
 
 import { GradButton } from "@/components/ui/grad-button";
 import SignUpImage from "@/components/ui/signup-image";
-import { signupUser } from "@/lib/User/actions";
+import { SignUpFieldErrors, signupUser } from "@/lib/User/actions";
 import {
+  EMAIL_ALREADY_EXISTS_MSG,
   SIGNUP_MAX_EMAIL_LENGTH,
   SIGNUP_MAX_NAME_LENGTH,
   SIGNUP_MAX_PASSWORD_LENGTH,
   SIGNUP_MIN_NAME_LENGTH,
   SIGNUP_MIN_PASSWORD_LENGTH,
+  signUpSchema,
 } from "@/lib/User/validations";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
-import { Fragment } from "react";
-import { useFormState } from "react-dom";
+import { Fragment, useCallback, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 
 const SignUp = () => {
-  const [state, formAction] = useFormState(signupUser, undefined);
+  const formRef = useRef<HTMLFormElement>(null);
+  const [serverErrors, setServerErrors] = useState<
+    SignUpFieldErrors | undefined
+  >();
+  const [emailBeforeSubmission, setEmailBeforeSubmission] = useState<
+    string | undefined
+  >("");
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(signUpSchema),
+  });
+
+  const combinedErrors = useCallback(() => {
+    return {
+      ...serverErrors,
+      ...errors,
+    };
+  }, [serverErrors, errors])();
+
+  const emailValidation = register("email");
 
   return (
     <section className="h-full">
@@ -49,47 +75,103 @@ const SignUp = () => {
             <h2 className="text-3xl mb-5 font-semibold">Create your account</h2>
           </div>
           <div className="flex items-center px-12 mb-10 w-full">
-            <form action={formAction} className="w-full">
+            <form
+              ref={formRef}
+              onSubmit={handleSubmit(async (data) => {
+                const error = await signupUser(data);
+
+                if (error?.email?.length) {
+                  setEmailBeforeSubmission(data.email);
+                }
+
+                setServerErrors((prevError) => {
+                  if (!prevError) {
+                    return error;
+                  } else {
+                    return {
+                      ...prevError,
+                      ...error,
+                    };
+                  }
+                });
+              })}
+              className="w-full"
+              noValidate
+            >
               <div className="mb-4">
                 <input
                   autoFocus
                   autoComplete="given-name"
                   type="text"
-                  name="fullName"
                   placeholder="Full Name"
                   maxLength={SIGNUP_MAX_NAME_LENGTH}
                   minLength={SIGNUP_MIN_NAME_LENGTH}
                   aria-errormessage="fullNameError"
                   className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
                   required
+                  {...register("fullName")}
                 />
-                {state && state.fullName && (
+                {combinedErrors.fullName && (
                   <p id="fullNameError" className="text-red-500 text-sm mt-1">
-                    {state.fullName && <Fragment>{state.fullName[0]}</Fragment>}
+                    {Array.isArray(combinedErrors.fullName) ? (
+                      <Fragment>{combinedErrors.fullName[0]}</Fragment>
+                    ) : typeof combinedErrors.fullName.message === "string" ? (
+                      <Fragment>{combinedErrors.fullName.message}</Fragment>
+                    ) : (
+                      <Fragment>Invalid input</Fragment>
+                    )}
                   </p>
                 )}
               </div>
               <div className="mb-4">
                 <input
                   type="email"
-                  name="email"
                   autoComplete="email"
                   placeholder="Email"
                   maxLength={SIGNUP_MAX_EMAIL_LENGTH}
                   aria-errormessage="emailError"
                   className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
                   required
+                  {...emailValidation}
+                  onChange={(e) => {
+                    if (emailBeforeSubmission === e.target.value) {
+                      setServerErrors((prevError) => {
+                        if (prevError) {
+                          return {
+                            ...prevError,
+                            email: [EMAIL_ALREADY_EXISTS_MSG],
+                          };
+                        }
+                      });
+                    } else if (serverErrors?.email) {
+                      setServerErrors((prevError) => {
+                        if (prevError) {
+                          return {
+                            ...prevError,
+                            email: undefined,
+                          };
+                        }
+                      });
+                    }
+
+                    emailValidation.onChange(e);
+                  }}
                 />
-                {state && state.email && (
-                  <p id="emailError" className="text-red-500 text-sm mt-1">
-                    {state.email && <Fragment>{state.email[0]}</Fragment>}
+                {combinedErrors.email && (
+                  <p id="fullNameError" className="text-red-500 text-sm mt-1">
+                    {Array.isArray(combinedErrors.email) ? (
+                      <Fragment>{combinedErrors.email[0]}</Fragment>
+                    ) : typeof combinedErrors.email.message === "string" ? (
+                      <Fragment>{combinedErrors.email.message}</Fragment>
+                    ) : (
+                      <Fragment>Invalid input</Fragment>
+                    )}
                   </p>
                 )}
               </div>
               <div className="mb-4">
                 <input
                   type="password"
-                  name="password"
                   autoComplete="new-password"
                   placeholder="Password"
                   pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,}$"
@@ -98,17 +180,23 @@ const SignUp = () => {
                   aria-errormessage="passwordError"
                   className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
                   required
+                  {...register("password")}
                 />
-                {state && state.password && (
-                  <p id="passwordError" className="text-red-500 text-sm mt-1">
-                    {state.password && <Fragment>{state.password[0]}</Fragment>}
+                {combinedErrors.password && (
+                  <p id="fullNameError" className="text-red-500 text-sm mt-1">
+                    {Array.isArray(combinedErrors.password) ? (
+                      <Fragment>{combinedErrors.password[0]}</Fragment>
+                    ) : typeof combinedErrors.password.message === "string" ? (
+                      <Fragment>{combinedErrors.password.message}</Fragment>
+                    ) : (
+                      <Fragment>Invalid input</Fragment>
+                    )}
                   </p>
                 )}
               </div>
               <div className="mb-4">
                 <input
                   type="password"
-                  name="confirmPassword"
                   autoComplete="new-password"
                   placeholder="Confirm Password"
                   maxLength={SIGNUP_MAX_PASSWORD_LENGTH}
@@ -116,14 +204,19 @@ const SignUp = () => {
                   aria-errormessage="confirmPasswordError"
                   className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
                   required
+                  {...register("confirmPassword")}
                 />
-                {state && state.confirmPassword && (
-                  <p
-                    id="confirmPasswordError"
-                    className="text-red-500 text-sm mt-1"
-                  >
-                    {state.confirmPassword && (
-                      <Fragment>{state.confirmPassword[0]}</Fragment>
+                {combinedErrors.confirmPassword && (
+                  <p id="fullNameError" className="text-red-500 text-sm mt-1">
+                    {Array.isArray(combinedErrors.confirmPassword) ? (
+                      <Fragment>{combinedErrors.confirmPassword[0]}</Fragment>
+                    ) : typeof combinedErrors.confirmPassword.message ===
+                      "string" ? (
+                      <Fragment>
+                        {combinedErrors.confirmPassword.message}
+                      </Fragment>
+                    ) : (
+                      <Fragment>Invalid input</Fragment>
                     )}
                   </p>
                 )}

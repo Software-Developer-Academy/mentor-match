@@ -1,31 +1,26 @@
 "use server";
 import { redirect } from "next/navigation";
+import { FieldValues } from "react-hook-form";
 import { connectMongo } from "../db";
 import UserModel from "./model";
 import { EMAIL_ALREADY_EXISTS_MSG, signUpSchema } from "./validations";
 
-type FieldErrors = {
+export type SignUpFieldErrors = {
   [key: string]: string[] | undefined;
 };
 
 export async function signupUser(
-  _: FieldErrors | undefined,
-  data: FormData,
-): Promise<FieldErrors | undefined> {
-  const fullName = data.get("fullName");
-  const email = data.get("email");
-  const password = data.get("password");
-  const confirmPassword = data.get("confirmPassword");
-  const dataSchemaValidation = signUpSchema.safeParse({
-    fullName: fullName,
-    email: email,
-    password: password,
-    confirmPassword: confirmPassword,
-  });
+  data: FieldValues,
+): Promise<SignUpFieldErrors | undefined> {
+  const dataSchemaValidation = signUpSchema.safeParse(data);
 
   if (dataSchemaValidation.success === false) {
     return dataSchemaValidation.error.formErrors.fieldErrors;
   }
+
+  const email = data.email;
+  const fullName = data.fullName;
+  const password = data.password;
 
   await connectMongo();
 
