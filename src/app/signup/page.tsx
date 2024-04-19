@@ -7,7 +7,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { signupUser } from "@/lib/User/actions";
-import { signUpSchema } from "@/lib/User/userValidations";
+import { signUpSchema } from "@/lib/User/validations";
 
 const SignUp = () => {
   const {

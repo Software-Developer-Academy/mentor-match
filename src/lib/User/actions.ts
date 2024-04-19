@@ -1,5 +1,5 @@
 "use server";
-import { signUpSchema } from "./userValidations";
+import { signUpSchema } from "./validations";
 import { redirect } from "next/navigation";
 import UserModel from "./model";
 import { connectMongo } from "../db";
