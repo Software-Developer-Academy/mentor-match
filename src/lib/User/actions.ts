@@ -1,5 +1,5 @@
 "use server";
-import { signUpSchema } from "../validations/userValidations";
+import { signUpSchema } from "./userValidations";
 import { redirect } from "next/navigation";
 import UserModel from "./model";
 import { connectMongo } from "../db";
@@ -12,7 +12,6 @@ type Fields = {
 };
 
 export async function signupUser(fields: Fields) {
-  
   const validationResult = signUpSchema.safeParse(fields);
   if (!validationResult.success) {
     const errors = validationResult.error.flatten();
