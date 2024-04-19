@@ -8,7 +8,21 @@ import { useForm } from "react-hook-form";
 import { signupUser } from "@/lib/User/actions";
 import { signUpSchema } from "@/lib/User/validations";
 
+import { useState } from 'react';
 const SignUp = () => {
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handlePasswordChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setPassword(value);
+    setShowPassword(true);
+
+    // Hide the password after 500 milliseconds
+    setTimeout(() => {
+      setShowPassword(false);
+    }, 500);
+  };
   const {
     register,
     handleSubmit,
@@ -89,12 +103,14 @@ const SignUp = () => {
               </div>
               <div className="mb-4">
                 <input
-                  type="password"
-                  placeholder="Password"
+                     type={showPassword ? 'text' : 'password'}
+                     placeholder="Password"
+                     value={password}
+                     onChange={handlePasswordChange}
                   maxLength={64}
                   className="w-full bg-gray-300 text-black size-12 placeholder:text-black border px-4 rounded"
                   required
-                  {...register("password")}
+                  // {...register("password")}
                 />
                 {errors.password?.message &&
                   typeof errors.password.message === "string" && (
