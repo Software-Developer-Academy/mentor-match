@@ -2,36 +2,24 @@
 
 import { GradButton } from "@/components/ui/grad-button";
 import SignUpImage from "@/components/ui/signup-image";
-import { SignUpFieldErrors, signupUser } from "@/lib/User/actions";
-import { EMAIL_ALREADY_EXISTS_MSG, signUpSchema } from "@/lib/User/validations";
+import { signupUser } from "@/lib/User/actions";
+import { signUpSchema } from "@/lib/User/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
-import { useCallback, useRef, useState } from "react";
+import { useRef } from "react";
 import { useForm } from "react-hook-form";
 
 const SignUp = () => {
   const formRef = useRef<HTMLFormElement>(null);
-  const [serverErrors, setServerErrors] = useState<
-    SignUpFieldErrors | undefined
-  >();
-  const emailBeforeSubmission = useRef("");
 
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(signUpSchema),
   });
-
-  const combinedErrors = useCallback(() => {
-    return {
-      ...serverErrors,
-      ...errors,
-    };
-  }, [serverErrors, errors])();
-
-  const emailValidation = register("email");
 
   return (
     <section className="h-full">
@@ -67,23 +55,11 @@ const SignUp = () => {
           <div className="flex items-center px-12 mb-10 w-full">
             <form
               ref={formRef}
-              onSubmit={handleSubmit(async (data) => {
-                const error = await signupUser(new FormData(formRef.current!));
-
-                if (error?.email?.length) {
-                  emailBeforeSubmission.current = data.email;
+              onSubmit={handleSubmit(async () => {
+                const errors = await signupUser(new FormData(formRef.current!));
+                for (const error of errors) {
+                  setError(error.path[0] as string, error);
                 }
-
-                setServerErrors((prevError) => {
-                  if (!prevError) {
-                    return error;
-                  } else {
-                    return {
-                      ...prevError,
-                      ...error,
-                    };
-                  }
-                });
               })}
               className="w-full"
               noValidate
@@ -98,12 +74,12 @@ const SignUp = () => {
                   className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
                   {...register("fullName")}
                 />
-                {combinedErrors.fullName && (
+                {errors.fullName && (
                   <p id="fullNameError" className="text-red-500 text-sm mt-1">
-                    {Array.isArray(combinedErrors.fullName) ? (
-                      <>{combinedErrors.fullName[0]}</>
-                    ) : typeof combinedErrors.fullName.message === "string" ? (
-                      <>{combinedErrors.fullName.message}</>
+                    {Array.isArray(errors.fullName) ? (
+                      <>{errors.fullName[0]}</>
+                    ) : typeof errors.fullName.message === "string" ? (
+                      <>{errors.fullName.message}</>
                     ) : (
                       <>Invalid input</>
                     )}
@@ -117,37 +93,14 @@ const SignUp = () => {
                   placeholder="Email"
                   aria-errormessage="emailError"
                   className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
-                  {...emailValidation}
-                  onChange={(e) => {
-                    if (emailBeforeSubmission.current === e.target.value) {
-                      setServerErrors((prevError) => {
-                        if (prevError) {
-                          return {
-                            ...prevError,
-                            email: [EMAIL_ALREADY_EXISTS_MSG],
-                          };
-                        }
-                      });
-                    } else if (serverErrors?.email) {
-                      setServerErrors((prevError) => {
-                        if (prevError) {
-                          return {
-                            ...prevError,
-                            email: undefined,
-                          };
-                        }
-                      });
-                    }
-
-                    emailValidation.onChange(e);
-                  }}
+                  {...register("email")}
                 />
-                {combinedErrors.email && (
+                {errors.email && (
                   <p id="emailError" className="text-red-500 text-sm mt-1">
-                    {Array.isArray(combinedErrors.email) ? (
-                      <>{combinedErrors.email[0]}</>
-                    ) : typeof combinedErrors.email.message === "string" ? (
-                      <>{combinedErrors.email.message}</>
+                    {Array.isArray(errors.email) ? (
+                      <>{errors.email[0]}</>
+                    ) : typeof errors.email.message === "string" ? (
+                      <>{errors.email.message}</>
                     ) : (
                       <>Invalid input</>
                     )}
@@ -163,12 +116,12 @@ const SignUp = () => {
                   className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
                   {...register("password")}
                 />
-                {combinedErrors.password && (
+                {errors.password && (
                   <p id="passwordError" className="text-red-500 text-sm mt-1">
-                    {Array.isArray(combinedErrors.password) ? (
-                      <>{combinedErrors.password[0]}</>
-                    ) : typeof combinedErrors.password.message === "string" ? (
-                      <>{combinedErrors.password.message}</>
+                    {Array.isArray(errors.password) ? (
+                      <>{errors.password[0]}</>
+                    ) : typeof errors.password.message === "string" ? (
+                      <>{errors.password.message}</>
                     ) : (
                       <>Invalid input</>
                     )}
@@ -184,16 +137,15 @@ const SignUp = () => {
                   className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
                   {...register("confirmPassword")}
                 />
-                {combinedErrors.confirmPassword && (
+                {errors.confirmPassword && (
                   <p
                     id="confirmPasswordError"
                     className="text-red-500 text-sm mt-1"
                   >
-                    {Array.isArray(combinedErrors.confirmPassword) ? (
-                      <>{combinedErrors.confirmPassword[0]}</>
-                    ) : typeof combinedErrors.confirmPassword.message ===
-                      "string" ? (
-                      <>{combinedErrors.confirmPassword.message}</>
+                    {Array.isArray(errors.confirmPassword) ? (
+                      <>{errors.confirmPassword[0]}</>
+                    ) : typeof errors.confirmPassword.message === "string" ? (
+                      <>{errors.confirmPassword.message}</>
                     ) : (
                       <>Invalid input</>
                     )}
