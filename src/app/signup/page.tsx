@@ -3,49 +3,14 @@
 import { GradButton } from "@/components/ui/grad-button";
 import SignUpImage from "@/components/ui/signup-image";
 import { signupUser } from "@/lib/User/actions";
-import { passwordRegex } from "@/lib/utils";
+import { EMAIL_ALREADY_EXISTS_MSG, SIGNUP_MAX_EMAIL_LENGTH, SIGNUP_MAX_NAME_LENGTH, SIGNUP_MAX_PASSWORD_LENGTH, SIGNUP_MIN_NAME_LENGTH, SIGNUP_MIN_PASSWORD_LENGTH, signUpSchema } from "@/lib/User/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { useMemo, useRef, useState } from "react";
 import { useFormState } from "react-dom";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 
 const SignUp = () => {
-  const MIN_NAME_LENGTH = 3;
-  const MAX_NAME_LENGTH = 30;
-  const MAX_EMAIL_LENGTH = 200;
-  const MAX_PASSWORD_LENGTH = 64;
-
-  const signUpSchema = z
-    .object({
-      fullName: z
-        .string()
-        .min(MIN_NAME_LENGTH, {
-          message: `Name must be at least ${MIN_NAME_LENGTH} characters long`,
-        })
-        .max(MAX_NAME_LENGTH, {
-          message: `Name must be no more than ${MAX_NAME_LENGTH} characters long`,
-        })
-        .regex(/^[a-zA-Z'-]+(?: [a-zA-Z'-]+)*$/, {
-          message:
-            "Name can only include alphabetical characters, hyphens, apostrophes, and internal spaces",
-        }),
-      email: z.string().email({ message: "Please enter a valid email" }),
-      password: z
-        .string()
-        .min(8, { message: "Password must be at least 8 characters long" })
-        .regex(passwordRegex, {
-          message:
-            "Password must include uppercase, lowercase, number, and special character",
-        }),
-      confirmPassword: z.string(),
-    })
-    .refine((data) => data.password === data.confirmPassword, {
-      message: "Passwords must match",
-      path: ["confirmPassword"],
-    });
-
   const formRef = useRef<HTMLFormElement>(null);
   const [state, formAction] = useFormState(signupUser, undefined);
   const previousEmailValue = useMemo(() => {
@@ -56,24 +21,33 @@ const SignUp = () => {
   const previousFullNameValue = useMemo(() => {
     return state
       ? state.find((s) => s.field === "fullName")?.previousValue?.toString() ||
-          ""
+      ""
       : "";
   }, [state]);
   const previousPasswordValue = useMemo(() => {
     return state
       ? state.find((s) => s.field === "password")?.previousValue?.toString() ||
-          ""
+      ""
       : "";
   }, [state]);
   const previousConfirmPasswordValue = useMemo(() => {
     return state
       ? state
-          .find((s) => s.field === "confirmPassword")
-          ?.previousValue?.toString() || ""
+        .find((s) => s.field === "confirmPassword")
+        ?.previousValue?.toString() || ""
       : "";
   }, [state]);
   const emailError = useMemo(() => {
     return state?.find((error) => error.field === "email")?.message;
+  }, [state]);
+  const fullNameError = useMemo(() => {
+    return state?.find((error) => error.field === "fullName")?.message;
+  }, [state]);
+  const passwordError = useMemo(() => {
+    return state?.find((error) => error.field === "password")?.message;
+  }, [state]);
+  const confirmPasswordError = useMemo(() => {
+    return state?.find((error) => error.field === "confirmPassword")?.message;
   }, [state]);
 
   const [showEmailStateError, setShowEmailStateError] = useState(
@@ -133,6 +107,7 @@ const SignUp = () => {
               action={formAction}
               onSubmit={handleSubmit(() => formRef.current?.submit())}
               className="w-full"
+              noValidate
             >
               <div className="mb-4">
                 <input
@@ -140,7 +115,9 @@ const SignUp = () => {
                   autoComplete="given-name"
                   type="text"
                   placeholder="Full Name"
-                  maxLength={MAX_EMAIL_LENGTH}
+                  maxLength={SIGNUP_MAX_NAME_LENGTH}
+                  minLength={SIGNUP_MIN_NAME_LENGTH}
+                  required
                   defaultValue={previousFullNameValue}
                   className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
                   {...register("fullName")}
@@ -151,13 +128,19 @@ const SignUp = () => {
                       {errors.fullName.message}
                     </p>
                   )}
+                {fullNameError && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {fullNameError}
+                  </p>
+                )}
               </div>
               <div className="mb-4">
                 <input
                   type="email"
                   autoComplete="email"
                   placeholder="Email"
-                  maxLength={MAX_EMAIL_LENGTH}
+                  maxLength={SIGNUP_MAX_EMAIL_LENGTH}
+                  required
                   defaultValue={previousEmailValue}
                   className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
                   ref={emailValidator.ref}
@@ -180,7 +163,7 @@ const SignUp = () => {
                       {errors.email.message}
                     </p>
                   )}
-                {emailError && showEmailStateError && (
+                {((emailError === EMAIL_ALREADY_EXISTS_MSG && showEmailStateError) || emailError !== EMAIL_ALREADY_EXISTS_MSG) && (
                   <p className="text-red-500 text-sm mt-1">{emailError}</p>
                 )}
               </div>
@@ -190,7 +173,9 @@ const SignUp = () => {
                   autoComplete="new-password"
                   placeholder="Password"
                   defaultValue={previousPasswordValue}
-                  maxLength={MAX_PASSWORD_LENGTH}
+                  maxLength={SIGNUP_MAX_PASSWORD_LENGTH}
+                  minLength={SIGNUP_MIN_PASSWORD_LENGTH}
+                  required
                   className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
                   {...register("password")}
                 />
@@ -200,14 +185,19 @@ const SignUp = () => {
                       {errors.password.message}
                     </p>
                   )}
+                {passwordError && (
+                  <p className="text-red-500 text-sm mt-1">{passwordError}</p>
+                )}
               </div>
               <div className="mb-4">
                 <input
                   type="password"
                   autoComplete="new-password"
                   placeholder="Confirm Password"
-                  maxLength={MAX_PASSWORD_LENGTH}
+                  maxLength={SIGNUP_MAX_PASSWORD_LENGTH}
+                  minLength={SIGNUP_MIN_PASSWORD_LENGTH}
                   defaultValue={previousConfirmPasswordValue}
+                  required
                   className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
                   {...register("confirmPassword")}
                 />
@@ -217,6 +207,11 @@ const SignUp = () => {
                       {errors.confirmPassword.message}
                     </p>
                   )}
+                {confirmPasswordError && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {confirmPasswordError}
+                  </p>
+                )}
               </div>
               <div className="mb-10">
                 <GradButton variant="default" className="w-full">

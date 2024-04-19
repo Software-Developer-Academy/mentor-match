@@ -1,8 +1,8 @@
 "use server";
-
 import { redirect } from "next/navigation";
 import { connectMongo } from "../db";
 import UserModel from "./model";
+import { EMAIL_ALREADY_EXISTS_MSG, signUpSchema } from "./validations";
 
 type FormError = {
   field: string;
@@ -10,61 +10,44 @@ type FormError = {
   message: string;
 };
 
-export async function signupUser(
-  _: FormError[] | undefined,
-  data: FormData,
-): Promise<FormError[] | undefined> {
+export async function signupUser(_: FormError[] | undefined, data: FormData): Promise<FormError[] | undefined> {
   const fullName = data.get("fullName");
   const email = data.get("email");
   const password = data.get("password");
   const confirmPassword = data.get("confirmPassword");
+  const dataSchemaValidation = signUpSchema.safeParse({
+    fullName: fullName,
+    email: email,
+    password: password,
+    confirmPassword: confirmPassword,
+  });
 
-  if (!fullName || !email || !password || !confirmPassword) {
+  if (dataSchemaValidation.success === false) {
+    const fullNameError = dataSchemaValidation.error.formErrors.fieldErrors.fullName;
+    const emailError = dataSchemaValidation.error.formErrors.fieldErrors.email;
+    const passwordError = dataSchemaValidation.error.formErrors.fieldErrors.password;
+    const confirmPasswordError = dataSchemaValidation.error.formErrors.fieldErrors.confirmPassword;
+
     return [
       {
         field: "fullName",
         previousValue: fullName,
-        message: !fullName ? "Full name is required." : "",
+        message: fullNameError?.join(",") ??  "",
       },
       {
         field: "email",
         previousValue: email,
-        message: !email ? "Email is required." : "",
+        message: emailError?.join(",") ??  "",
       },
       {
         field: "password",
         previousValue: password,
-        message: !password ? "Password is required." : "",
+        message: passwordError?.join(",") ??  "",
       },
       {
         field: "confirmPassword",
         previousValue: confirmPassword,
-        message: !confirmPassword ? "Please confirm your password." : "",
-      },
-    ];
-  }
-
-  if (password !== confirmPassword) {
-    return [
-      {
-        field: "fullName",
-        previousValue: fullName,
-        message: "",
-      },
-      {
-        field: "email",
-        previousValue: email,
-        message: "",
-      },
-      {
-        field: "confirmPassword",
-        previousValue: confirmPassword,
-        message: "Passwords do not match.",
-      },
-      {
-        field: "password",
-        previousValue: password,
-        message: "Passwords do not match.",
+        message: confirmPasswordError?.join(",") ??  "",
       },
     ];
   }
@@ -85,7 +68,7 @@ export async function signupUser(
       {
         field: "email",
         previousValue: email,
-        message: "An account with this email already exists.",
+        message: EMAIL_ALREADY_EXISTS_MSG,
       },
       {
         field: "password",
