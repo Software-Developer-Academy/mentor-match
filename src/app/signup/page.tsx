@@ -148,7 +148,7 @@ const SignUp = () => {
                   }}
                 />
                 {combinedErrors.email && (
-                  <p id="fullNameError" className="text-red-500 text-sm mt-1">
+                  <p id="emailError" className="text-red-500 text-sm mt-1">
                     {Array.isArray(combinedErrors.email) ? (
                       <Fragment>{combinedErrors.email[0]}</Fragment>
                     ) : typeof combinedErrors.email.message === "string" ? (
@@ -169,7 +169,7 @@ const SignUp = () => {
                   {...register("password")}
                 />
                 {combinedErrors.password && (
-                  <p id="fullNameError" className="text-red-500 text-sm mt-1">
+                  <p id="passwordError" className="text-red-500 text-sm mt-1">
                     {Array.isArray(combinedErrors.password) ? (
                       <Fragment>{combinedErrors.password[0]}</Fragment>
                     ) : typeof combinedErrors.password.message === "string" ? (
@@ -190,7 +190,7 @@ const SignUp = () => {
                   {...register("confirmPassword")}
                 />
                 {combinedErrors.confirmPassword && (
-                  <p id="fullNameError" className="text-red-500 text-sm mt-1">
+                  <p id="confirmPasswordError" className="text-red-500 text-sm mt-1">
                     {Array.isArray(combinedErrors.confirmPassword) ? (
                       <Fragment>{combinedErrors.confirmPassword[0]}</Fragment>
                     ) : typeof combinedErrors.confirmPassword.message ===
