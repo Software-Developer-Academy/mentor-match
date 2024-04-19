@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import UserModel from "./model";
 import { connectMongo } from "../db";
+import { createSession, setSessionCookie } from "../tools/session";
 
 type Fields = {
   fullName: string;
@@ -33,11 +34,17 @@ export async function signupUser(fields: Fields) {
   }
 
   try {
-    await UserModel.create({
+    const newUser = await UserModel.create({
       name: fullName,
       email,
       password,
     });
+
+    // Generate a new session for the newly created user
+    const token = await createSession({ userId: newUser._id });
+
+    // Set the session token as a secure, HTTP-only cookie in the response
+    setSessionCookie(token);
   } catch (e) {
     console.error(e);
     throw new Error("Failed to create user.");
