@@ -1,9 +1,15 @@
 import { jwtVerify, SignJWT } from "jose";
-import { randomBytes } from "crypto";
-import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
+
+// Check for the environment variable for the secret key, throw error if not set
+if (!process.env.SESSION_SECRET) {
+  throw new Error(
+    "SESSION_SECRET is not set. Please set the SESSION_SECRET environment variable."
+  );
+}
 
 // Environment variable for the secret key
-const secretKey = process.env.SESSION_SECRET || randomBytes(64).toString("hex");
+const secretKey = process.env.SESSION_SECRET;
 const encoder = new TextEncoder();
 
 export async function createSession(payload: { userId: string }) {
@@ -29,16 +35,16 @@ export async function verifySession(token: string) {
   }
 }
 
-export function setSessionCookie(response: NextResponse, token: string) {
-  response.cookies.set("session", token, {
+export function setSessionCookie(token: string) {
+  cookies().set("session", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "strict",
     path: "/",
-    maxAge: 2592000, // 30 days in seconds
+    maxAge: 60 * 60 * 24 * 30, // 30 days in seconds
   });
 }
 
-export function clearSessionCookie(response: NextResponse) {
-  response.cookies.delete("session");
+export function clearSessionCookie() {
+  cookies().delete("session");
 }

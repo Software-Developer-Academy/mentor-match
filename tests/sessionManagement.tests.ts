@@ -22,7 +22,7 @@ test("Session Management: createSession and verifySession", async (t) => {
     assert.strictEqual(
       payload.userId,
       userId,
-      "Decrypted userId should match the original"
+      "Decrypted userId should match the original",
     );
   });
 
@@ -32,7 +32,7 @@ test("Session Management: createSession and verifySession", async (t) => {
     assert.strictEqual(
       payload,
       null,
-      "Payload should be null for an invalid token"
+      "Payload should be null for an invalid token",
     );
   });
 });
