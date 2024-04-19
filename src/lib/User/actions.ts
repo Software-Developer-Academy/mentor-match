@@ -9,7 +9,10 @@ type FormError = {
   message: string;
 };
 
-export async function signupUser(_: FormError[] | undefined, data: FormData): Promise<FormError[] | undefined> {
+export async function signupUser(
+  _: FormError[] | undefined,
+  data: FormData,
+): Promise<FormError[] | undefined> {
   const fullName = data.get("fullName");
   const email = data.get("email");
   const password = data.get("password");
@@ -22,31 +25,34 @@ export async function signupUser(_: FormError[] | undefined, data: FormData): Pr
   });
 
   if (dataSchemaValidation.success === false) {
-    const fullNameError = dataSchemaValidation.error.formErrors.fieldErrors.fullName;
+    const fullNameError =
+      dataSchemaValidation.error.formErrors.fieldErrors.fullName;
     const emailError = dataSchemaValidation.error.formErrors.fieldErrors.email;
-    const passwordError = dataSchemaValidation.error.formErrors.fieldErrors.password;
-    const confirmPasswordError = dataSchemaValidation.error.formErrors.fieldErrors.confirmPassword;
+    const passwordError =
+      dataSchemaValidation.error.formErrors.fieldErrors.password;
+    const confirmPasswordError =
+      dataSchemaValidation.error.formErrors.fieldErrors.confirmPassword;
 
     return [
       {
         field: "fullName",
         previousValue: fullName,
-        message: fullNameError?.join(",") ??  "",
+        message: fullNameError?.join(",") ?? "",
       },
       {
         field: "email",
         previousValue: email,
-        message: emailError?.join(",") ??  "",
+        message: emailError?.join(",") ?? "",
       },
       {
         field: "password",
         previousValue: password,
-        message: passwordError?.join(",") ??  "",
+        message: passwordError?.join(",") ?? "",
       },
       {
         field: "confirmPassword",
         previousValue: confirmPassword,
-        message: confirmPasswordError?.join(",") ??  "",
+        message: confirmPasswordError?.join(",") ?? "",
       },
     ];
   }

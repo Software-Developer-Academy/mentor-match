@@ -3,7 +3,15 @@
 import { GradButton } from "@/components/ui/grad-button";
 import SignUpImage from "@/components/ui/signup-image";
 import { signupUser } from "@/lib/User/actions";
-import { EMAIL_ALREADY_EXISTS_MSG, SIGNUP_MAX_EMAIL_LENGTH, SIGNUP_MAX_NAME_LENGTH, SIGNUP_MAX_PASSWORD_LENGTH, SIGNUP_MIN_NAME_LENGTH, SIGNUP_MIN_PASSWORD_LENGTH, signUpSchema } from "@/lib/User/validations";
+import {
+  EMAIL_ALREADY_EXISTS_MSG,
+  SIGNUP_MAX_EMAIL_LENGTH,
+  SIGNUP_MAX_NAME_LENGTH,
+  SIGNUP_MAX_PASSWORD_LENGTH,
+  SIGNUP_MIN_NAME_LENGTH,
+  SIGNUP_MIN_PASSWORD_LENGTH,
+  signUpSchema,
+} from "@/lib/User/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { useMemo, useRef, useState } from "react";
@@ -21,20 +29,20 @@ const SignUp = () => {
   const previousFullNameValue = useMemo(() => {
     return state
       ? state.find((s) => s.field === "fullName")?.previousValue?.toString() ||
-      ""
+          ""
       : "";
   }, [state]);
   const previousPasswordValue = useMemo(() => {
     return state
       ? state.find((s) => s.field === "password")?.previousValue?.toString() ||
-      ""
+          ""
       : "";
   }, [state]);
   const previousConfirmPasswordValue = useMemo(() => {
     return state
       ? state
-        .find((s) => s.field === "confirmPassword")
-        ?.previousValue?.toString() || ""
+          .find((s) => s.field === "confirmPassword")
+          ?.previousValue?.toString() || ""
       : "";
   }, [state]);
   const emailError = useMemo(() => {
@@ -129,9 +137,7 @@ const SignUp = () => {
                     </p>
                   )}
                 {fullNameError && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {fullNameError}
-                  </p>
+                  <p className="text-red-500 text-sm mt-1">{fullNameError}</p>
                 )}
               </div>
               <div className="mb-4">
@@ -163,7 +169,9 @@ const SignUp = () => {
                       {errors.email.message}
                     </p>
                   )}
-                {((emailError === EMAIL_ALREADY_EXISTS_MSG && showEmailStateError) || emailError !== EMAIL_ALREADY_EXISTS_MSG) && (
+                {((emailError === EMAIL_ALREADY_EXISTS_MSG &&
+                  showEmailStateError) ||
+                  emailError !== EMAIL_ALREADY_EXISTS_MSG) && (
                   <p className="text-red-500 text-sm mt-1">{emailError}</p>
                 )}
               </div>
