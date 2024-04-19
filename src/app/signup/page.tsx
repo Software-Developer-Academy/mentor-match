@@ -3,10 +3,7 @@
 import { GradButton } from "@/components/ui/grad-button";
 import SignUpImage from "@/components/ui/signup-image";
 import { SignUpFieldErrors, signupUser } from "@/lib/User/actions";
-import {
-  EMAIL_ALREADY_EXISTS_MSG,
-  signUpSchema
-} from "@/lib/User/validations";
+import { EMAIL_ALREADY_EXISTS_MSG, signUpSchema } from "@/lib/User/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { Fragment, useCallback, useRef, useState } from "react";
@@ -190,7 +187,10 @@ const SignUp = () => {
                   {...register("confirmPassword")}
                 />
                 {combinedErrors.confirmPassword && (
-                  <p id="confirmPasswordError" className="text-red-500 text-sm mt-1">
+                  <p
+                    id="confirmPasswordError"
+                    className="text-red-500 text-sm mt-1"
+                  >
                     {Array.isArray(combinedErrors.confirmPassword) ? (
                       <Fragment>{combinedErrors.confirmPassword[0]}</Fragment>
                     ) : typeof combinedErrors.confirmPassword.message ===
