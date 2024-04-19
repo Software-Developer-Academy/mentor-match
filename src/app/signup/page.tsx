@@ -4,79 +4,18 @@ import { GradButton } from "@/components/ui/grad-button";
 import SignUpImage from "@/components/ui/signup-image";
 import { signupUser } from "@/lib/User/actions";
 import {
-  EMAIL_ALREADY_EXISTS_MSG,
   SIGNUP_MAX_EMAIL_LENGTH,
   SIGNUP_MAX_NAME_LENGTH,
   SIGNUP_MAX_PASSWORD_LENGTH,
   SIGNUP_MIN_NAME_LENGTH,
   SIGNUP_MIN_PASSWORD_LENGTH,
-  signUpSchema,
 } from "@/lib/User/validations";
-import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
-import { useMemo, useRef, useState } from "react";
+import { Fragment } from "react";
 import { useFormState } from "react-dom";
-import { useForm } from "react-hook-form";
 
 const SignUp = () => {
-  const formRef = useRef<HTMLFormElement>(null);
   const [state, formAction] = useFormState(signupUser, undefined);
-  const previousEmailValue = useMemo(() => {
-    return state
-      ? state.find((s) => s.field === "email")?.previousValue?.toString() || ""
-      : "";
-  }, [state]);
-  const previousFullNameValue = useMemo(() => {
-    return state
-      ? state.find((s) => s.field === "fullName")?.previousValue?.toString() ||
-          ""
-      : "";
-  }, [state]);
-  const previousPasswordValue = useMemo(() => {
-    return state
-      ? state.find((s) => s.field === "password")?.previousValue?.toString() ||
-          ""
-      : "";
-  }, [state]);
-  const previousConfirmPasswordValue = useMemo(() => {
-    return state
-      ? state
-          .find((s) => s.field === "confirmPassword")
-          ?.previousValue?.toString() || ""
-      : "";
-  }, [state]);
-  const emailError = useMemo(() => {
-    return state?.find((error) => error.field === "email")?.message;
-  }, [state]);
-  const fullNameError = useMemo(() => {
-    return state?.find((error) => error.field === "fullName")?.message;
-  }, [state]);
-  const passwordError = useMemo(() => {
-    return state?.find((error) => error.field === "password")?.message;
-  }, [state]);
-  const confirmPasswordError = useMemo(() => {
-    return state?.find((error) => error.field === "confirmPassword")?.message;
-  }, [state]);
-
-  const [showEmailStateError, setShowEmailStateError] = useState(
-    previousEmailValue !== "",
-  );
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: zodResolver(signUpSchema),
-    defaultValues: {
-      fullName: previousFullNameValue || "",
-      email: previousEmailValue || "",
-      password: previousPasswordValue || "",
-      confirmPassword: previousConfirmPasswordValue || "",
-    },
-  });
-
-  const emailValidator = register("email");
 
   return (
     <section className="h-full">
@@ -110,114 +49,82 @@ const SignUp = () => {
             <h2 className="text-3xl mb-5 font-semibold">Create your account</h2>
           </div>
           <div className="flex items-center px-12 mb-10 w-full">
-            <form
-              ref={formRef}
-              action={formAction}
-              onSubmit={handleSubmit(() => formRef.current?.submit())}
-              className="w-full"
-              noValidate
-            >
+            <form action={formAction} className="w-full">
               <div className="mb-4">
                 <input
                   autoFocus
                   autoComplete="given-name"
                   type="text"
+                  name="fullName"
                   placeholder="Full Name"
                   maxLength={SIGNUP_MAX_NAME_LENGTH}
                   minLength={SIGNUP_MIN_NAME_LENGTH}
-                  required
-                  defaultValue={previousFullNameValue}
+                  aria-errormessage="fullNameError"
                   className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
-                  {...register("fullName")}
+                  required
                 />
-                {errors.fullName?.message &&
-                  typeof errors.fullName.message === "string" && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.fullName.message}
-                    </p>
-                  )}
-                {fullNameError && (
-                  <p className="text-red-500 text-sm mt-1">{fullNameError}</p>
+                {state && state.fullName && (
+                  <p id="fullNameError" className="text-red-500 text-sm mt-1">
+                    {state.fullName && <Fragment>{state.fullName[0]}</Fragment>}
+                  </p>
                 )}
               </div>
               <div className="mb-4">
                 <input
                   type="email"
+                  name="email"
                   autoComplete="email"
                   placeholder="Email"
                   maxLength={SIGNUP_MAX_EMAIL_LENGTH}
-                  required
-                  defaultValue={previousEmailValue}
+                  aria-errormessage="emailError"
                   className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
-                  ref={emailValidator.ref}
-                  onBlur={emailValidator.onBlur}
-                  name={emailValidator.name}
-                  onChange={(evt) => {
-                    if (previousEmailValue) {
-                      setShowEmailStateError(
-                        evt.target.value === previousEmailValue,
-                      );
-                    }
-
-                    emailValidator.onChange(evt);
-                  }}
+                  required
                 />
-                {errors.email?.message &&
-                  !showEmailStateError &&
-                  typeof errors.email.message === "string" && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.email.message}
-                    </p>
-                  )}
-                {((emailError === EMAIL_ALREADY_EXISTS_MSG &&
-                  showEmailStateError) ||
-                  emailError !== EMAIL_ALREADY_EXISTS_MSG) && (
-                  <p className="text-red-500 text-sm mt-1">{emailError}</p>
+                {state && state.email && (
+                  <p id="emailError" className="text-red-500 text-sm mt-1">
+                    {state.email && <Fragment>{state.email[0]}</Fragment>}
+                  </p>
                 )}
               </div>
               <div className="mb-4">
                 <input
                   type="password"
+                  name="password"
                   autoComplete="new-password"
                   placeholder="Password"
-                  defaultValue={previousPasswordValue}
+                  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,}$"
                   maxLength={SIGNUP_MAX_PASSWORD_LENGTH}
                   minLength={SIGNUP_MIN_PASSWORD_LENGTH}
-                  required
+                  aria-errormessage="passwordError"
                   className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
-                  {...register("password")}
+                  required
                 />
-                {errors.password?.message &&
-                  typeof errors.password.message === "string" && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.password.message}
-                    </p>
-                  )}
-                {passwordError && (
-                  <p className="text-red-500 text-sm mt-1">{passwordError}</p>
+                {state && state.password && (
+                  <p id="passwordError" className="text-red-500 text-sm mt-1">
+                    {state.password && <Fragment>{state.password[0]}</Fragment>}
+                  </p>
                 )}
               </div>
               <div className="mb-4">
                 <input
                   type="password"
+                  name="confirmPassword"
                   autoComplete="new-password"
                   placeholder="Confirm Password"
                   maxLength={SIGNUP_MAX_PASSWORD_LENGTH}
                   minLength={SIGNUP_MIN_PASSWORD_LENGTH}
-                  defaultValue={previousConfirmPasswordValue}
-                  required
+                  aria-errormessage="confirmPasswordError"
                   className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
-                  {...register("confirmPassword")}
+                  required
                 />
-                {errors.confirmPassword?.message &&
-                  typeof errors.confirmPassword.message === "string" && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.confirmPassword.message}
-                    </p>
-                  )}
-                {confirmPasswordError && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {confirmPasswordError}
+                {state && state.confirmPassword && (
+                  <p
+                    id="confirmPasswordError"
+                    className="text-red-500 text-sm mt-1"
+                  >
+                    {state.confirmPassword && (
+                      <Fragment>{state.confirmPassword[0]}</Fragment>
+                    )}
                   </p>
                 )}
               </div>
