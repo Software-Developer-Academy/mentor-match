@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 // Check for the environment variable for the secret key, throw error if not set
 if (!process.env.SESSION_SECRET) {
   throw new Error(
-    "SESSION_SECRET is not set. Please set the SESSION_SECRET environment variable."
+    "SESSION_SECRET is not set. Please set the SESSION_SECRET environment variable.",
   );
 }
 

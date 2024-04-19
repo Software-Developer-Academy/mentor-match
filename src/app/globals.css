@@ -27,8 +27,8 @@
     --tertiary-foreground: 0 0 0;
     --tertiary-accent: 37 91 73;
 
-    --mmgray: #e5e5e5;
-    --mmgray-accent: #767676;
+    --mmgray: 0 0% 90%;
+    --mmgray-accent: 0 0% 46%;
 
     --muted: 210 40% 96.1%;
     /* --muted-foreground: 215.4 16.3% 46.9%; */
@@ -87,6 +87,9 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  input {
+    @apply placeholder:text-muted-foreground/70;
   }
 }
 

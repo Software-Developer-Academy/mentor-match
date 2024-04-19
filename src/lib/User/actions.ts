@@ -1,26 +1,31 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import UserModel from "./model";
 import { connectMongo } from "../db";
 import { createSession, setSessionCookie } from "../tools/session";
+import UserModel from "./model";
+import { EMAIL_ALREADY_EXISTS_MSG, signUpSchema } from "./validations";
 
-type Fields = {
-  fullName: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
+export type SignUpFieldErrors = {
+  [key: string]: string[] | undefined;
 };
 
-export async function signupUser(fields: Fields) {
-  const { fullName, email, password, confirmPassword } = fields;
+export async function signupUser(
+  data: FormData,
+): Promise<SignUpFieldErrors | undefined> {
+  const fullName = data.get("fullName");
+  const email = data.get("email");
+  const password = data.get("password");
+  const confirmPassword = data.get("confirmPassword");
+  const dataSchemaValidation = signUpSchema.safeParse({
+    fullName,
+    email,
+    password,
+    confirmPassword,
+  });
 
-  if (!fullName || !email || !password || !confirmPassword) {
-    throw new Error("Must fill in all values.");
-  }
-
-  if (password !== confirmPassword) {
-    throw new Error("Password Confirm must match password.");
+  if (dataSchemaValidation.success === false) {
+    return dataSchemaValidation.error.formErrors.fieldErrors;
   }
 
   await connectMongo();
@@ -30,7 +35,7 @@ export async function signupUser(fields: Fields) {
   });
 
   if (existingUserWithEmail) {
-    throw new Error("User already exists.");
+    return { email: [EMAIL_ALREADY_EXISTS_MSG] };
   }
 
   try {
@@ -47,7 +52,9 @@ export async function signupUser(fields: Fields) {
     setSessionCookie(token);
   } catch (e) {
     console.error(e);
-    throw new Error("Failed to create user.");
+    throw new Error(
+      "We encountered a problem creating your account. Please try again.",
+    );
   }
 
   return redirect("/");
