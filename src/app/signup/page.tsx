@@ -6,7 +6,7 @@ import { SignUpFieldErrors, signupUser } from "@/lib/User/actions";
 import { EMAIL_ALREADY_EXISTS_MSG, signUpSchema } from "@/lib/User/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
-import { Fragment, useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
 const SignUp = () => {
@@ -14,9 +14,7 @@ const SignUp = () => {
   const [serverErrors, setServerErrors] = useState<
     SignUpFieldErrors | undefined
   >();
-  const [emailBeforeSubmission, setEmailBeforeSubmission] = useState<
-    string | undefined
-  >("");
+  const emailBeforeSubmission = useRef("");
 
   const {
     register,
@@ -70,10 +68,10 @@ const SignUp = () => {
             <form
               ref={formRef}
               onSubmit={handleSubmit(async (data) => {
-                const error = await signupUser(data);
+                const error = await signupUser(new FormData(formRef.current!));
 
                 if (error?.email?.length) {
-                  setEmailBeforeSubmission(data.email);
+                  emailBeforeSubmission.current = data.email;
                 }
 
                 setServerErrors((prevError) => {
@@ -93,7 +91,7 @@ const SignUp = () => {
               <div className="mb-4">
                 <input
                   autoFocus
-                  autoComplete="given-name"
+                  autoComplete="name"
                   type="text"
                   placeholder="Full Name"
                   aria-errormessage="fullNameError"
@@ -103,11 +101,11 @@ const SignUp = () => {
                 {combinedErrors.fullName && (
                   <p id="fullNameError" className="text-red-500 text-sm mt-1">
                     {Array.isArray(combinedErrors.fullName) ? (
-                      <Fragment>{combinedErrors.fullName[0]}</Fragment>
+                      <>{combinedErrors.fullName[0]}</>
                     ) : typeof combinedErrors.fullName.message === "string" ? (
-                      <Fragment>{combinedErrors.fullName.message}</Fragment>
+                      <>{combinedErrors.fullName.message}</>
                     ) : (
-                      <Fragment>Invalid input</Fragment>
+                      <>Invalid input</>
                     )}
                   </p>
                 )}
@@ -121,7 +119,7 @@ const SignUp = () => {
                   className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
                   {...emailValidation}
                   onChange={(e) => {
-                    if (emailBeforeSubmission === e.target.value) {
+                    if (emailBeforeSubmission.current === e.target.value) {
                       setServerErrors((prevError) => {
                         if (prevError) {
                           return {
@@ -147,11 +145,11 @@ const SignUp = () => {
                 {combinedErrors.email && (
                   <p id="emailError" className="text-red-500 text-sm mt-1">
                     {Array.isArray(combinedErrors.email) ? (
-                      <Fragment>{combinedErrors.email[0]}</Fragment>
+                      <>{combinedErrors.email[0]}</>
                     ) : typeof combinedErrors.email.message === "string" ? (
-                      <Fragment>{combinedErrors.email.message}</Fragment>
+                      <>{combinedErrors.email.message}</>
                     ) : (
-                      <Fragment>Invalid input</Fragment>
+                      <>Invalid input</>
                     )}
                   </p>
                 )}
@@ -168,11 +166,11 @@ const SignUp = () => {
                 {combinedErrors.password && (
                   <p id="passwordError" className="text-red-500 text-sm mt-1">
                     {Array.isArray(combinedErrors.password) ? (
-                      <Fragment>{combinedErrors.password[0]}</Fragment>
+                      <>{combinedErrors.password[0]}</>
                     ) : typeof combinedErrors.password.message === "string" ? (
-                      <Fragment>{combinedErrors.password.message}</Fragment>
+                      <>{combinedErrors.password.message}</>
                     ) : (
-                      <Fragment>Invalid input</Fragment>
+                      <>Invalid input</>
                     )}
                   </p>
                 )}
@@ -192,14 +190,14 @@ const SignUp = () => {
                     className="text-red-500 text-sm mt-1"
                   >
                     {Array.isArray(combinedErrors.confirmPassword) ? (
-                      <Fragment>{combinedErrors.confirmPassword[0]}</Fragment>
+                      <>{combinedErrors.confirmPassword[0]}</>
                     ) : typeof combinedErrors.confirmPassword.message ===
                       "string" ? (
-                      <Fragment>
+                      <>
                         {combinedErrors.confirmPassword.message}
-                      </Fragment>
+                      </>
                     ) : (
-                      <Fragment>Invalid input</Fragment>
+                      <>Invalid input</>
                     )}
                   </p>
                 )}
