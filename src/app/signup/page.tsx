@@ -57,8 +57,10 @@ const SignUp = () => {
               ref={formRef}
               onSubmit={handleSubmit(async () => {
                 const errors = await signupUser(new FormData(formRef.current!));
-                for (const error of errors) {
-                  setError(error.path[0] as string, error);
+                if (errors && Array.isArray(errors)) {
+                  for (const error of errors) {
+                    setError(error.path[0] as string, error);
+                  }
                 }
               })}
               className="w-full"

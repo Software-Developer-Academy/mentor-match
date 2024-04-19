@@ -7,7 +7,9 @@ import UserModel from "./model";
 import { EMAIL_ALREADY_EXISTS_MSG, signUpSchema } from "./validations";
 import { ZodIssue } from "zod";
 
-export async function signupUser(data: FormData): Promise<ZodIssue[]> {
+export async function signupUser(
+  data: FormData,
+): Promise<ZodIssue[] | unknown> {
   const fullName = data.get("fullName");
   const email = data.get("email");
   const password = data.get("password");
