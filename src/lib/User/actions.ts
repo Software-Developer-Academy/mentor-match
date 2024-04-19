@@ -1,6 +1,8 @@
 "use server";
+
 import { redirect } from "next/navigation";
 import { connectMongo } from "../db";
+import { createSession, setSessionCookie } from "../tools/session";
 import UserModel from "./model";
 import { EMAIL_ALREADY_EXISTS_MSG, signUpSchema } from "./validations";
 
@@ -37,11 +39,17 @@ export async function signupUser(
   }
 
   try {
-    await UserModel.create({
+    const newUser = await UserModel.create({
       name: fullName,
       email,
       password,
     });
+
+    // Generate a new session for the newly created user
+    const token = await createSession({ userId: newUser._id });
+
+    // Set the session token as a secure, HTTP-only cookie in the response
+    setSessionCookie(token);
   } catch (e) {
     console.error(e);
     throw new Error(
