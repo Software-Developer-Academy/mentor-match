@@ -1,5 +1,5 @@
 "use server";
-
+import { signUpSchema } from "../validations/userValidations";
 import { redirect } from "next/navigation";
 import UserModel from "./model";
 import { connectMongo } from "../db";
@@ -12,15 +12,14 @@ type Fields = {
 };
 
 export async function signupUser(fields: Fields) {
-  const { fullName, email, password, confirmPassword } = fields;
-
-  if (!fullName || !email || !password || !confirmPassword) {
-    throw new Error("Must fill in all values.");
+  
+  const validationResult = signUpSchema.safeParse(fields);
+  if (!validationResult.success) {
+    const errors = validationResult.error.flatten();
+    throw new Error("Validation failed: " + errors.fieldErrors);
   }
 
-  if (password !== confirmPassword) {
-    throw new Error("Password Confirm must match password.");
-  }
+  const { fullName, email, password } = validationResult.data;
 
   await connectMongo();
 
