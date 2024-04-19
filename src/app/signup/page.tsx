@@ -5,12 +5,7 @@ import SignUpImage from "@/components/ui/signup-image";
 import { SignUpFieldErrors, signupUser } from "@/lib/User/actions";
 import {
   EMAIL_ALREADY_EXISTS_MSG,
-  SIGNUP_MAX_EMAIL_LENGTH,
-  SIGNUP_MAX_NAME_LENGTH,
-  SIGNUP_MAX_PASSWORD_LENGTH,
-  SIGNUP_MIN_NAME_LENGTH,
-  SIGNUP_MIN_PASSWORD_LENGTH,
-  signUpSchema,
+  signUpSchema
 } from "@/lib/User/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
@@ -104,11 +99,8 @@ const SignUp = () => {
                   autoComplete="given-name"
                   type="text"
                   placeholder="Full Name"
-                  maxLength={SIGNUP_MAX_NAME_LENGTH}
-                  minLength={SIGNUP_MIN_NAME_LENGTH}
                   aria-errormessage="fullNameError"
                   className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
-                  required
                   {...register("fullName")}
                 />
                 {combinedErrors.fullName && (
@@ -128,10 +120,8 @@ const SignUp = () => {
                   type="email"
                   autoComplete="email"
                   placeholder="Email"
-                  maxLength={SIGNUP_MAX_EMAIL_LENGTH}
                   aria-errormessage="emailError"
                   className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
-                  required
                   {...emailValidation}
                   onChange={(e) => {
                     if (emailBeforeSubmission === e.target.value) {
@@ -174,12 +164,8 @@ const SignUp = () => {
                   type="password"
                   autoComplete="new-password"
                   placeholder="Password"
-                  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,}$"
-                  maxLength={SIGNUP_MAX_PASSWORD_LENGTH}
-                  minLength={SIGNUP_MIN_PASSWORD_LENGTH}
                   aria-errormessage="passwordError"
                   className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
-                  required
                   {...register("password")}
                 />
                 {combinedErrors.password && (
@@ -199,11 +185,8 @@ const SignUp = () => {
                   type="password"
                   autoComplete="new-password"
                   placeholder="Confirm Password"
-                  maxLength={SIGNUP_MAX_PASSWORD_LENGTH}
-                  minLength={SIGNUP_MIN_PASSWORD_LENGTH}
                   aria-errormessage="confirmPasswordError"
                   className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
-                  required
                   {...register("confirmPassword")}
                 />
                 {combinedErrors.confirmPassword && (
