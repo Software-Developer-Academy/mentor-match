@@ -193,9 +193,7 @@ const SignUp = () => {
                       <>{combinedErrors.confirmPassword[0]}</>
                     ) : typeof combinedErrors.confirmPassword.message ===
                       "string" ? (
-                      <>
-                        {combinedErrors.confirmPassword.message}
-                      </>
+                      <>{combinedErrors.confirmPassword.message}</>
                     ) : (
                       <>Invalid input</>
                     )}
