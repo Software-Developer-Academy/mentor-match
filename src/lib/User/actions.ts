@@ -3,7 +3,6 @@ import { redirect } from "next/navigation";
 import { connectMongo } from "../db";
 import UserModel from "./model";
 import { EMAIL_ALREADY_EXISTS_MSG, signUpSchema } from "./validations";
-
 type FormError = {
   field: string;
   previousValue?: string | FormDataEntryValue | null;
