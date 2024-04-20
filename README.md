@@ -2,98 +2,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-## Contributing
-
-### Join us in project discussion
-
 <a href="https://discord.gg/mg4mvCjE"><img src="https://img.shields.io/badge/discord-%237289DA.svg?&style=for-the-badge&logo=discord&logoColor=white " /></a>
 <a href="https://www.figma.com/file/Fiz0RIIZkZsgnzGDPb603b/Mentor-Match?type=design&node-id=8-2&mode=design"><img src="https://img.shields.io/badge/figma-%23F24E1E.svg?&style=for-the-badge&logo=figma&logoColor=white" /></a>
 
 - Click the icon or link: https://discord.gg/mg4mvCjE
 - Click the icon or link: https://www.figma.com/file/Fiz0RIIZkZsgnzGDPb603b/Mentor-Match?type=design&node-id=8-2&mode=design
-
-### Clone the Repository
-
-1. Open your terminal or command prompt.
-2. Navigate to the directory where you want to clone the repository.
-3. Run the following command to clone the repository:
-
-```bash
-git clone <repository-url>
-```
-
-Replace `<repository-url>` with the actual URL of the repository.
-
-4. Navigate to the cloned repository directory:
-
-```bash
-cd <repository-name>
-```
-
-Replace `<repository-name>` with the name of your repository.
-
-5. Install the project dependencies:
-
-```bash
-npm install
-```
-
-**Note:** Make sure you are in the root of your project directory before running the above command.
-
-### Create a New Branch
-
-After cloning the repository, it's a good practice to create a new branch for your feature work. Here's how you can do it:
-
-1. Navigate to the cloned repository directory.
-2. Run the following command to create a new branch:
-
-```bash
-git checkout -b <branch-name>
-```
-
-Replace `<branch-name>` with the name of your new branch.
-
-Remember, it's a good practice to name the branch something that describes the feature you're working on.
-
-### Setup DB
-
-1. Either run it locally or create a cloud DB.
-
-#### Local
-
-1. `docker run --name mongodb -d -p 27017:27017 mongodb/mongodb-community-server:latest`
-
-### Copy .env.example to .env.local
-
-1. `cp .env.example .env.local`
-1. Modify the `MONGO_URI` string to your DB connection _(the default string is for local DB connection)_
-
-Run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-### Running Formatting Script
-
-```bash
-npm run format
-
-```
-
-Run the above script to have Prettier format all files in the codebase.
 
 ## Learn More
 

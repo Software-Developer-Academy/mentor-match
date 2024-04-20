@@ -1,41 +1,41 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
   ERROR_INVALID_SESSION_SCHEMA,
+  getDeserializedSessionCookie,
   SESSION_COOKIE_NAME,
-  verifySession,
 } from "./lib/tools/session";
 
 export async function middleware(request: NextRequest) {
-  const sessionCookie = request.cookies.get(SESSION_COOKIE_NAME)?.value;
+  try {
+    await getDeserializedSessionCookie();
+  } catch (err) {
+    if (
+      !(err instanceof Error) ||
+      err.message !== ERROR_INVALID_SESSION_SCHEMA
+    ) {
+      console.error(err);
+      return NextResponse.next();
+    }
 
-  if (sessionCookie) {
-    try {
-      await verifySession(sessionCookie);
-    } catch (err) {
-      if (
-        !(err instanceof Error) ||
-        err.message !== ERROR_INVALID_SESSION_SCHEMA
-      ) {
-        console.error(err);
-        return NextResponse.next();
-      }
-
-      if (request.nextUrl.pathname !== "/signin" && request.method === "GET") {
-        const response = NextResponse.redirect(
-          new URL("/signin", request.nextUrl.origin),
-        );
-
-        response.cookies.delete(SESSION_COOKIE_NAME);
-
-        return response;
-      }
-
+    if (
+      request.nextUrl.pathname === "/signin" ||
+      request.nextUrl.pathname === "/signup" ||
+      request.nextUrl.pathname === "/"
+    ) {
       const response = NextResponse.next();
 
       response.cookies.delete(SESSION_COOKIE_NAME);
 
       return response;
     }
+
+    const response = NextResponse.redirect(
+      new URL("/signin", request.nextUrl.origin),
+    );
+
+    response.cookies.delete(SESSION_COOKIE_NAME);
+
+    return response;
   }
 
   return NextResponse.next();

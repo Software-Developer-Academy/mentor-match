@@ -55,10 +55,11 @@ export async function verifySession(
 
     return payload as JWTSessionPayload;
   } catch (error) {
-    if (error instanceof Error) {
-      if (error.name === "JWSSignatureVerificationFailed") {
-        throw new Error(ERROR_INVALID_SESSION_SCHEMA);
-      }
+    if (
+      error instanceof Error &&
+      error.name === "JWSSignatureVerificationFailed"
+    ) {
+      throw new Error(ERROR_INVALID_SESSION_SCHEMA);
     }
 
     console.error("Failed to verify session:", error);
