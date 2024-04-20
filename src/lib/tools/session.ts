@@ -148,7 +148,6 @@ export async function getSessionUser(): Promise<SessionUser | null> {
       }
     }
 
-    console.error("Failed to get session user:", err);
-    return null;
+    throw err;
   }
 }
