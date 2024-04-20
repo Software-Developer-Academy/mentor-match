@@ -7,60 +7,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { signupUser } from "@/lib/User/actions";
 import { signUpSchema } from "@/lib/User/validations";
+import PasswordInput from "./PasswordInput";
 
-import { useState } from "react";
 const SignUp = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setPassword(value);
-    setShowPassword(true);
-
-    // Hide the password after 500 milliseconds
-    setTimeout(() => {
-      setShowPassword(false);
-    }, 500);
-  };
-
-  const handleConfirmPasswordChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const value = e.target.value;
-    setConfirmPassword(value);
-    setShowConfirmPassword(true);
-
-    // Hide the confirm password after 500 milliseconds
-    setTimeout(() => {
-      setShowConfirmPassword(false);
-    }, 500);
-  };
-
-  const togglePasswordVisibility = () => {
-    setShowPassword((prevShowPassword) => !prevShowPassword);
-    // Reset the timeout if the eye icon is clicked manually
-    if (!showPassword) {
-      setTimeout(() => {
-        setShowPassword(false);
-      }, 500);
-    }
-  };
-
-  const toggleConfirmPasswordVisibility = () => {
-    setShowConfirmPassword(
-      (prevShowConfirmPassword) => !prevShowConfirmPassword
-    );
-    // Reset the timeout if the eye icon is clicked manually
-    if (!showConfirmPassword) {
-      setTimeout(() => {
-        setShowConfirmPassword(false);
-      }, 500);
-    }
-  };
-
   const {
     register,
     handleSubmit,
@@ -68,6 +17,10 @@ const SignUp = () => {
   } = useForm({
     resolver: zodResolver(signUpSchema),
   });
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
 
   return (
     <section className="h-full">
@@ -102,7 +55,7 @@ const SignUp = () => {
           </div>
           <div className="flex items-center px-12 mb-10 w-full">
             <form
-              // @ts-expect-error Type mismatch
+              // @ts-expect-errors Type mismatch
               onSubmit={handleSubmit((data) => signupUser(data))}
               className="w-full"
             >
@@ -139,148 +92,43 @@ const SignUp = () => {
                     </p>
                   )}
               </div>
-              <div className="mb-4 relative">
-                <div className="relative">
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Password"
-                    value={password}
-                    onChange={handlePasswordChange}
-                    maxLength={64}
-                    className="w-full bg-gray-300 text-black size-12 placeholder:text-black border px-4 rounded"
-                    required
-                    // {...register("password")}
-                  />
-                  {/* Password visibility toggle button */}
-                  <button
-                    type="button"
-                    onClick={togglePasswordVisibility}
-                    className="absolute inset-y-0 right-0 flex items-center px-4 focus:outline-none"
-                  >
-                    {showPassword ? (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 text-gray-500"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"
-                        />
-                      </svg>
-                    ) : (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 text-gray-500"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17.18 19a10 10 0 01-14.36 0m14.36 0a10 10 0 10-14.36 0"
-                        />
-                      </svg>
-                    )}
-                  </button>
-                </div>
-                {errors.password?.message &&
-                  typeof errors.password.message === "string" && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.password.message}
-                    </p>
+              <PasswordInput
+                placeholder="Password"
+                // onChange={(value) => register("password", { value, required: true })}
+                // error={errors.password?.message}
+                register={register}
+             
+              error={errors.password && (
+                <p id="passworderrors" className="text-red-500 text-sm mt-1">
+                  {Array.isArray(errors.password) ? (
+                    <>{errors.password[0]}</>
+                  ) : typeof errors.password.message === "string" ? (
+                    <>{errors.password.message}</>
+                  ) : (
+                    <>Invalid input</>
                   )}
-              </div>
-              <div className="mb-4 relative">
-                <div className="relative">
-                  <input
-                    type={showConfirmPassword ? "text" : "password"}
-                    placeholder="Confirm Password"
-                    value={confirmPassword}
-                    onChange={handleConfirmPasswordChange}
-                    maxLength={64}
-                    className="w-full bg-gray-300 text-black size-12 placeholder:text-black border px-4 rounded"
-                    required
-                    // {...register("confirmPassword")}
-                  />
-                  {/* Confirm Password visibility toggle button */}
-                  <button
-                    type="button"
-                    onClick={toggleConfirmPasswordVisibility}
-                    className="absolute inset-y-0 right-0 flex items-center px-4 focus:outline-none"
-                  >
-                    {showConfirmPassword ? (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 text-gray-500"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"
-                        />
-                      </svg>
-                    ) : (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 text-gray-500"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17.18 19a10 10 0 01-14.36 0m14.36 0a10 10 0 10-14.36 0"
-                        />
-                      </svg>
-                    )}
-                  </button>
-                </div>
-                {errors.confirmPassword?.message &&
-                  typeof errors.confirmPassword.message === "string" && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.confirmPassword.message}
-                    </p>
+                </p>
+              )}
+              />
+              <PasswordInput
+                placeholder="Confirm Password"
+                // onChange={(value) => register("confirmPassword", { value, required: true })}
+                // error={errors.confirmPassword?.message}
+                register={register}
+              error={errors.confirmPassword && (
+                <p id="confirmPassworderrors" className="text-red-500 text-sm mt-1">
+                  {Array.isArray(errors.confirmPassword) ? (
+                    <>{errors.confirmPassword[0]}</>
+                  ) : typeof errors.confirmPassword.message === "string" ? (
+                    <>{errors.confirmPassword.message}</>
+                  ) : (
+                    <>Invalid input</>
                   )}
-              </div>
+                </p>
+              )}
+              />
               <div className="mb-10">
-                <GradButton variant="default" className="w-full">
+                <GradButton type="submit" variant="default" className="w-full">
                   Sign Up
                 </GradButton>
               </div>
@@ -312,3 +160,5 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
+
