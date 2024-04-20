@@ -12,9 +12,9 @@ export type SessionUser = Pick<User, "name" | "roles" | "_id">;
  * Uses {@link getDeserializedSessionCookie} to get the session token
  * and then fetches the user from the database.
  *
- * Example return response of {@link SessionUser}
+ * Example format of {@link SessionUser}
  *
- * The ```_id``` is a MongoDB ObjectId string.
+ * The `_id` is a MongoDB ObjectId string.
  * ```json
  * {
  *  "_id": "60f1e1b3e6f3b3b3b3b3b3b3",
