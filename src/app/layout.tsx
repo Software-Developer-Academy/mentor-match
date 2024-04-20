@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Andada_Pro, Poppins } from "next/font/google";
+import { Andada_Pro, Inter, Poppins } from "next/font/google";
 import "./globals.css";
 
 //defined variables for font
