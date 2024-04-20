@@ -1,14 +1,11 @@
 import { JWTPayload, jwtVerify, SignJWT } from "jose";
 import { cookies } from "next/headers";
-import { connectMongo } from "../db";
-import UserModel, { User } from "../User/model";
 
-type SessionPayload = {
+export type SessionPayload = {
   userId: string;
 };
 
-type JWTSessionPayload = SessionPayload & JWTPayload;
-type SessionUser = Pick<User, "name" | "roles" | "_id">;
+export type JWTSessionPayload = SessionPayload & JWTPayload;
 
 // Check for the environment variable for the secret key, throw error if not set
 if (!process.env.SESSION_SECRET) {
@@ -18,9 +15,9 @@ if (!process.env.SESSION_SECRET) {
 }
 
 // Environment variable for the secret key
-const SESSION_SECRET = process.env.SESSION_SECRET;
-const SESSION_COOKIE_NAME = "session";
-const ERROR_INVALID_SESSION_SCHEMA =
+export const SESSION_SECRET = process.env.SESSION_SECRET;
+export const SESSION_COOKIE_NAME = "session";
+export const ERROR_INVALID_SESSION_SCHEMA =
   "Deserialized session cookie has an invalid schema";
 
 export async function createSession(payload: SessionPayload): Promise<string> {
@@ -79,10 +76,6 @@ export function setSessionCookie(token: string) {
   });
 }
 
-export function clearSessionCookie() {
-  cookies().delete(SESSION_COOKIE_NAME);
-}
-
 /**
  * @returns The deserialized session token from the cookie.
  * This uses {@link verifySession}.
@@ -99,55 +92,6 @@ export async function getDeserializedSessionCookie(): Promise<JWTSessionPayload 
   return signedCookie ? verifySession(signedCookie) : null;
 }
 
-/**
- * Uses {@link getDeserializedSessionCookie} to get the session token
- * and then fetches the user from the database.
- *
- * Example return response of {@link SessionUser}
- *
- * The ```_id``` is a MongoDB ObjectId string.
- * ```json
- * {
- *  "_id": "60f1e1b3e6f3b3b3b3b3b3b3",
- *  "name": "John Doe",
- *  "roles": []
- * }
- * ```
- *
- * @throws Errors from {@link connectMongo}, {@link UserModel.findById},
- * and {@link getDeserializedSessionCookie}.
- */
-export async function getSessionUser(): Promise<SessionUser | null> {
-  try {
-    const sessionCookie = await getDeserializedSessionCookie();
-
-    if (!sessionCookie) {
-      return null;
-    }
-
-    await connectMongo();
-
-    const sessionUser = await UserModel.findById(sessionCookie.userId, {
-      name: 1,
-      roles: 1,
-    });
-
-    if (!sessionUser) {
-      // This means that a user has a cookie, but they don't
-      // exist in the database. We delete this cookie if that is the case.
-      clearSessionCookie();
-      return null;
-    }
-
-    return sessionUser;
-  } catch (err) {
-    if (err instanceof Error) {
-      if (err.message === ERROR_INVALID_SESSION_SCHEMA) {
-        clearSessionCookie();
-        return null;
-      }
-    }
-
-    throw err;
-  }
+export async function clearSessionCookie() {
+  cookies().delete(SESSION_COOKIE_NAME);
 }
