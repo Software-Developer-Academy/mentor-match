@@ -4,8 +4,8 @@ import { connectMongo } from "../db";
 import UserModel, { User } from "../User/model";
 
 type SessionPayload = {
-  userId: string
-}
+  userId: string;
+};
 
 type JWTSessionPayload = SessionPayload & JWTPayload;
 type SessionUser = Pick<User, "name" | "roles" | "_id">;
@@ -20,7 +20,8 @@ if (!process.env.SESSION_SECRET) {
 // Environment variable for the secret key
 const SESSION_SECRET = process.env.SESSION_SECRET;
 const SESSION_COOKIE_NAME = "session";
-const ERROR_INVALID_SESSION_SCHEMA = "Deserialized session cookie has an invalid schema";
+const ERROR_INVALID_SESSION_SCHEMA =
+  "Deserialized session cookie has an invalid schema";
 
 export async function createSession(payload: SessionPayload): Promise<string> {
   const encoder = new TextEncoder();
@@ -41,7 +42,9 @@ export async function createSession(payload: SessionPayload): Promise<string> {
  * @returns null if the token cannot be deserialized.
  * @throws {Error} If the token cannot be deserialized.
  */
-export async function verifySession(token: string): Promise<JWTSessionPayload | null> {
+export async function verifySession(
+  token: string,
+): Promise<JWTSessionPayload | null> {
   const encoder = new TextEncoder();
 
   try {
@@ -118,7 +121,7 @@ export async function getSessionUser(): Promise<SessionUser | null> {
   const sessionCookie = await getDeserializedSessionCookie();
 
   if (!sessionCookie) {
-    return null
+    return null;
   }
 
   await connectMongo();
