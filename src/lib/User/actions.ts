@@ -39,7 +39,7 @@ export async function signupUser(fields: Fields) {
       name: fullName,
       email,
       password: hashedPassword, // Save the hashed password
-      salt : salt,
+      salt: salt,
     });
   } catch (error) {
     console.error(error);

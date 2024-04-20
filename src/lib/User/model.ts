@@ -15,6 +15,7 @@ export interface User extends Document {
   name: string;
   email: string;
   password: string;
+  salt: string;
   intro: string;
   roles: [string];
   skills: [];
@@ -35,6 +36,10 @@ const UserSchema: Schema<User> = new Schema({
     unique: true,
   },
   password: {
+    type: String,
+    required: true,
+  },
+  salt: { // Define salt field
     type: String,
     required: true,
   },
