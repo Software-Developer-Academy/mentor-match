@@ -1,5 +1,14 @@
-import { jwtVerify, SignJWT } from "jose";
+import { JWTPayload, jwtVerify, SignJWT } from "jose";
 import { cookies } from "next/headers";
+import { connectMongo } from "../db";
+import UserModel, { User } from "../User/model";
+
+type SessionPayload = {
+  userId: string
+}
+
+type JWTSessionPayload = SessionPayload & JWTPayload;
+type SessionUser = Pick<User, "name" | "roles" | "_id">;
 
 // Check for the environment variable for the secret key, throw error if not set
 if (!process.env.SESSION_SECRET) {
@@ -9,34 +18,56 @@ if (!process.env.SESSION_SECRET) {
 }
 
 // Environment variable for the secret key
-const secretKey = process.env.SESSION_SECRET;
-const encoder = new TextEncoder();
+const SESSION_SECRET = process.env.SESSION_SECRET;
+const SESSION_COOKIE_NAME = "session";
+const ERROR_INVALID_SESSION_SCHEMA = "Deserialized session cookie has an invalid schema";
 
-export async function createSession(payload: { userId: string }) {
+export async function createSession(payload: SessionPayload): Promise<string> {
   const encoder = new TextEncoder();
   const jwt = await new SignJWT({ userId: payload.userId })
     .setProtectedHeader({ alg: "HS256", typ: "JWT" })
     .setIssuedAt()
     .setExpirationTime("30d")
-    .sign(encoder.encode(secretKey));
+    .sign(encoder.encode(SESSION_SECRET));
 
   return jwt;
 }
 
-export async function verifySession(token: string) {
+/**
+ * Verifies the signed token string and
+ * deserializes it into a {@link JWTPayload} object
+ * with properties from {@link SessionPayload}.
+ *
+ * @returns null if the token cannot be deserialized.
+ * @throws {Error} If the token cannot be deserialized.
+ */
+export async function verifySession(token: string): Promise<JWTSessionPayload | null> {
+  const encoder = new TextEncoder();
+
   try {
-    const { payload } = await jwtVerify(token, encoder.encode(secretKey), {
+    const { payload } = await jwtVerify(token, encoder.encode(SESSION_SECRET), {
       algorithms: ["HS256"],
     });
-    return payload;
+
+    if (!("userId" in payload)) {
+      throw new Error(ERROR_INVALID_SESSION_SCHEMA);
+    }
+
+    return payload as JWTSessionPayload;
   } catch (error) {
+    if (error instanceof Error) {
+      if (error.name === "JWSSignatureVerificationFailed") {
+        //
+      }
+    }
+
     console.error("Failed to verify session:", error);
     return null;
   }
 }
 
 export function setSessionCookie(token: string) {
-  cookies().set("session", token, {
+  cookies().set(SESSION_COOKIE_NAME, token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "strict",
@@ -46,5 +77,54 @@ export function setSessionCookie(token: string) {
 }
 
 export function clearSessionCookie() {
-  cookies().delete("session");
+  cookies().delete(SESSION_COOKIE_NAME);
+}
+
+/**
+ * @returns The deserialized session token from the cookie.
+ * This uses {@link verifySession}.
+ *
+ * **Note**: This does not verify whether the user exists on the
+ * database or not. It only checks if the session token is valid and
+ * returns it.
+ *
+ * @throws Errors from {@link verifySession}
+ */
+export async function getDeserializedSessionCookie(): Promise<JWTSessionPayload | null> {
+  const signedCookie = cookies().get(SESSION_COOKIE_NAME)?.value;
+
+  return signedCookie ? verifySession(signedCookie) : null;
+}
+
+/**
+ * Uses {@link getDeserializedSessionCookie} to get the session token
+ * and then fetches the user from the database.
+ *
+ * Example return response of {@link SessionUser}
+ *
+ * The ```_id``` is a MongoDB ObjectId string.
+ * ```json
+ * {
+ *  "_id": "60f1e1b3e6f3b3b3b3b3b3b3",
+ *  "name": "John Doe",
+ *  "roles": []
+ * }
+ * ```
+ *
+ * @throws Errors from {@link connectMongo}, {@link UserModel.findById},
+ * and {@link getDeserializedSessionCookie}.
+ */
+export async function getSessionUser(): Promise<SessionUser | null> {
+  const sessionCookie = await getDeserializedSessionCookie();
+
+  if (!sessionCookie) {
+    return null
+  }
+
+  await connectMongo();
+
+  return UserModel.findById(sessionCookie.userId, {
+    name: 1,
+    roles: 1,
+  });
 }
