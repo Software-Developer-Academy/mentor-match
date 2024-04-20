@@ -60,7 +60,7 @@ export async function verifySession(
   } catch (error) {
     if (error instanceof Error) {
       if (error.name === "JWSSignatureVerificationFailed") {
-        //
+        throw new Error(ERROR_INVALID_SESSION_SCHEMA);
       }
     }
 
@@ -118,16 +118,37 @@ export async function getDeserializedSessionCookie(): Promise<JWTSessionPayload 
  * and {@link getDeserializedSessionCookie}.
  */
 export async function getSessionUser(): Promise<SessionUser | null> {
-  const sessionCookie = await getDeserializedSessionCookie();
+  try {
+    const sessionCookie = await getDeserializedSessionCookie();
 
-  if (!sessionCookie) {
+    if (!sessionCookie) {
+      return null;
+    }
+
+    await connectMongo();
+
+    const sessionUser = await UserModel.findById(sessionCookie.userId, {
+      name: 1,
+      roles: 1,
+    });
+
+    if (!sessionUser) {
+      // This means that a user has a cookie, but they don't
+      // exist in the database. We delete this cookie if that is the case.
+      clearSessionCookie();
+      return null;
+    }
+
+    return sessionUser;
+  } catch (err) {
+    if (err instanceof Error) {
+      if (err.message === ERROR_INVALID_SESSION_SCHEMA) {
+        clearSessionCookie();
+        return null;
+      }
+    }
+
+    console.error("Failed to get session user:", err);
     return null;
   }
-
-  await connectMongo();
-
-  return UserModel.findById(sessionCookie.userId, {
-    name: 1,
-    roles: 1,
-  });
 }
