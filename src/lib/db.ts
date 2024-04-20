@@ -7,6 +7,10 @@ const cached: {
   promise?: Promise<typeof mongoose>;
 } = {};
 
+/**
+ * @throws {Error} If {@link MONGO_URI} is not defined and
+ * an error from {@link mongoose.connect}.
+ */
 export async function connectMongo() {
   if (!MONGO_URI) {
     throw new Error(
