@@ -8,7 +8,7 @@
 git checkout -b ui/landing-page
 ```
 
-Then check if you are on the ```ui/landing-page``` branch:
+Then check if you are on the `ui/landing-page` branch:
 
 ```bash
 git branch
