@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+
 ## Contributing
 
 ### Join us in project discussion### Clone the Repository
@@ -83,17 +85,32 @@ npm run format
 
 Run the above script to have Prettier format all files in the codebase.
 
+=======
+
+> > > > > > > 81561676c59f1feefab173e387a68ab442eacb4a
+
 ## Guidelines
 
 - For commit messages, make sure to follow the discussion [here](https://gist.github.com/robertpainsi/b632364184e70900af4ab688decf6f53) as much as possible.
 - Comment or let yourself be assigned to an issue before working on it. **Do not** work on an issue that someone has already commented or been assigned on, unless it is known that they are not working on it anymore.
+  <<<<<<< HEAD
 - Create a separate branch for the feature/issue you are working on. Run this command on your terminal or command prompt before starting your work:
 
 ```bash
 git checkout -b feat/<REPLACE_ME>
 ```
 
+# Then check if you are on the `ui/landing-page` branch:
+
+- Create a separate branch for the feature/issue you are working on. For example, if you are working on the landing page, you run this command on your terminal or command prompt before starting your work:
+
+```bash
+git checkout -b ui/landing-page
+```
+
 Then check if you are on the `ui/landing-page` branch:
+
+> > > > > > > 81561676c59f1feefab173e387a68ab442eacb4a
 
 ```bash
 git branch
@@ -102,6 +119,7 @@ git branch
 You should see something like this:
 
 ```bash
+<<<<<<< HEAD
 * feat/<REPLACE_ME>
   main
 ```
@@ -132,4 +150,13 @@ If you are sure that there are nothing else to commit for the issue/feature you'
 
 ```bash
 git push --set-upstream origin <YOUR_CURRENT_BRANCH>
+```
+
+=======
+
+- ui/landing-page
+  main
+
+```
+>>>>>>> 81561676c59f1feefab173e387a68ab442eacb4a
 ```
