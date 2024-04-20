@@ -1,11 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import {
   ERROR_INVALID_SESSION_SCHEMA,
   getDeserializedSessionCookie,
   SESSION_COOKIE_NAME,
 } from "./lib/tools/session";
 
-export async function middleware(request: NextRequest) {
+export async function middleware() {
   try {
     await getDeserializedSessionCookie();
   } catch (err) {
@@ -17,21 +17,7 @@ export async function middleware(request: NextRequest) {
       return NextResponse.next();
     }
 
-    if (
-      request.nextUrl.pathname === "/signin" ||
-      request.nextUrl.pathname === "/signup" ||
-      request.nextUrl.pathname === "/"
-    ) {
-      const response = NextResponse.next();
-
-      response.cookies.delete(SESSION_COOKIE_NAME);
-
-      return response;
-    }
-
-    const response = NextResponse.redirect(
-      new URL("/signin", request.nextUrl.origin),
-    );
+    const response = NextResponse.next();
 
     response.cookies.delete(SESSION_COOKIE_NAME);
 
