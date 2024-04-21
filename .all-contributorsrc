@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "coltonehrman",
+      "name": "Colton Ehrman",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12456288?v=4",
+      "profile": "https://coltonehrman.com",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "mentor-match",
+  "projectOwner": "Software-Developer-Academy"
+}
