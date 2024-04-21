@@ -1,5 +1,5 @@
-import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
-import Navbar from "@/components/Navbar"
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,7 +11,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 
 import Image1 from "@/svgs/image1";
 import RatingStars from "@/components/RatingStars";
@@ -34,7 +33,9 @@ const Benefits = () => {
           </div>
           <div className="">
             <div className="w-full flex justify-between">
-              <h3 className="text-[1rem] leading-normal p-0 m-0 text-primary font-poppins font-medium">{benefit.title}</h3>
+              <h3 className="text-[1rem] leading-normal p-0 m-0 text-primary font-poppins font-medium">
+                {benefit.title}
+              </h3>
             </div>
             <div className="w-full flex justify-between">
               <p className="text-sm">{benefit.description}</p>
@@ -43,18 +44,21 @@ const Benefits = () => {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
 const Testimonials = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
       {testimonials.map((testimonial) => (
-        <div key={testimonial.name} className="flex flex-col items-center justify-start text-center md:last:col-span-2 lg:last:col-span-1">
+        <div
+          key={testimonial.name}
+          className="flex flex-col items-center justify-start text-center md:last:col-span-2 lg:last:col-span-1"
+        >
           <div className="rounded-full overflow-hidden m-5">
-            <Image 
-              src={testimonial.image} 
-              alt={testimonial.name} 
+            <Image
+              src={testimonial.image}
+              alt={testimonial.name}
               width={100}
               height={100}
               className="object-cover rounded-full border-4 border-secondary"
@@ -68,40 +72,47 @@ const Testimonials = () => {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
 const Mentors = () => {
   return (
     <>
       {mentors.map((mentor) => (
-        <CarouselItem key={mentor.name} className="w-full md:basis-1/2 lg:basis-1/3 flex flex-col items-center justify-start text-center">
+        <CarouselItem
+          key={mentor.name}
+          className="w-full md:basis-1/2 lg:basis-1/3 flex flex-col items-center justify-start text-center"
+        >
           <div className="w-full flex justify-between bg-slate-100 rounded-sm">
             <div className="w-1/2 m-5 flex flex-col items-center justify-center">
-              <Image 
-                src={mentor.image} 
-                alt={mentor.name} 
+              <Image
+                src={mentor.image}
+                alt={mentor.name}
                 width={100}
                 height={100}
                 className="object-cover rounded-full border-4 border-secondary"
               />
               <div className="w-full mt-2">
-                <RatingStars id="mentors" rating={mentor.rating} color="secondary" />
+                <RatingStars
+                  id="mentors"
+                  rating={mentor.rating}
+                  color="secondary"
+                />
               </div>
               <div className="flex w-full mt-2 justify-center">
                 {mentor.languages.map((language) => (
-                  <span 
-                    key={language} 
+                  <span
+                    key={language}
                     className="text-xs text-white rounded-full m-1"
                     title={language}
                   >
-                      <Image
-                        src={`/icons/${getIcon(language)}.svg`}
-                        alt={`${language} Icon`}
-                        width={20}
-                        height={20}
-                        className="object-contain"
-                      />
+                    <Image
+                      src={`/icons/${getIcon(language)}.svg`}
+                      alt={`${language} Icon`}
+                      width={20}
+                      height={20}
+                      className="object-contain"
+                    />
                   </span>
                 ))}
               </div>
@@ -110,40 +121,41 @@ const Mentors = () => {
               <h3 className="text-lg font-bold">{mentor.name}</h3>
               <p className="text-sm">{mentor.title}</p>
               <p className="text-sm">{mentor.location}</p>
-              {
-                mentor.availability ? (
-                  <Button asChild className="mt-2 max-w-min py-2 px-4">
-                    <Link href={`/profile/${mentor.id}`}>View Profile</Link>
-                  </Button>
-                ) : (
-                  <p className="text-sm">Currently unavailable</p>
-                )
-              }
+              {mentor.availability ? (
+                <Button asChild className="mt-2 max-w-min py-2 px-4">
+                  <Link href={`/profile/${mentor.id}`}>View Profile</Link>
+                </Button>
+              ) : (
+                <p className="text-sm">Currently unavailable</p>
+              )}
             </div>
-
           </div>
         </CarouselItem>
       ))}
     </>
-  )
-}
+  );
+};
 
 export default function Home() {
   return (
     <>
       <Navbar />
       <main className="flex w-full flex-col items-center justify-between">
-
         <section className="container w-full md:min-h-[75dvh] lg:min-h-[100dvh] h-min flex flex-col lg:flex-row bg-cover items-center justify-center py-32 lg:py-20 md:py-24">
           <div className="flex flex-col lg:flex-row items-center justify-center">
             <div className="flex lg:w-1/2 w-full flex-col text-center lg:text-left px-10">
               <h1 className="text-4xl md:text-5xl font-bold">
-                Find the <span className="text-primary">right mentor</span> and carve your <span className="text-primary">path to success</span>
+                Find the <span className="text-primary">right mentor</span> and
+                carve your <span className="text-primary">path to success</span>
               </h1>
               <p className="text-lg mt-7">
-                Our platform helps you find the perfect mentor to guide you through your personal and professional development journey.
+                Our platform helps you find the perfect mentor to guide you
+                through your personal and professional development journey.
               </p>
-              <Button asChild className="mt-10 max-w-min py-4 px-8 mx-auto lg:mx-0">
+              <Button
+                asChild
+                className="mt-10 max-w-min py-4 px-8 mx-auto lg:mx-0"
+              >
                 <Link href="/signup">Join Mentor Match today</Link>
               </Button>
             </div>
@@ -161,7 +173,7 @@ export default function Home() {
           </div>
           <div className="flex w-full md:w-2/3 lg:w-1/2 text-center md:text-left flex-col">
             <h2 className="text-3xl md:text-4xl font-bold">
-              Do you feel like you're lacking direction and motivation?
+              Do you feel like you&apos;re lacking direction and motivation?
             </h2>
             <p className="text-lg my-3">
               Finding a mentor can offer numerous benefits, including:
@@ -190,10 +202,11 @@ export default function Home() {
             </h2>
           </div>
           <div className="flex px-10 mt-10 w-full">
-            <Carousel opts={{ 
-              align: "start",
-              loop: true 
-            }}
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
               className="w-full flex flex-col items-center justify-start text-center"
             >
               <CarouselContent className="w-screen">
@@ -205,6 +218,7 @@ export default function Home() {
           </div>
         </section>
       </main>
+      <Footer />
     </>
   );
 }

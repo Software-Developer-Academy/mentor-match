@@ -16,7 +16,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Mentor Match",
-  description: "Menor Match is a platform that connects mentors and mentees."
+  description: "Menor Match is a platform that connects mentors and mentees.",
 };
 
 export default function RootLayout({
@@ -28,7 +28,6 @@ export default function RootLayout({
     <html lang="en" className={`${poppins.variable} ${andada_pro.variable}`}>
       <body className={inter.className}>
         {children}
-        <Footer />
       </body>
     </html>
   );

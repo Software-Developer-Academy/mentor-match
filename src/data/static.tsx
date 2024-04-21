@@ -262,6 +262,7 @@ export const Subjects = [
 ];
 
 export const getIcon = (name: string) => {
-  const icon = Subjects.find((subject) => subject.name === name)?.icon ?? 'fallback';
+  const icon =
+    Subjects.find((subject) => subject.name === name)?.icon ?? "fallback";
   return icon;
-}
+};

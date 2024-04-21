@@ -1,23 +1,27 @@
 export const BenefitsData = [
   {
     title: "Guidance and Advice",
-    description: "Mentors can provide you with valuable advice and guidance based on their experience and expertise.",
+    description:
+      "Mentors can provide you with valuable advice and guidance based on their experience and expertise.",
     icon: "lightbulb",
   },
   {
     title: "Networking Opportunities",
-    description: "Mentors can introduce you to new contacts and help you expand your professional network.",
+    description:
+      "Mentors can introduce you to new contacts and help you expand your professional network.",
     icon: "groups",
   },
   {
     title: "Accountability",
-    description: "Mentors can help you set goals and hold you accountable for achieving them.",
+    description:
+      "Mentors can help you set goals and hold you accountable for achieving them.",
     icon: "check",
   },
   {
     title: "Feedback",
-    description: "Mentors can provide you with constructive feedback to help you improve and grow.",
-    icon: "chat"
+    description:
+      "Mentors can provide you with constructive feedback to help you improve and grow.",
+    icon: "chat",
   },
 ];
 
@@ -25,24 +29,27 @@ export const TestimonialsData = [
   {
     name: "John Doe",
     title: "Software Engineer",
-    quote: "Mentor Match helped me find a mentor who provided me with invaluable advice and guidance. I highly recommend it to anyone looking to advance their career.",
+    quote:
+      "Mentor Match helped me find a mentor who provided me with invaluable advice and guidance. I highly recommend it to anyone looking to advance their career.",
     rating: 5,
-    image: "/avatars/17.svg"
+    image: "/avatars/17.svg",
   },
   {
     name: "Jane Smith",
     title: "Designer",
-    quote: "I found a mentor on Mentor Match who helped me improve my design skills and expand my professional network. It was a great experience!",
+    quote:
+      "I found a mentor on Mentor Match who helped me improve my design skills and expand my professional network. It was a great experience!",
     rating: 4,
-    image: "/avatars/10.svg"
+    image: "/avatars/10.svg",
   },
   {
     name: "Alex Johnson",
     title: "Entrepreneur",
-    quote: "Mentor Match connected me with a mentor who helped me navigate the challenges of starting a business. I'm grateful for the support and guidance.",
+    quote:
+      "Mentor Match connected me with a mentor who helped me navigate the challenges of starting a business. I'm grateful for the support and guidance.",
     rating: 4.5,
-    image: "/avatars/16.svg"
-  }
+    image: "/avatars/16.svg",
+  },
 ];
 
 export const MentorsData = [
@@ -56,7 +63,7 @@ export const MentorsData = [
     languages: ["HTML", "CSS", "JavaScript"],
     availability: true,
     location: "San Francisco, CA",
-    email: ""
+    email: "",
   },
   {
     id: 2,
@@ -68,7 +75,7 @@ export const MentorsData = [
     languages: ["Swift", "Kotlin", "Java", "React Native"],
     availability: true,
     location: "New York, NY",
-    email: ""
+    email: "",
   },
   {
     id: 3,
@@ -80,7 +87,7 @@ export const MentorsData = [
     languages: ["MongoDB", "Express", "React", "Node.js"],
     availability: true,
     location: "Los Angeles, CA",
-    email: ""
+    email: "",
   },
   {
     id: 4,
@@ -92,7 +99,7 @@ export const MentorsData = [
     languages: ["MongoDB", "Express", "Angular", "Node.js"],
     availability: true,
     location: "Seattle, WA",
-    email: ""
+    email: "",
   },
   {
     id: 5,
@@ -104,7 +111,7 @@ export const MentorsData = [
     languages: ["Python", "SQL", "Django"],
     availability: true,
     location: "Chicago, IL",
-    email: ""
+    email: "",
   },
   {
     id: 6,
@@ -116,6 +123,6 @@ export const MentorsData = [
     languages: ["Ruby"],
     availability: true,
     location: "Austin, TX",
-    email: ""
-  }
+    email: "",
+  },
 ];

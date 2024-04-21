@@ -19,9 +19,9 @@ const config = {
     },
     extend: {
       fontFamily: {
-        'andada': "var(--andada-pro)",
-        'inter': "var(--inter)",
-        'poppins': "var(--poppins)",
+        andada: "var(--andada-pro)",
+        inter: "var(--inter)",
+        poppins: "var(--poppins)",
       },
       colors: {
         border: "hsl(var(--border))",

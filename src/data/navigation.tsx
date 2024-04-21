@@ -2,32 +2,36 @@ type languageProps = {
   name: string;
   href: string;
   icon: string;
-}
+};
 
-export const Technologies: { title: string; languages:languageProps[]; description: string }[] = [
+export const Technologies: {
+  title: string;
+  languages: languageProps[];
+  description: string;
+}[] = [
   {
     title: "Frontend",
     languages: [
       {
         name: "HTML",
         href: "/explore/html",
-        icon: "html5"
+        icon: "html5",
       },
       {
         name: "CSS",
         href: "/explore/css",
-        icon: "css3"
+        icon: "css3",
       },
       {
         name: "JavaScript",
         href: "/explore/javascript",
-        icon: "javascript"
+        icon: "javascript",
       },
       {
         name: "TypeScript",
         href: "/explore/typescript",
-        icon: "typescript"
-      }
+        icon: "typescript",
+      },
     ],
     description: "Make software look good",
   },
@@ -37,28 +41,28 @@ export const Technologies: { title: string; languages:languageProps[]; descripti
       {
         name: "Python",
         href: "/explore/python",
-        icon: "python"
+        icon: "python",
       },
       {
         name: "Ruby",
         href: "/explore/ruby",
-        icon: "ruby"
+        icon: "ruby",
       },
       {
         name: "Java",
         href: "/explore/java",
-        icon: "java"
+        icon: "java",
       },
       {
         name: "PHP",
         href: "/explore/php",
-        icon: "php"
+        icon: "php",
       },
       {
         name: "C#",
         href: "/explore/csharp",
-        icon: "csharp"
-      }
+        icon: "csharp",
+      },
     ],
     description: "Make software work well",
   },
@@ -68,23 +72,23 @@ export const Technologies: { title: string; languages:languageProps[]; descripti
       {
         name: "MERN",
         href: "/explore/mern",
-        icon: "mern"
+        icon: "mern",
       },
       {
         name: "MEAN",
         href: "/explore/mean",
-        icon: "mean"
+        icon: "mean",
       },
       {
         name: "LAMP",
         href: "/explore/lamp",
-        icon: "lamp"
+        icon: "lamp",
       },
       {
         name: "Python-Django",
         href: "/explore/python-django",
-        icon: "python-django"
-      }
+        icon: "python-django",
+      },
     ],
     description: "The full package",
   },
@@ -94,23 +98,23 @@ export const Technologies: { title: string; languages:languageProps[]; descripti
       {
         name: "Swift",
         href: "/explore/swift",
-        icon: "swift"
+        icon: "swift",
       },
       {
         name: "Kotlin",
         href: "/explore/kotlin",
-        icon: "kotlin"
+        icon: "kotlin",
       },
       {
         name: "React Native",
         href: "/explore/react-native",
-        icon: "react"
+        icon: "react",
       },
       {
         name: "Flutter",
         href: "/explore/flutter",
-        icon: "flutter"
-      }
+        icon: "flutter",
+      },
     ],
     description: "",
   },
@@ -120,30 +124,30 @@ export const Technologies: { title: string; languages:languageProps[]; descripti
       {
         name: "SQL",
         href: "/explore/sql",
-        icon: "mysql"
+        icon: "mysql",
       },
       {
         name: "NoSQL",
         href: "/explore/nosql",
-        icon: "nosql"
+        icon: "nosql",
       },
       {
         name: "MongoDB",
         href: "/explore/mongodb",
-        icon: "mongodb"
+        icon: "mongodb",
       },
       {
         name: "PostgreSQL",
         href: "/explore/postgresql",
-        icon: "postgresql"
-      }
+        icon: "postgresql",
+      },
     ],
     description: "Store data efficiently",
-  }
-]
+  },
+];
 
-export const AccountLinks: { text:string; href:string; style:string; }[] = [
-  { text: 'Account Dashboard', href: '/profile', style: 'link' },
-  { text: 'Settings', href: '/settings', style: 'link' },
-  { text: 'Log Out', href: '/logout', style: 'button' }
-]
+export const AccountLinks: { text: string; href: string; style: string }[] = [
+  { text: "Account Dashboard", href: "/profile", style: "link" },
+  { text: "Settings", href: "/settings", style: "link" },
+  { text: "Log Out", href: "/logout", style: "button" },
+];

@@ -1,10 +1,9 @@
 import Link from "next/link";
-import { Input } from "./ui/input"
-import { Separator } from "./ui/separator"
+import { Input } from "./ui/input";
+import { Separator } from "./ui/separator";
 
-import { Technologies, AccountLinks } from '@/data/navigation';
+import { Technologies, AccountLinks } from "@/data/navigation";
 const technologies = Technologies;
-const accountLinks = AccountLinks;
 
 const Explore = () => {
   return (
@@ -18,7 +17,10 @@ const Explore = () => {
           <ul className="grid w-full gap-x-2">
             {group.languages.map((language) => (
               <li key={language.name}>
-                <Link className="text-xs py-1 flex flex-row-reverse gap-2 border-b-[1px] border-dashed border-secondary/50 justify-end text-gray-300 hover:text-secondary focus:text-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary focus-visible:ring-offset-transparent transition-colors" href={language.href}>
+                <Link
+                  className="text-xs py-1 flex flex-row-reverse gap-2 border-b-[1px] border-dashed border-secondary/50 justify-end text-gray-300 hover:text-secondary focus:text-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary focus-visible:ring-offset-transparent transition-colors"
+                  href={language.href}
+                >
                   {language.name}
                 </Link>
               </li>
@@ -27,11 +29,10 @@ const Explore = () => {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
 const Footer = () => {
-
   return (
     <footer className="bg-primary text-white">
       <div className="container py-10">
@@ -41,14 +42,18 @@ const Footer = () => {
           </div>
           <div className="row-start-1 md:col-start-3 col-span-1">
             <form className="w-full">
-              <Input type="text" placeholder="Search..." className="p-2 w-full" />
+              <Input
+                type="text"
+                placeholder="Search..."
+                className="p-2 w-full"
+              />
             </form>
-          </div>  
+          </div>
         </div>
         <div className="text-right text-xs mt-10">&copy; Copyright Info</div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
