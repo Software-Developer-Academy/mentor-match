@@ -1,58 +1,25 @@
 "use client";
 
-import Image from "next/image";
 import { GradButton } from "@/components/ui/grad-button";
 import SignUpImage from "@/svgs/signup-image";
-import { z } from "zod";
+import { signupUser } from "@/lib/User/actions";
+import { signUpSchema } from "@/lib/User/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Image from "next/image";
+import { useRef } from "react";
 import { useForm } from "react-hook-form";
 
 const SignUp = () => {
-  const MIN_NAME_LENGTH = 3;
-  const MAX_NAME_LENGTH = 30;
-
-  const signUpSchema = z
-    .object({
-      fullName: z
-        .string()
-        .min(MIN_NAME_LENGTH, {
-          message: `Name must be at least ${MIN_NAME_LENGTH} characters long`,
-        })
-        .max(MAX_NAME_LENGTH, {
-          message: `Name must be no more than ${MAX_NAME_LENGTH} characters long`,
-        })
-        .regex(/^[a-zA-Z'-]+(?: [a-zA-Z'-]+)*$/, {
-          message:
-            "Name can only include alphabetical characters, hyphens, apostrophes, and internal spaces",
-        }),
-      email: z.string().email({ message: "Please enter a valid email" }),
-      password: z
-        .string()
-        .min(8, { message: "Password must be at least 8 characters long" })
-        .regex(
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-          {
-            message:
-              "Password must include uppercase, lowercase, number, and special character",
-          },
-        ),
-      confirmPassword: z.string(),
-    })
-    .refine((data) => data.password === data.confirmPassword, {
-      message: "Passwords must match",
-      path: ["confirmPassword"],
-    });
+  const formRef = useRef<HTMLFormElement>(null);
 
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(signUpSchema),
   });
-
-  // Callback for when the data is valid.
-  const onSubmit = (data: any) => console.log(data);
 
   return (
     <section className="h-full">
@@ -86,71 +53,106 @@ const SignUp = () => {
             <h2 className="text-3xl mb-5 font-semibold">Create your account</h2>
           </div>
           <div className="flex items-center px-12 mb-10 w-full">
-            <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+            <form
+              ref={formRef}
+              onSubmit={handleSubmit(async () => {
+                const errors = await signupUser(new FormData(formRef.current!));
+                if (errors && Array.isArray(errors)) {
+                  for (const error of errors) {
+                    setError(error.path[0] as string, error);
+                  }
+                }
+              })}
+              className="w-full"
+              noValidate
+            >
               <div className="mb-4">
                 <input
                   autoFocus
+                  autoComplete="name"
                   type="text"
                   placeholder="Full Name"
-                  maxLength={200}
-                  className="w-full bg-gray-300 text-black size-12 placeholder:text-black border px-4 rounded"
-                  required
+                  aria-errormessage="fullNameError"
+                  className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
                   {...register("fullName")}
                 />
-                {errors.fullName?.message &&
-                  typeof errors.fullName.message === "string" && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.fullName.message}
-                    </p>
-                  )}
+                {errors.fullName && (
+                  <p id="fullNameError" className="text-red-500 text-sm mt-1">
+                    {Array.isArray(errors.fullName) ? (
+                      <>{errors.fullName[0]}</>
+                    ) : typeof errors.fullName.message === "string" ? (
+                      <>{errors.fullName.message}</>
+                    ) : (
+                      <>Invalid input</>
+                    )}
+                  </p>
+                )}
               </div>
               <div className="mb-4">
                 <input
                   type="email"
+                  autoComplete="email"
                   placeholder="Email"
-                  maxLength={200}
-                  className="w-full bg-gray-300 text-black size-12 placeholder:text-black border px-4 rounded"
-                  required
+                  aria-errormessage="emailError"
+                  className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
                   {...register("email")}
                 />
-                {errors.email?.message &&
-                  typeof errors.email.message === "string" && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.email.message}
-                    </p>
-                  )}
+                {errors.email && (
+                  <p id="emailError" className="text-red-500 text-sm mt-1">
+                    {Array.isArray(errors.email) ? (
+                      <>{errors.email[0]}</>
+                    ) : typeof errors.email.message === "string" ? (
+                      <>{errors.email.message}</>
+                    ) : (
+                      <>Invalid input</>
+                    )}
+                  </p>
+                )}
               </div>
               <div className="mb-4">
                 <input
                   type="password"
+                  autoComplete="new-password"
                   placeholder="Password"
-                  maxLength={64}
-                  className="w-full bg-gray-300 text-black size-12 placeholder:text-black border px-4 rounded"
-                  required
+                  aria-errormessage="passwordError"
+                  className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
                   {...register("password")}
                 />
-                {errors.password?.message &&
-                  typeof errors.password.message === "string" && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.password.message}
-                    </p>
-                  )}
+                {errors.password && (
+                  <p id="passwordError" className="text-red-500 text-sm mt-1">
+                    {Array.isArray(errors.password) ? (
+                      <>{errors.password[0]}</>
+                    ) : typeof errors.password.message === "string" ? (
+                      <>{errors.password.message}</>
+                    ) : (
+                      <>Invalid input</>
+                    )}
+                  </p>
+                )}
               </div>
               <div className="mb-4">
                 <input
                   type="password"
+                  autoComplete="new-password"
                   placeholder="Confirm Password"
-                  maxLength={64}
-                  className="w-full bg-gray-300 text-black size-12 placeholder:text-black border px-4 rounded"
-                  required
+                  aria-errormessage="confirmPasswordError"
+                  className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
                   {...register("confirmPassword")}
                 />
-                {errors.confirmPassword?.message &&
-                  typeof errors.confirmPassword.message === "string" && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.confirmPassword.message}
-                    </p>
-                  )}
+                {errors.confirmPassword && (
+                  <p
+                    id="confirmPasswordError"
+                    className="text-red-500 text-sm mt-1"
+                  >
+                    {Array.isArray(errors.confirmPassword) ? (
+                      <>{errors.confirmPassword[0]}</>
+                    ) : typeof errors.confirmPassword.message === "string" ? (
+                      <>{errors.confirmPassword.message}</>
+                    ) : (
+                      <>Invalid input</>
+                    )}
+                  </p>
+                )}
               </div>
               <div className="mb-10">
                 <GradButton variant="default" className="w-full">
