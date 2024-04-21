@@ -1,7 +1,5 @@
 {
-  "files": [
-    "README.md"
-  ],
+  "files": ["README.md"],
   "imageSize": 100,
   "commit": false,
   "commitType": "docs",
@@ -12,111 +10,84 @@
       "name": "TJ McCoy",
       "avatar_url": "https://avatars.githubusercontent.com/u/7388732?v=4",
       "profile": "https://github.com/tjay22",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "donlevans29",
       "name": "Don Lamarr",
       "avatar_url": "https://avatars.githubusercontent.com/u/18158428?v=4",
       "profile": "https://github.com/donlevans29",
-      "contributions": [
-        "review"
-      ]
+      "contributions": ["review"]
     },
     {
       "login": "mikebashford",
       "name": "Mike Bashford",
       "avatar_url": "https://avatars.githubusercontent.com/u/13946486?v=4",
       "profile": "http://mikebashford.com",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "coltonehrman",
       "name": "Colton Ehrman",
       "avatar_url": "https://avatars.githubusercontent.com/u/12456288?v=4",
       "profile": "https://coltonehrman.com",
-      "contributions": [
-        "code",
-        "projectManagement",
-        "review",
-        "ideas"
-      ]
+      "contributions": ["code", "projectManagement", "review", "ideas"]
     },
     {
       "login": "Ragudos",
       "name": "Aaron",
       "avatar_url": "https://avatars.githubusercontent.com/u/133567781?v=4",
       "profile": "https://github.com/Ragudos",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "reuterShawn",
       "name": "Shawn Reuter",
       "avatar_url": "https://avatars.githubusercontent.com/u/60119326?v=4",
       "profile": "https://github.com/reuterShawn",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "kalpeshdhotre",
       "name": "Kalpesh",
       "avatar_url": "https://avatars.githubusercontent.com/u/49611334?v=4",
       "profile": "https://github.com/kalpeshdhotre",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "ogeeDeveloper",
       "name": "omaro grant",
       "avatar_url": "https://avatars.githubusercontent.com/u/74021270?v=4",
       "profile": "http://omarogrant.com",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "harunugurlu",
       "name": "harunugurlu",
       "avatar_url": "https://avatars.githubusercontent.com/u/83241950?v=4",
       "profile": "https://github.com/harunugurlu",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "SaudAhmed96",
       "name": "Saud Ahmed",
       "avatar_url": "https://avatars.githubusercontent.com/u/64993903?v=4",
       "profile": "https://github.com/SaudAhmed96",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "icarodredd",
       "name": "Icaro Gomes",
       "avatar_url": "https://avatars.githubusercontent.com/u/78151906?v=4",
       "profile": "https://github.com/icarodredd",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "KQuiggins",
       "name": "Kenneth Darrick Quiggins",
       "avatar_url": "https://avatars.githubusercontent.com/u/76880191?v=4",
       "profile": "https://github.com/KQuiggins",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     }
   ],
   "contributorsPerLine": 7,

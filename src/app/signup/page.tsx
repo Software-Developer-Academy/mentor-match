@@ -1,7 +1,7 @@
 "use client";
 
 import { GradButton } from "@/components/ui/grad-button";
-import SignUpImage from "@/components/ui/signup-image";
+import SignUpImage from "@/svgs/signup-image";
 import { signupUser } from "@/lib/User/actions";
 import { signUpSchema } from "@/lib/User/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
