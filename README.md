@@ -1,6 +1,6 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## Getting Started
@@ -129,6 +129,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://coltonehrman.com"><img src="https://avatars.githubusercontent.com/u/12456288?v=4?s=100" width="100px;" alt="Colton Ehrman"/><br /><sub><b>Colton Ehrman</b></sub></a><br /><a href="https://github.com/Software-Developer-Academy/mentor-match/commits?author=coltonehrman" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Ragudos"><img src="https://avatars.githubusercontent.com/u/133567781?v=4?s=100" width="100px;" alt="Aaron"/><br /><sub><b>Aaron</b></sub></a><br /><a href="https://github.com/Software-Developer-Academy/mentor-match/commits?author=Ragudos" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/reuterShawn"><img src="https://avatars.githubusercontent.com/u/60119326?v=4?s=100" width="100px;" alt="Shawn Reuter"/><br /><sub><b>Shawn Reuter</b></sub></a><br /><a href="https://github.com/Software-Developer-Academy/mentor-match/commits?author=reuterShawn" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/kalpeshdhotre"><img src="https://avatars.githubusercontent.com/u/49611334?v=4?s=100" width="100px;" alt="Kalpesh"/><br /><sub><b>Kalpesh</b></sub></a><br /><a href="https://github.com/Software-Developer-Academy/mentor-match/commits?author=kalpeshdhotre" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
