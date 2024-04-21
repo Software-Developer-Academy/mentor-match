@@ -1,6 +1,6 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## Getting Started
@@ -135,6 +135,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="http://omarogrant.com"><img src="https://avatars.githubusercontent.com/u/74021270?v=4?s=100" width="100px;" alt="omaro grant"/><br /><sub><b>omaro grant</b></sub></a><br /><a href="https://github.com/Software-Developer-Academy/mentor-match/commits?author=ogeeDeveloper" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/harunugurlu"><img src="https://avatars.githubusercontent.com/u/83241950?v=4?s=100" width="100px;" alt="harunugurlu"/><br /><sub><b>harunugurlu</b></sub></a><br /><a href="https://github.com/Software-Developer-Academy/mentor-match/commits?author=harunugurlu" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/SaudAhmed96"><img src="https://avatars.githubusercontent.com/u/64993903?v=4?s=100" width="100px;" alt="Saud Ahmed"/><br /><sub><b>Saud Ahmed</b></sub></a><br /><a href="https://github.com/Software-Developer-Academy/mentor-match/commits?author=SaudAhmed96" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/icarodredd"><img src="https://avatars.githubusercontent.com/u/78151906?v=4?s=100" width="100px;" alt="Icaro Gomes"/><br /><sub><b>Icaro Gomes</b></sub></a><br /><a href="https://github.com/Software-Developer-Academy/mentor-match/commits?author=icarodredd" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
