@@ -1,7 +1,6 @@
 "use server";
 
 import { EMAIL_ALREADY_EXISTS_MSG, signUpSchema } from "./validations";
-import { createSession, setSessionCookie } from "../tools/session";
 import { redirect } from "next/navigation";
 import { connectMongo } from "../db";
 import UserModel from "./model";
