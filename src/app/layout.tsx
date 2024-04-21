@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter, Andada_Pro, Poppins } from "next/font/google";
-import Footer from "@/components/Footer";
 
 import "@/styles/globals.css";
 import "@/styles/global-icons.css";

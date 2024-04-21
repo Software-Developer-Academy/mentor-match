@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Input } from "./ui/input";
 import { Separator } from "./ui/separator";
 
-import { Technologies, AccountLinks } from "@/data/navigation";
+import { Technologies } from "@/data/navigation";
 const technologies = Technologies;
 
 const Explore = () => {
