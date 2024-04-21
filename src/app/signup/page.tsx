@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { GradButton } from "@/components/ui/grad-button";
-import SignUpImage from "@/app/svgs/signup-image";
+import SignUpImage from "@/svgs/signup-image";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";

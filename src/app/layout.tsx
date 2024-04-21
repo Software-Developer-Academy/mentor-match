@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Andada_Pro, Poppins } from "next/font/google";
-import "@/app/styles/globals.css";
-import "@/app/styles/global-icons.css";
+import Footer from "@/components/Footer";
+
+import "@/styles/globals.css";
+import "@/styles/global-icons.css";
 
 //defined variables for font
 const andada_pro = Andada_Pro({ subsets: ["latin"], variable: "--andada-pro" });
@@ -24,7 +26,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${poppins.variable} ${andada_pro.variable}`}>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

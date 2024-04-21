@@ -96,6 +96,10 @@
   padding: 0;
 }
 
+body{
+  overflow-x: hidden;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--andada-pro);
   font-weight: bold;
@@ -139,6 +143,25 @@ p {
 
 #img1 .cls-3 {
   fill: #b7ce63
+}
+
+.star.primary {
+  stroke: hsl(var(--primary));
+}
+.star.secondary {
+  stroke: hsl(var(--secondary));
+}
+.star.tertiary{
+  stroke: hsl(var(--tertiary));
+}
+.star.primary .stop-color {
+  stop-color: hsl(var(--primary));
+}
+.star.secondary .stop-color {
+  stop-color: hsl(var(--secondary));
+}
+.star.tertiary .stop-color{
+  stop-color: hsl(var(--tertiary));
 }
 
 svg.signup path.themeSecondary {

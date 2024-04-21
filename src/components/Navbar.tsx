@@ -14,178 +14,68 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
   NavigationMenuViewport
-} from "@/components/ui/navigation-menu"
-import { Separator } from "@/components/ui/separator"
+} from '@/components/ui/navigation-menu'
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+  DrawerPortal,
+  DrawerOverlay
+} from '@/components/ui/drawer'
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator'
 import IconWithFallback from '@/components/IconWithFallback';
 
-type languageProps = {
-  name: string;
-  href: string;
-  icon: string;
+import { Subjects, getIcon } from '@/data/static';
+import { Technologies, AccountLinks } from '@/data/navigation';
+const technologies = Technologies;
+const accountLinks = AccountLinks;
+const subjects = Subjects;
+
+// Generate the Account navigation menu
+const Account = () => {
+  return (
+    <ul className="grid w-[400px] md:w-[200px] md:grid-cols-1 gap-row-10">
+      {accountLinks.map((link) => (
+        <li key={link.text}>
+          {link.style === 'button' ? (
+            <Button className="w-full block p-3 px-6">
+              <Link href={link.href}>{link.text}</Link>
+            </Button>
+          ) : (
+            <Link href={link.href} className="px-6 p-2 block text-slate-500 border-b-[1px] hover:text-slate-900 hover:bg-slate-100 focus:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900 focus-visible:ring-offset-slate-100 transition-colors">
+              {link.text}
+            </Link>
+          )}
+        </li>
+      ))}
+    </ul>
+  )
 }
 
-const technologies: { title: string; languages:languageProps[]; description: string }[] = [
-  {
-    title: "Frontend",
-    languages: [
-      {
-        name: "HTML",
-        href: "/explore/html",
-        icon: "html5"
-      },
-      {
-        name: "CSS",
-        href: "/explore/css",
-        icon: "css3"
-      },
-      {
-        name: "JavaScript",
-        href: "/explore/javascript",
-        icon: "javascript"
-      },
-      {
-        name: "TypeScript",
-        href: "/explore/typescript",
-        icon: "typescript"
-      }
-    ],
-    description: "Make software look good",
-  },
-  {
-    title: "Backend",
-    languages: [
-      {
-        name: "Python",
-        href: "/explore/python",
-        icon: "python"
-      },
-      {
-        name: "Ruby",
-        href: "/explore/ruby",
-        icon: "ruby"
-      },
-      {
-        name: "Java",
-        href: "/explore/java",
-        icon: "java"
-      },
-      {
-        name: "PHP",
-        href: "/explore/php",
-        icon: "php"
-      },
-      {
-        name: "C#",
-        href: "/explore/csharp",
-        icon: "csharp"
-      }
-    ],
-    description: "Make software work well",
-  },
-  {
-    title: "Fullstack",
-    languages: [
-      {
-        name: "MERN",
-        href: "/explore/mern",
-        icon: "mern"
-      },
-      {
-        name: "MEAN",
-        href: "/explore/mean",
-        icon: "mean"
-      },
-      {
-        name: "LAMP",
-        href: "/explore/lamp",
-        icon: "lamp"
-      },
-      {
-        name: "Python-Django",
-        href: "/explore/python-django",
-        icon: "python-django"
-      }
-    ],
-    description: "The full package",
-  },
-  {
-    title: "Mobile",
-    languages: [
-      {
-        name: "Swift",
-        href: "/explore/swift",
-        icon: "swift"
-      },
-      {
-        name: "Kotlin",
-        href: "/explore/kotlin",
-        icon: "kotlin"
-      },
-      {
-        name: "React Native",
-        href: "/explore/react-native",
-        icon: "react"
-      },
-      {
-        name: "Flutter",
-        href: "/explore/flutter",
-        icon: "flutter"
-      }
-    ],
-    description: "",
-  },
-  {
-    title: "Database",
-    languages: [
-      {
-        name: "SQL",
-        href: "/explore/sql",
-        icon: "mysql"
-      },
-      {
-        name: "NoSQL",
-        href: "/explore/nosql",
-        icon: "nosql"
-      },
-      {
-        name: "MongoDB",
-        href: "/explore/mongodb",
-        icon: "mongodb"
-      },
-      {
-        name: "PostgreSQL",
-        href: "/explore/postgresql",
-        icon: "postgresql"
-      }
-    ],
-    description: "The science of data storage",
-  }
-]
-
-const accountLinks: { text:string; href:string; style:string; }[] = [
-  { text: 'Account Dashboard', href: '/profile', style: 'link' },
-  { text: 'Settings', href: '/settings', style: 'link' },
-  { text: 'Log Out', href: '/logout', style: 'button' }
-]
-
+// Generate the Explore navigation menu 
 const Explore = () => {
   return (
-    <div className="grid w-screen gap-10 md:grid-cols-3 p-10">
+    <div className="grid w-screen gap-10 md:grid-cols-3 p-10 pb-32 md:pb-10">
       {technologies.map((group) => (
         <div key={group.title}>
           <div className="w-full flex justify-between">
             <p>{group.title}</p>
             <small className="text-slate-500 text-xs">{group.description}</small>
           </div>
-          <Separator />
+          <Separator className="border-secondary" />
           <ul className="grid w-full gap-x-2 grid-cols-2">
             {group.languages.map((language) => (
               <li key={language.name}>
                 <Link className="text-sm px-2 p-2 flex flex-row-reverse gap-2 justify-end text-slate-500 border-b-[1px] hover:text-slate-900 hover:bg-slate-100 focus:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900 focus-visible:ring-offset-slate-100 transition-colors" href={language.href}>
                   {language.name}
-                  <IconWithFallback 
-                    src={`/icons/${language.icon}.svg`}
-                    fallbackSrc='/icons/fallback.svg'
+                  <Image 
+                    src={`/icons/${getIcon(language.name)}.svg`}
                     alt={`${language.name} Icon`} 
                     width={20} 
                     height={20} 
@@ -200,11 +90,40 @@ const Explore = () => {
   )
 }
 
+// For future use if needed
+const MobileMenu = () => {
+  return (
+    <Drawer direction="right" shouldScaleBackground fixed dismissible={false}>
+      <DrawerTrigger asChild>
+        <Button variant="outline">
+          <span className="material-symbols-outlined">menu</span>
+        </Button>
+      </DrawerTrigger>
+      <DrawerPortal>
+        <DrawerOverlay className='fixed inset-0 bg-black/40' />
+          <DrawerContent className="lg:max-w-screen-lg overflow-y-scroll max-h-screen">
+            <DrawerHeader>
+              <DrawerTitle>What would you like to learn?</DrawerTitle>
+              <DrawerDescription>We have mentors available to teach the following</DrawerDescription>
+            </DrawerHeader>
+            <Separator />
+            <Explore />
+            <DrawerFooter>
+              <DrawerClose>
+                <Button className="text-white">Close</Button>
+              </DrawerClose>
+            </DrawerFooter>
+          </DrawerContent>
+      </DrawerPortal>
+    </Drawer>
+  )
+}
+
 const Navbar = () => {
   const userLoggedIn = true;
   
   return (
-    <nav className='fixed z-50 w-full p-2 bg-white scroll-my-10'>
+    <nav className='fixed z-50 w-full p-2 bg-white'>
       <div className='lg:container w-full flex justify-between'>
         <Link 
           href="/" 
@@ -223,7 +142,7 @@ const Navbar = () => {
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuTrigger>Explore</NavigationMenuTrigger>
-                <NavigationMenuContent>
+                <NavigationMenuContent className="overflow-y-scroll md:overflow-auto max-h-screen">
                   <Explore />
                 </NavigationMenuContent>
               </NavigationMenuItem>
@@ -231,47 +150,20 @@ const Navbar = () => {
                 <NavigationMenuTrigger className="text-primary text-sm font-medium flex items-center justify-center">
                   <span className="material-symbols-outlined">person</span>
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="p-0">
-                  <ul className="grid w-[400px] md:w-[200px] md:grid-cols-1">
-                    {accountLinks.map((link) => (
-                      link.style === 'button' ? (
-                        <li
-                          key={link.text}
-                          className="bg-primary text-white text-sm font-medium flex items-center justify-center"
-                        >
-                          <Link 
-                            key={link.text}
-                            href={link.href}
-                            className="w-full block p-3 px-6"
-                          >
-                              {link.text}
-                          </Link>
-                        </li>
-                      ) : (
-                        <li className="w-full block">
-                          <Link
-                            key={link.text}
-                            href={link.href}
-                            className = "px-6 p-2 block text-slate-500 border-b-[1px] hover:text-slate-900 hover:bg-slate-100 focus:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-900 focus-visible:ring-offset-slate-100 transition-colors"
-                          >
-                            {link.text}
-                          </Link>
-                        </li>
-                      )
-                    ))}
-                  </ul>
+                <NavigationMenuContent className="flex justify-center p-5">
+                  <Account />
                 </NavigationMenuContent>
               </NavigationMenuItem>
             </NavigationMenuList>
 
-            <NavigationMenuViewport className="fixed right-0 w-screen md:w-full h-screen md:h-auto" />
+            <NavigationMenuViewport className="fixed right-0" />
           </NavigationMenu>
         ) : (
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuTrigger>Explore</NavigationMenuTrigger>
-                <NavigationMenuContent>
+                <NavigationMenuContent className="overflow-y-scroll md:overflow-auto max-h-screen">
                   <Explore />
                 </NavigationMenuContent>
               </NavigationMenuItem>
@@ -284,7 +176,7 @@ const Navbar = () => {
               </NavigationMenuItem>
             </NavigationMenuList>
 
-            <NavigationMenuViewport className="fixed right-0 w-full" />
+            <NavigationMenuViewport className="fixed right-0" />
           </NavigationMenu>
         )}
         

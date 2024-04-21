@@ -18,8 +18,10 @@ const config = {
       },
     },
     extend: {
-      backgroundImage: {
-        'hero-image': "url('/images/hero-bg.jpg')",
+      fontFamily: {
+        'andada': "var(--andada-pro)",
+        'inter': "var(--inter)",
+        'poppins': "var(--poppins)",
       },
       colors: {
         border: "hsl(var(--border))",
