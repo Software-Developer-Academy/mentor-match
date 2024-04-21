@@ -51,6 +51,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "reuterShawn",
+      "name": "Shawn Reuter",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60119326?v=4",
+      "profile": "https://github.com/reuterShawn",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
