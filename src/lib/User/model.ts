@@ -39,7 +39,8 @@ const UserSchema: Schema<User> = new Schema({
     type: String,
     required: true,
   },
-  salt: { // Define salt field
+  salt: {
+    // Define salt field
     type: String,
     required: true,
   },
