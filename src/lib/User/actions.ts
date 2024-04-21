@@ -10,10 +10,10 @@ import bcrypt from "bcrypt";
 export async function signupUser(
   data: FormData,
 ): Promise<ZodIssue[] | unknown> {
-  const fullName = data.get("fullName");
-  const email = data.get("email");
-  const password = data.get("password");
-  const confirmPassword = data.get("confirmPassword");
+  const fullName = data.get("fullName") as string;
+  const email = data.get("email") as string;
+  const password = data.get("password") as string;
+  const confirmPassword = data.get("confirmPassword") as string;
 
   const dataSchemaValidation = signUpSchema.safeParse({
     fullName,
@@ -44,13 +44,13 @@ export async function signupUser(
     // Hash and salt the password
     const saltRounds = 15;
     const salt = await bcrypt.genSalt(saltRounds);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    const hashedPassword = bcrypt.hash(password, salt as string);
 
     await UserModel.create({
       name: fullName,
       email,
       password: hashedPassword, // Save the hashed password
-      salt: salt,
+      salt: salt as string, // Asssert salt as string
     });
   } catch (error) {
     console.error(error);
