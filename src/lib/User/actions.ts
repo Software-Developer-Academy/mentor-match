@@ -8,7 +8,6 @@ import UserModel from "./model";
 import { ZodIssue } from "zod";
 import bcrypt from "bcrypt";
 
-
 export async function signupUser(
   data: FormData,
 ): Promise<ZodIssue[] | unknown> {
