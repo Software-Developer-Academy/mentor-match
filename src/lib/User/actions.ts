@@ -1,32 +1,45 @@
 "use server";
-import { signUpSchema } from "./validations";
+
+import { EMAIL_ALREADY_EXISTS_MSG, signUpSchema } from "./validations";
+import { createSession, setSessionCookie } from "../tools/session";
 import { redirect } from "next/navigation";
-import UserModel from "./model";
 import { connectMongo } from "../db";
+import UserModel from "./model";
+import { ZodIssue } from "zod";
 import bcrypt from "bcrypt";
 
-type Fields = {
-  fullName: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
 
-export async function signupUser(fields: Fields) {
-  const validationResult = signUpSchema.safeParse(fields);
-  if (!validationResult.success) {
-    const errors = validationResult.error.flatten();
-    throw new Error("Validation failed: " + errors.fieldErrors);
+export async function signupUser(
+  data: FormData,
+): Promise<ZodIssue[] | unknown> {
+  const fullName = data.get("fullName");
+  const email = data.get("email");
+  const password = data.get("password");
+  const confirmPassword = data.get("confirmPassword");
+
+  const dataSchemaValidation = signUpSchema.safeParse({
+    fullName,
+    email,
+    password,
+    confirmPassword,
+  });
+
+  if (dataSchemaValidation.success === false) {
+    return dataSchemaValidation.error.errors;
   }
-
-  const { fullName, email, password } = validationResult.data;
 
   await connectMongo();
 
   const existingUserWithEmail = await UserModel.findOne({ email });
 
   if (existingUserWithEmail) {
-    throw new Error("User already exists.");
+    return [
+      {
+        message: EMAIL_ALREADY_EXISTS_MSG,
+        path: ["email"],
+        code: "custom",
+      },
+    ];
   }
 
   try {
