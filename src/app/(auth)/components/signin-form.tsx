@@ -103,7 +103,7 @@ export const SignInForm = () => {
       <hr className="mt-10 mb-10" />
       <div className="flex justify-center mb-5">
         <p className="text-black font-semibold text-xl">
-          Don't have an account?
+          Don&apos;t have an account?
         </p>
       </div>
       <div className="mx-20 my-10">
