@@ -18,9 +18,9 @@ import AccountQuestion1 from "@/components/account-questions/account-question-1"
 const AccountQuestionnaire = () => {
 	return (
 		<div className="flex h-screen">
-			<div className="basis-1/2 py-5 px-10">
-				<div className="mb-10">
-					<p className="text-right">SKIP</p>
+			<div className="basis-1/2 py-5 px-10 pr-0 w-1/2">
+				<div className="mb-24">
+					<p className="text-right text-l">SKIP</p>
 				</div>
 
 				{/* <div className="flex flex-col justify-center pb-16">
@@ -43,14 +43,21 @@ const AccountQuestionnaire = () => {
 					</RadioGroup>
 				</div> */}
 
-				<div className="bg-slate-500">
+				<div className="w-full">
 					<Carousel>
 						<CarouselContent>
 							<CarouselItem>
 								<AccountQuestion1 />
 							</CarouselItem>
-							<CarouselItem>bro</CarouselItem>
-							<CarouselItem>bro</CarouselItem>
+							<CarouselItem>
+								<AccountQuestion1 />
+							</CarouselItem>
+							<CarouselItem>
+								<AccountQuestion1 />
+							</CarouselItem>
+							<CarouselItem>
+								<AccountQuestion1 />
+							</CarouselItem>
 						</CarouselContent>
 						<CarouselDots />
 						<CarouselPrevious />
@@ -58,7 +65,7 @@ const AccountQuestionnaire = () => {
 					</Carousel>
 				</div>
 			</div>
-			<div className="bg-[#00658A] flex items-center justify-center basis-1/2 p-10 rounded-l-[40%]">
+			<div className="bg-[#00658A] flex items-center justify-center basis-3/5 p-10 rounded-l-[40%]">
 				{/* <Image /> */}
 
 				<div>
