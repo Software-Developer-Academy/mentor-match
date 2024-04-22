@@ -1,7 +1,5 @@
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors-)
-
+[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## Join us in project discussion
@@ -45,6 +43,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/SaudAhmed96"><img src="https://avatars.githubusercontent.com/u/64993903?v=4?s=100" width="100px;" alt="Saud Ahmed"/><br /><sub><b>Saud Ahmed</b></sub></a><br /><a href="https://github.com/Software-Developer-Academy/mentor-match/commits?author=SaudAhmed96" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/icarodredd"><img src="https://avatars.githubusercontent.com/u/78151906?v=4?s=100" width="100px;" alt="Icaro Gomes"/><br /><sub><b>Icaro Gomes</b></sub></a><br /><a href="https://github.com/Software-Developer-Academy/mentor-match/commits?author=icarodredd" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/KQuiggins"><img src="https://avatars.githubusercontent.com/u/76880191?v=4?s=100" width="100px;" alt="Kenneth Darrick Quiggins"/><br /><sub><b>Kenneth Darrick Quiggins</b></sub></a><br /><a href="https://github.com/Software-Developer-Academy/mentor-match/commits?author=KQuiggins" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Sriram823"><img src="https://avatars.githubusercontent.com/u/62587304?v=4?s=100" width="100px;" alt="Sriram823"/><br /><sub><b>Sriram823</b></sub></a><br /><a href="https://github.com/Software-Developer-Academy/mentor-match/commits?author=Sriram823" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
