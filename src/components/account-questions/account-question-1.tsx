@@ -5,7 +5,6 @@ import { Label } from "@/components/ui/label";
 const AccountQuestion1 = () => {
 	const [radioState, setRadioState] = useState("A");
 	const radioCheck = (currentState: string) => {
-		console.log(currentState);
 		setRadioState(currentState);
 	};
 
