@@ -40,8 +40,10 @@ export async function signinUser(
       }
     );
 
-    // !DANGER! This is a NOT VERY SECURE FORM of password checking. Compare the hashes instead.
-    if (!user || user.password !== password) {
+    if (
+      !user ||
+      !(await bcrypt.compare(password as string, user?.password as string))
+    ) {
       return [
         {
           message: "Invalid email or password",
@@ -75,10 +77,10 @@ export async function signinUser(
 export async function signupUser(
   data: FormData
 ): Promise<ZodIssue[] | unknown> {
-  const fullName = data.get("fullName") as string;
-  const email = data.get("email") as string;
-  const password = data.get("password") as string;
-  const confirmPassword = data.get("confirmPassword") as string;
+  const fullName = data.get("fullName");
+  const email = data.get("email");
+  const password = data.get("password");
+  const confirmPassword = data.get("confirmPassword");
 
   const dataSchemaValidation = signUpSchema.safeParse({
     fullName,
@@ -106,16 +108,12 @@ export async function signupUser(
   }
 
   try {
-    // Hash and salt the password
-    const saltRounds = 15;
-    const salt = await bcrypt.genSalt(saltRounds);
-    const hashedPassword = bcrypt.hash(password, salt as string);
+    const hashedPassword = await bcrypt.hash(password as string, 15);
 
     await UserModel.create({
       name: fullName,
       email,
-      password: hashedPassword, // Save the hashed password
-      salt: salt as string, // Asssert salt as string
+      password: hashedPassword,
     });
   } catch (error) {
     console.error(error);
