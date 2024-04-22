@@ -13,7 +13,7 @@ import {
 import { createSession, setSessionCookie } from "../tools/session";
 
 export async function signinUser(
-  data: FormData
+  data: FormData,
 ): Promise<ZodIssue[] | unknown> {
   const email = data.get("email");
   const password = data.get("password");
@@ -37,7 +37,7 @@ export async function signinUser(
       {
         _id: 1,
         password: 1,
-      }
+      },
     );
 
     if (
@@ -67,7 +67,7 @@ export async function signinUser(
     console.error(err);
 
     throw new Error(
-      "We encountered a problem signing you in. Please try again."
+      "We encountered a problem signing you in. Please try again.",
     );
   }
 
@@ -75,7 +75,7 @@ export async function signinUser(
 }
 
 export async function signupUser(
-  data: FormData
+  data: FormData,
 ): Promise<ZodIssue[] | unknown> {
   const fullName = data.get("fullName");
   const email = data.get("email");
@@ -124,7 +124,7 @@ export async function signupUser(
   } catch (error) {
     console.error(error);
     throw new Error(
-      "We encountered a problem creating your account. Please try again."
+      "We encountered a problem creating your account. Please try again.",
     );
   }
 
