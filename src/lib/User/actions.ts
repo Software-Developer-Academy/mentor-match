@@ -1,14 +1,79 @@
 "use server";
 
-import { EMAIL_ALREADY_EXISTS_MSG, signUpSchema } from "./validations";
+import bcrypt from "bcrypt";
 import { redirect } from "next/navigation";
+import { ZodIssue } from "zod";
 import { connectMongo } from "../db";
 import UserModel from "./model";
-import { ZodIssue } from "zod";
-import bcrypt from "bcrypt";
+import {
+  EMAIL_ALREADY_EXISTS_MSG,
+  signInSchema,
+  signUpSchema,
+} from "./validations";
+import { createSession, setSessionCookie } from "../tools/session";
+
+export async function signinUser(
+  data: FormData
+): Promise<ZodIssue[] | unknown> {
+  const email = data.get("email");
+  const password = data.get("password");
+
+  const dataSchemaValidation = signInSchema.safeParse({
+    email,
+    password,
+  });
+
+  if (dataSchemaValidation.success === false) {
+    return dataSchemaValidation.error.errors;
+  }
+
+  await connectMongo();
+
+  try {
+    const user = await UserModel.findOne(
+      {
+        email,
+      },
+      {
+        _id: 1,
+        password: 1,
+      }
+    );
+
+    // !DANGER! This is a NOT VERY SECURE FORM of password checking. Compare the hashes instead.
+    if (!user || user.password !== password) {
+      return [
+        {
+          message: "Invalid email or password",
+          path: ["email"],
+          code: "custom",
+        },
+        {
+          message: "Invalid email or password",
+          path: ["password"],
+          code: "custom",
+        },
+      ];
+    }
+
+    // Generate a new session for the newly created user
+    const token = await createSession({ userId: user._id });
+
+    // Set the session token as a secure, HTTP-only cookie in the response
+    setSessionCookie(token);
+  } catch (err) {
+    console.error(err);
+
+    throw new Error(
+      "We encountered a problem signing you in. Please try again."
+    );
+  }
+
+  return redirect("/");
+}
 
 export async function signupUser(
-  data: FormData,
+  data: FormData
 ): Promise<ZodIssue[] | unknown> {
   const fullName = data.get("fullName") as string;
   const email = data.get("email") as string;

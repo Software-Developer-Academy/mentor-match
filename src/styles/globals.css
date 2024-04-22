@@ -93,7 +93,22 @@
   }
 }
 
-h1 {
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--andada-pro);
   font-weight: bold;
   font-size: 64px;
@@ -105,6 +120,72 @@ p {
   font-size: 16px;
 }
 
+/* SVGs */
+#hero-avatar1 .cls-1,
+#hero-avatar1 .cls-4 {
+  fill: #000;
+  stroke-width: 0;
+}
+
+#hero-avatar1 .cls-4 {
+  fill: none;
+}
+
+#img1 {
+  transform: rotateY(180deg);
+}
+
+#img1 .cls-1 {
+  fill: #181818;
+}
+
+#img1 .cls-1,
+#img1 .cls-2,
+#img1 .cls-3 {
+  stroke-width: 0;
+}
+
+#img1 .cls-2 {
+  fill: #fffeff;
+}
+
+#img1 .cls-3 {
+  fill: #b7ce63;
+}
+
+.star.primary {
+  stroke: hsl(var(--primary));
+}
+.star.secondary {
+  stroke: hsl(var(--secondary));
+}
+.star.tertiary {
+  stroke: hsl(var(--tertiary));
+}
+.star.primary .stop-color {
+  stop-color: hsl(var(--primary));
+}
+.star.secondary .stop-color {
+  stop-color: hsl(var(--secondary));
+}
+.star.tertiary .stop-color {
+  stop-color: hsl(var(--tertiary));
+}
+
 svg.signup path.themeSecondary {
   fill: hsl(var(--secondary));
+}
+
+/* Tailwind Styles */
+
+.outline_btn {
+  @apply border border-primary text-primary rounded-[4px] px-4 py-2 transition-colors ease-linear duration-200 outline-none focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50;
+}
+.outline_btn:hover {
+  @apply bg-primary text-primary-foreground;
+}
+
+.NavigationMenuViewport {
+  width: var(--radix-navigation-menu-viewport-width);
+  height: var(--radix-navigation-menu-viewport-height);
 }
