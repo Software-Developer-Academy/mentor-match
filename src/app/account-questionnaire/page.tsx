@@ -72,7 +72,7 @@ const AccountQuestionnaire = () => {
 							</CarouselItem>
 						</CarouselContent>
 						<CarouselDots />
-						<CarouselPrevious />
+						<CarouselPrevious className="fill-slate-300" />
 						<CarouselNext />
 					</Carousel>
 				</div>

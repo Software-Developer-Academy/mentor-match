@@ -17,8 +17,8 @@ const AccountQuestion1 = () => {
 					<div
 						className={
 							radioState === "A"
-								? "flex items-center space-x-2 py-3  bg-[#b7ce63]  rounded-sm transition-colors hover:bg-[#e5e5e5] duration-300 cursor-pointer"
-								: "flex items-center space-x-2 py-3  bg-[#efefef] rounded-sm transition-colors hover: cursor-pointer"
+								? "flex items-center space-x-2 py-3  bg-[#C7D59F]  rounded-sm transition-colors hover: cursor-pointer "
+								: "flex items-center space-x-2 py-3  bg-[#efefef] rounded-sm transition-colors hover:bg-[#e5e5e5] duration-300 cursor-pointer"
 						}
 						onClick={() => {
 							radioCheck("A");
@@ -26,7 +26,7 @@ const AccountQuestion1 = () => {
 					>
 						<RadioGroupItem
 							className="invisible"
-							value="option-one"
+							value="Learn something new"
 							id="option-one"
 						/>
 						<Label className="cursor-pointer" htmlFor="option-one">
@@ -36,8 +36,8 @@ const AccountQuestion1 = () => {
 					<div
 						className={
 							radioState === "B"
-								? "flex items-center space-x-2 py-3  bg-[#b7ce63]  rounded-sm transition-colors hover:bg-[#e5e5e5] duration-300 cursor-pointer"
-								: "flex items-center space-x-2 py-3  bg-[#efefef] rounded-sm transition-colors hover: cursor-pointer"
+								? "flex items-center space-x-2 py-3  bg-[#C7D59F]  rounded-sm transition-colors hover: cursor-pointer "
+								: "flex items-center space-x-2 py-3  bg-[#efefef] rounded-sm transition-colors hover:bg-[#e5e5e5] duration-300 cursor-pointer"
 						}
 						onClick={() => {
 							radioCheck("B");
@@ -45,7 +45,7 @@ const AccountQuestion1 = () => {
 					>
 						<RadioGroupItem
 							className="invisible"
-							value="option-two"
+							value="Master a skill"
 							id="option-two"
 						/>
 						<Label className="cursor-pointer" htmlFor="option-two">
@@ -55,8 +55,8 @@ const AccountQuestion1 = () => {
 					<div
 						className={
 							radioState === "C"
-								? "flex items-center space-x-2 py-3  bg-[#b7ce63]  rounded-sm transition-colors hover:bg-[#e5e5e5] duration-300 cursor-pointer"
-								: "flex items-center space-x-2 py-3  bg-[#efefef] rounded-sm transition-colors hover: cursor-pointer"
+								? "flex items-center space-x-2 py-3  bg-[#C7D59F]  rounded-sm transition-colors hover: cursor-pointer "
+								: "flex items-center space-x-2 py-3  bg-[#efefef] rounded-sm transition-colors hover:bg-[#e5e5e5] duration-300 cursor-pointer"
 						}
 						onClick={() => {
 							radioCheck("C");
@@ -64,7 +64,7 @@ const AccountQuestion1 = () => {
 					>
 						<RadioGroupItem
 							className="invisible"
-							value="option-three"
+							value="Still trying to figure it out"
 							id="option-three"
 						/>
 						<Label className="cursor-pointer" htmlFor="option-three">

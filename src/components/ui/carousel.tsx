@@ -4,7 +4,7 @@ import * as React from "react";
 import useEmblaCarousel, {
 	type UseEmblaCarouselType,
 } from "embla-carousel-react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -206,9 +206,9 @@ const CarouselPrevious = React.forwardRef<
 			variant={variant}
 			size={size}
 			className={cn(
-				"absolute  h-8 w-8 rounded-full",
+				"absolute  h-8 w-8 rounded-full border-0",
 				orientation === "horizontal"
-					? "left-1/4 -translate-y-1/3"
+					? "left-[30%] -translate-y-[1.35rem]"
 					: "-top-12 left-1/2 -translate-x-1/2 rotate-90",
 				className
 			)}
@@ -216,7 +216,7 @@ const CarouselPrevious = React.forwardRef<
 			onClick={scrollPrev}
 			{...props}
 		>
-			<ArrowLeft className="h-4 w-4" />
+			<ChevronLeft className="h-7 w-7 stroke-[#b0b0b0]" />
 			<span className="sr-only">Previous slide</span>
 		</Button>
 	);
@@ -235,9 +235,9 @@ const CarouselNext = React.forwardRef<
 			variant={variant}
 			size={size}
 			className={cn(
-				"absolute h-8 w-8 rounded-full",
+				"absolute h-8 w-8 rounded-full border-0",
 				orientation === "horizontal"
-					? "right-1/4 -translate-y-1/3"
+					? "right-[30%] -translate-y-[1.35rem]"
 					: "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
 				className
 			)}
@@ -245,7 +245,7 @@ const CarouselNext = React.forwardRef<
 			onClick={scrollNext}
 			{...props}
 		>
-			<ArrowRight className="h-4 w-4" />
+			<ChevronRight className="h-7 w-7 stroke-[#b0b0b0]" />
 			<span className="sr-only">Next slide</span>
 		</Button>
 	);
@@ -284,10 +284,10 @@ const CarouselDots = React.forwardRef<
 				{Array.from({ length: numberOfSlides }, (_, i) => (
 					<Button
 						key={i}
-						className={`mx-1 h-1.5 w-1.5 rounded-full p-0 ${
+						className={`mx-1 h-3 w-3 rounded-full p-0 ${
 							i === currentSlide
-								? "scale-125 transform bg-gray-500 hover:bg-gray-500"
-								: "bg-gray-300 hover:bg-gray-300"
+								? "scale-125 transform bg-[#b0b0b0] hover:bg-[#b0b0b0]"
+								: "bg-[#d9d9d9] hover:bg-[#d9d9d9]"
 						}`}
 						aria-label={`Go to slide ${i + 1}`}
 						onClick={() => api?.scrollTo(i)}
