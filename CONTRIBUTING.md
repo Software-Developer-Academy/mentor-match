@@ -1,8 +1,6 @@
-<<<<<<< HEAD
-
 ## Contributing
 
-### Join us in project discussion### Clone the Repository
+### Clone the Repository
 
 1. Open your terminal or command prompt.
 2. Navigate to the directory where you want to clone the repository.
