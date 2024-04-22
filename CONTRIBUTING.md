@@ -83,41 +83,22 @@ npm run format
 
 Run the above script to have Prettier format all files in the codebase.
 
-=======
-
-> > > > > > > 81561676c59f1feefab173e387a68ab442eacb4a
-
 ## Guidelines
 
 - For commit messages, make sure to follow the discussion [here](https://gist.github.com/robertpainsi/b632364184e70900af4ab688decf6f53) as much as possible.
 - Comment or let yourself be assigned to an issue before working on it. **Do not** work on an issue that someone has already commented or been assigned on, unless it is known that they are not working on it anymore.
-  <<<<<<< HEAD
 - Create a separate branch for the feature/issue you are working on. Run this command on your terminal or command prompt before starting your work:
-
 ```bash
 git checkout -b feat/<REPLACE_ME>
 ```
 
-# Then check if you are on the `ui/landing-page` branch:
-
-- Create a separate branch for the feature/issue you are working on. For example, if you are working on the landing page, you run this command on your terminal or command prompt before starting your work:
-
-```bash
-git checkout -b ui/landing-page
-```
-
-Then check if you are on the `ui/landing-page` branch:
-
-> > > > > > > 81561676c59f1feefab173e387a68ab442eacb4a
-
+Check the branches you currently have locally
 ```bash
 git branch
 ```
 
 You should see something like this:
-
 ```bash
-<<<<<<< HEAD
 * feat/<REPLACE_ME>
   main
 ```
@@ -127,34 +108,21 @@ The `*` indicates that you are currently on that branch.
 - After finishing your work, run these commands:
 
 Check the files you changed
-
 ```bash
 git status
 ```
 
 Add the files you wish to commit. The command below adds **all** the files listed from `git status`
-
 ```bash
 git add .
 ```
 
 Commit the files
-
 ```bash
 git commit -m "<YOUR_MESSAGE_ABOUT_THIS_COMMIT>"
 ```
 
 If you are sure that there are nothing else to commit for the issue/feature you're working on, run this command:
-
 ```bash
 git push --set-upstream origin <YOUR_CURRENT_BRANCH>
-```
-
-=======
-
-- ui/landing-page
-  main
-
-```
->>>>>>> 81561676c59f1feefab173e387a68ab442eacb4a
 ```
