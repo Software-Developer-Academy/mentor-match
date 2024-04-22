@@ -110,14 +110,22 @@ export async function signupUser(
   try {
     const hashedPassword = await bcrypt.hash(password as string, 15);
 
-    await UserModel.create({
+    const newUser = await UserModel.create({
       name: fullName,
       email,
       password: hashedPassword,
     });
+
+    // Generate a new session for the newly created user
+    const token = await createSession({ userId: newUser._id });
+
+    // Set the session token as a secure, HTTP-only cookie in the response
+    setSessionCookie(token);
   } catch (error) {
     console.error(error);
-    throw new Error("Failed to create user.");
+    throw new Error(
+      "We encountered a problem creating your account. Please try again."
+    );
   }
 
   return redirect("/");
