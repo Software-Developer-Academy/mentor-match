@@ -82,70 +82,51 @@ const Explore = () => {
   );
 };
 
-const Navbar = () => {
-  const userLoggedIn = true;
-
+export const NavbarItems = ({ loggedIn }: { loggedIn: boolean }) => {
   return (
-    <nav className="fixed z-50 w-full p-2 bg-white">
-      <div className="lg:container w-full flex justify-between">
-        <Link href="/" className="flex flex-center gap-2 items-center">
-          <Image
-            src="/images/logo.svg"
-            alt="Mentor Match Logo"
-            width={30}
-            height={30}
-            className="object-contain"
-          />
-          <h1 className="text-2xl text-primary font-bold hidden md:inline-block">
-            Mentor Match
-          </h1>
-        </Link>
+    <>
+      {loggedIn ? (
+        <NavigationMenu>
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>Explore</NavigationMenuTrigger>
+              <NavigationMenuContent className="overflow-y-scroll md:overflow-auto max-h-screen">
+                <Explore />
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger className="text-primary text-sm font-medium flex items-center justify-center">
+                <span className="material-symbols-outlined">person</span>
+              </NavigationMenuTrigger>
+              <NavigationMenuContent className="flex justify-center p-5">
+                <Account />
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+          </NavigationMenuList>
 
-        {userLoggedIn ? (
-          <NavigationMenu>
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger>Explore</NavigationMenuTrigger>
-                <NavigationMenuContent className="overflow-y-scroll md:overflow-auto max-h-screen">
-                  <Explore />
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="text-primary text-sm font-medium flex items-center justify-center">
-                  <span className="material-symbols-outlined">person</span>
-                </NavigationMenuTrigger>
-                <NavigationMenuContent className="flex justify-center p-5">
-                  <Account />
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-            </NavigationMenuList>
+          <NavigationMenuViewport className="fixed right-0" />
+        </NavigationMenu>
+      ) : (
+        <NavigationMenu>
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>Explore</NavigationMenuTrigger>
+              <NavigationMenuContent className="overflow-y-scroll md:overflow-auto max-h-screen">
+                <Explore />
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/signin" legacyBehavior passHref>
+                <NavigationMenuLink className="outline_btn text-sm font-medium flex items-center justify-center">
+                  Log In
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          </NavigationMenuList>
 
-            <NavigationMenuViewport className="fixed right-0" />
-          </NavigationMenu>
-        ) : (
-          <NavigationMenu>
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger>Explore</NavigationMenuTrigger>
-                <NavigationMenuContent className="overflow-y-scroll md:overflow-auto max-h-screen">
-                  <Explore />
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <Link href="/signin" legacyBehavior passHref>
-                  <NavigationMenuLink className="outline_btn text-sm font-medium flex items-center justify-center">
-                    Log In
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-
-            <NavigationMenuViewport className="fixed right-0" />
-          </NavigationMenu>
-        )}
-      </div>
-    </nav>
+          <NavigationMenuViewport className="fixed right-0" />
+        </NavigationMenu>
+      )}
+    </>
   );
 };
-
-export default Navbar;
