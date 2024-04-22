@@ -87,7 +87,31 @@
       "name": "Kenneth Darrick Quiggins",
       "avatar_url": "https://avatars.githubusercontent.com/u/76880191?v=4",
       "profile": "https://github.com/KQuiggins",
+<<<<<<< HEAD
       "contributions": ["code"]
+=======
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Sriram823",
+      "name": "Sriram823",
+      "avatar_url": "https://avatars.githubusercontent.com/u/62587304?v=4",
+      "profile": "https://github.com/Sriram823",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "alhelwany",
+      "name": "Mhd Ghaith Alhelwany",
+      "avatar_url": "https://avatars.githubusercontent.com/u/115778766?v=4",
+      "profile": "https://github.com/alhelwany",
+      "contributions": [
+        "code"
+      ]
+>>>>>>> de94ccf826f586c2f51b86ad6f1a544409200971
     }
   ],
   "contributorsPerLine": 7,
