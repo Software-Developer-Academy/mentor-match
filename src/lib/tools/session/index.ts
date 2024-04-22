@@ -10,7 +10,7 @@ export type JWTSessionPayload = SessionPayload & JWTPayload;
 // Check for the environment variable for the secret key, throw error if not set
 if (!process.env.CI && !process.env.SESSION_SECRET) {
   throw new Error(
-    "SESSION_SECRET is not set. Please set the SESSION_SECRET environment variable."
+    "SESSION_SECRET is not set. Please set the SESSION_SECRET environment variable.",
   );
 }
 
@@ -40,7 +40,7 @@ export async function createSession(payload: SessionPayload): Promise<string> {
  * @throws {Error} If the token cannot be deserialized.
  */
 export async function verifySession(
-  token: string
+  token: string,
 ): Promise<JWTSessionPayload | null> {
   const encoder = new TextEncoder();
 
