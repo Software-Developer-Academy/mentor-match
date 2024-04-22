@@ -53,3 +53,8 @@ export const signUpSchema = z
     message: "Passwords must match",
     path: ["confirmPassword"],
   });
+
+export const signInSchema = z.object({
+  email: signUpEmailValidator,
+  password: signUpPasswordValidator,
+});
