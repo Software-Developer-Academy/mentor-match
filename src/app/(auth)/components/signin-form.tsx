@@ -5,6 +5,7 @@ import { signinUser } from "@/lib/User/actions";
 import { signInSchema } from "@/lib/User/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
+import Link from "next/link";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 
@@ -81,7 +82,7 @@ export const SignInForm = () => {
             Sign In
           </GradButton>
         </div>
-        <div className="flex justify-center mb-5 ">
+        <div className="flex justify-center mb-5">
           <p className="text-black font-semibold text-xl">or sign in with</p>
         </div>
         <div className="flex justify-center mb-5 space-x-10">
@@ -100,15 +101,15 @@ export const SignInForm = () => {
         </div>
       </form >
       <hr className="mt-10 mb-10" />
-      <div className="flex justify-center mb-5 ">
+      <div className="flex justify-center mb-5">
         <p className="text-black font-semibold text-xl">Don't have an account?</p>
       </div>
       <div className="mx-20 my-10">
-        <a href="/signup">
+        <Link href="/signup">
           <GradButton variant="default" className="w-full">
             Sign Up
           </GradButton>
-        </a>
+        </Link>
       </div>
     </div>
   );
