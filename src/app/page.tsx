@@ -81,9 +81,9 @@ const Mentors = () => {
       {mentors.map((mentor) => (
         <CarouselItem
           key={mentor.name}
-          className="w-full md:basis-1/2 lg:basis-1/3 flex flex-col items-center justify-start text-center"
+          className="md:basis-1/2 lg:basis-1/3 flex flex-col items-center justify-start text-center"
         >
-          <div className="w-full flex justify-between bg-slate-100 rounded-sm">
+          <div className="w-full md:w-full flex justify-between bg-slate-100 rounded-sm">
             <div className="w-1/2 m-5 flex flex-col items-center justify-center">
               <Image
                 src={mentor.image}
@@ -185,6 +185,31 @@ export default function Home() {
         </section>
 
         <section className="container flex flex-col lg:min-h-[100dvh] items-center justify-center py-10 md:py-24 lg:py-20">
+          <div className="flex w-full md:w-1/2 text-center md:text-left flex-col px-10">
+            <h2 className="text-3xl md:text-4xl font-bold text-center">
+              Meet some of our mentors
+            </h2>
+          </div>
+          <div className="flex px-10 my-10 w-full">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full flex flex-col items-center justify-start text-center"
+            >
+              <div className="overflow_mask w-screen md:w-full">
+              <CarouselContent>
+                <Mentors />
+              </CarouselContent>
+              </div>
+              <CarouselPrevious className="absolute top-auto -bottom-14 left-1/3 md:ml-24" />
+              <CarouselNext  className="absolute top-auto -bottom-14 right-1/3 md:mr-24" />
+            </Carousel>
+          </div>
+        </section>
+
+        <section className="container flex flex-col lg:min-h-[100dvh] items-center justify-center py-10 md:py-24 lg:py-20">
           <div className="flex w-full md:w-2/3 lg:1/2 text-center md:text-left flex-col px-10">
             <h2 className="text-3xl md:text-4xl font-bold text-center">
               See what our users have to say
@@ -195,28 +220,6 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="container flex flex-col lg:min-h-[100dvh] items-center justify-center py-10 md:py-24 lg:py-20">
-          <div className="flex w-full md:w-1/2 text-center md:text-left flex-col px-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-center">
-              Meet some of our mentors
-            </h2>
-          </div>
-          <div className="flex px-10 mt-10 w-full">
-            <Carousel
-              opts={{
-                align: "start",
-                loop: true,
-              }}
-              className="w-full flex flex-col items-center justify-start text-center"
-            >
-              <CarouselContent className="w-screen">
-                <Mentors />
-              </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
-            </Carousel>
-          </div>
-        </section>
       </main>
       <Footer />
     </>

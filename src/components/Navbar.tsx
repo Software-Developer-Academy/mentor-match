@@ -47,7 +47,7 @@ const Account = () => {
 // Generate the Explore navigation menu
 const Explore = () => {
   return (
-    <div className="grid w-screen gap-10 md:grid-cols-3 p-10 pb-32 md:pb-10">
+    <div className="grid w-screen lg:w-max gap-10 md:grid-cols-3 p-10 pb-32 md:pb-10">
       {technologies.map((group) => (
         <div key={group.title}>
           <div className="w-full flex justify-between">
@@ -105,13 +105,13 @@ const Navbar = () => {
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuTrigger>Explore</NavigationMenuTrigger>
+                <NavigationMenuTrigger className="relative">Explore</NavigationMenuTrigger>
                 <NavigationMenuContent className="overflow-y-scroll md:overflow-auto max-h-screen">
                   <Explore />
                 </NavigationMenuContent>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="text-primary text-sm font-medium flex items-center justify-center">
+                <NavigationMenuTrigger className="relative text-primary text-sm font-medium flex items-center justify-center">
                   <span className="material-symbols-outlined">person</span>
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="flex justify-center p-5">
@@ -120,7 +120,8 @@ const Navbar = () => {
               </NavigationMenuItem>
             </NavigationMenuList>
 
-            <NavigationMenuViewport className="fixed right-0" />
+            <NavigationMenuViewport className="w-screen origin-top-right fixed right-0 md:absolute"/>
+            {/* className="w-screen origin-top-right fixed right-0 md:w-full md:relative md:origin-top-center md:right-0" */}
           </NavigationMenu>
         ) : (
           <NavigationMenu>
@@ -140,7 +141,7 @@ const Navbar = () => {
               </NavigationMenuItem>
             </NavigationMenuList>
 
-            <NavigationMenuViewport className="fixed right-0" />
+            <NavigationMenuViewport />
           </NavigationMenu>
         )}
       </div>
