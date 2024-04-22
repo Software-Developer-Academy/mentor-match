@@ -1,0 +1,12 @@
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250">
+  <defs>
+    <style>
+      .cls-2{fill:#fff}.cls-3{fill:#b7ce62}.cls-2,.cls-3{stroke-width:0}
+    </style>
+  </defs>
+  <circle cx="125" cy="125" r="125" style="fill:#02658b;stroke-width:0"/>
+  <path class="cls-3" d="M72.06 71.97 19.03 125l53.03 53.03v-35.35L54.38 125l17.68-17.68V71.97zM178.13 71.97 230.97 125l-52.84 53.03v-35.35L195.8 125l-18.04-18.04.37-34.99z"/>
+  <text transform="translate(79.22 163.89)" style="fill:#fff;font-family:NeueHaasGroteskTextPro-Black,'Neue Haas Grotesk Text Pro';font-size:100px;font-variation-settings:'wght' 900;font-weight:800"><tspan x="0" y="0">M</tspan></text>
+  <circle class="cls-2" cx="98.34" cy="71.97" r="12.5"/>
+  <circle class="cls-2" cx="151.03" cy="73.61" r="10"/>
+</svg>
