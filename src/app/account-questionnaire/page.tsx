@@ -14,13 +14,25 @@ import {
 	CarouselPrevious,
 } from "@/components/ui/carousel";
 import AccountQuestion1 from "@/components/account-questions/account-question-1";
+import { useRouter } from "next/navigation";
 
 const AccountQuestionnaire = () => {
+	const router = useRouter();
+
+	const skipQuestions = () => {
+		// router.push("/home");
+	};
+
 	return (
 		<div className="flex h-screen">
-			<div className="basis-1/2 py-5 px-10 pr-0 w-1/2">
+			<div className="basis-1/2 py-5 px-10 w-1/2">
 				<div className="mb-24">
-					<p className="text-right text-l">SKIP</p>
+					<p
+						className="text-right text-l hover: cursor-pointer"
+						onClick={skipQuestions}
+					>
+						SKIP
+					</p>
 				</div>
 
 				{/* <div className="flex flex-col justify-center pb-16">
