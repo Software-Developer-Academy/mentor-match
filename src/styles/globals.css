@@ -193,15 +193,19 @@ svg.signup path.themeSecondary {
 @media screen and (min-width: 768px) {
   .overflow_mask {
     overflow: hidden;
-    -webkit-mask: linear-gradient(90deg,
-        transparent,
-        white 20%,
-        white 80%,
-        transparent);
-    mask: linear-gradient(90deg,
-        transparent,
-        white 20%,
-        white 80%,
-        transparent);
+    -webkit-mask: linear-gradient(
+      90deg,
+      transparent,
+      white 20%,
+      white 80%,
+      transparent
+    );
+    mask: linear-gradient(
+      90deg,
+      transparent,
+      white 20%,
+      white 80%,
+      transparent
+    );
   }
 }

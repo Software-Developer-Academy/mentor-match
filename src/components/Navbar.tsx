@@ -105,7 +105,9 @@ const Navbar = () => {
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="relative">Explore</NavigationMenuTrigger>
+                <NavigationMenuTrigger className="relative">
+                  Explore
+                </NavigationMenuTrigger>
                 <NavigationMenuContent className="overflow-y-scroll md:overflow-auto max-h-screen">
                   <Explore />
                 </NavigationMenuContent>
@@ -120,8 +122,7 @@ const Navbar = () => {
               </NavigationMenuItem>
             </NavigationMenuList>
 
-            <NavigationMenuViewport className="w-screen origin-top-right fixed right-0 md:absolute"/>
-            {/* className="w-screen origin-top-right fixed right-0 md:w-full md:relative md:origin-top-center md:right-0" */}
+            <NavigationMenuViewport className="w-screen origin-top-right fixed right-0 md:absolute" />
           </NavigationMenu>
         ) : (
           <NavigationMenu>

@@ -199,12 +199,12 @@ export default function Home() {
               className="w-full flex flex-col items-center justify-start text-center"
             >
               <div className="overflow_mask w-screen md:w-full">
-              <CarouselContent>
-                <Mentors />
-              </CarouselContent>
+                <CarouselContent>
+                  <Mentors />
+                </CarouselContent>
               </div>
               <CarouselPrevious className="absolute top-auto -bottom-14 left-1/3 md:ml-24" />
-              <CarouselNext  className="absolute top-auto -bottom-14 right-1/3 md:mr-24" />
+              <CarouselNext className="absolute top-auto -bottom-14 right-1/3 md:mr-24" />
             </Carousel>
           </div>
         </section>
@@ -219,7 +219,6 @@ export default function Home() {
             <Testimonials />
           </div>
         </section>
-
       </main>
       <Footer />
     </>
