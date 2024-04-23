@@ -4,7 +4,7 @@ import * as React from "react";
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -206,9 +206,9 @@ const CarouselPrevious = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute  h-8 w-8 rounded-full",
+        "absolute  h-8 w-8 rounded-full border-0",
         orientation === "horizontal"
-          ? "-left-12 top-1/2 -translate-y-1/2"
+          ? "left-[30%] -translate-y-[1.35rem]"
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
         className,
       )}
@@ -216,7 +216,7 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeft className="h-4 w-4" />
+      <ChevronLeft className="h-7 w-7 stroke-[#b0b0b0]" />
       <span className="sr-only">Previous slide</span>
     </Button>
   );
@@ -235,9 +235,9 @@ const CarouselNext = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute h-8 w-8 rounded-full",
+        "absolute h-8 w-8 rounded-full border-0",
         orientation === "horizontal"
-          ? "-right-12 top-1/2 -translate-y-1/2"
+          ? "right-[30%] -translate-y-[1.35rem]"
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
         className,
       )}
@@ -245,18 +245,70 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRight className="h-4 w-4" />
+      <ChevronRight className="h-7 w-7 stroke-[#b0b0b0]" />
       <span className="sr-only">Next slide</span>
     </Button>
   );
 });
 CarouselNext.displayName = "CarouselNext";
 
+const CarouselDots = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>((props, ref) => {
+  const { api } = useCarousel();
+  const [, setUpdateState] = React.useState(false);
+  // removed updateState for now from here since it wasnt being used
+
+  const toggleUpdateState = React.useCallback(
+    () => setUpdateState((prevState) => !prevState),
+    [],
+  );
+
+  React.useEffect(() => {
+    if (api) {
+      api.on("select", toggleUpdateState);
+      api.on("reInit", toggleUpdateState);
+
+      return () => {
+        api.off("select", toggleUpdateState);
+        api.off("reInit", toggleUpdateState);
+      };
+    }
+  }, [api, toggleUpdateState]);
+
+  const numberOfSlides = api?.scrollSnapList().length || 0;
+  const currentSlide = api?.selectedScrollSnap() || 0;
+
+  if (numberOfSlides > 1) {
+    return (
+      <div ref={ref} className={`flex justify-center ${props.className}`}>
+        {Array.from({ length: numberOfSlides }, (_, i) => (
+          <Button
+            key={i}
+            className={`mx-1 h-3 w-3 rounded-full p-0 ${
+              i === currentSlide
+                ? "scale-125 transform bg-[#b0b0b0] hover:bg-[#b0b0b0]"
+                : "bg-[#d9d9d9] hover:bg-[#d9d9d9]"
+            }`}
+            aria-label={`Go to slide ${i + 1}`}
+            onClick={() => api?.scrollTo(i)}
+          />
+        ))}
+      </div>
+    );
+  } else {
+    return <></>;
+  }
+});
+CarouselDots.displayName = "CarouselDots";
+
 export {
   type CarouselApi,
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselDots,
   CarouselPrevious,
   CarouselNext,
 };
