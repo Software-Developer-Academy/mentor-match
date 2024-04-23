@@ -1,10 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-// import { GradButton } from "@/components/ui/grad-button";
 import React from "react";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
 import {
 	Carousel,
 	CarouselContent,
@@ -20,7 +16,7 @@ const AccountQuestionnaire = () => {
 	const router = useRouter();
 
 	const skipQuestions = () => {
-		// router.push("/home");
+		router.push("/home");
 	};
 
 	return (
