@@ -58,9 +58,9 @@ const AccountQuestionnaire = () => {
 
 				<div>
 					<h1 className="text-2xl text-white text-left">
-						"<span className="text-[#b7ce63]">Education</span> is the most
-						powerful weapon which you can use to{" "}
-						<span className="text-[#b7ce63]">change the world</span>."
+						&quot;<span className="text-[#b7ce63]">Education</span> is the most
+						powerful weapon which you can use to
+						<span className="text-[#b7ce63]"> change the world</span>.&quot;
 					</h1>
 					<p className="self-start text-slate-100 mt-5">-Nelson Mandela</p>
 				</div>
