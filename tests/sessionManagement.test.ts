@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert";
-import { createSession, verifySession } from "@/lib/tools/session";
+import { createSession, verifySession } from "@/lib/utils/session";
 
 // Set a test secret key
 process.env.SESSION_SECRET = "testSecretKey";
