@@ -257,7 +257,9 @@ const CarouselDots = React.forwardRef<
 	React.HTMLAttributes<HTMLDivElement>
 >((props, ref) => {
 	const { api } = useCarousel();
-	const [updateState, setUpdateState] = React.useState(false);
+	const [, setUpdateState] = React.useState(false);
+	// removed updateState for now from here since it wasnt being used
+
 	const toggleUpdateState = React.useCallback(
 		() => setUpdateState((prevState) => !prevState),
 		[]
