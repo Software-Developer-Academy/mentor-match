@@ -8,6 +8,7 @@ const SignInPage = () => {
         <SignInForm />
         <OauthBlock type="sign in" />
       </FormPanel>
+
       <ImagePanel
         imgDirection="right"
         welcomeMessage="Welcome back to"

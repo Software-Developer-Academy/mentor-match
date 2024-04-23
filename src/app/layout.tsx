@@ -3,6 +3,7 @@ import { Andada_Pro, Inter, Poppins } from "next/font/google";
 
 import "@/styles/global-icons.css";
 import "@/styles/globals.css";
+import { cn } from "@/lib/utils";
 
 //defined variables for font
 const andada_pro = Andada_Pro({ subsets: ["latin"], variable: "--andada-pro" });
@@ -24,8 +25,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${poppins.variable} ${andada_pro.variable}`}>
-      <body className={inter.className}>{children}</body>
+    <html
+      lang="en"
+      className={cn(poppins.variable, andada_pro.variable, "h-full")}
+    >
+      <body className={cn(inter.className, "h-full")}>{children}</body>
     </html>
   );
 }
