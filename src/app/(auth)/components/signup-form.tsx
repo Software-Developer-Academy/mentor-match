@@ -1,11 +1,11 @@
 "use client";
 
+import { Spinner } from "@/components/loaders/spinner";
 import { GradButton } from "@/components/ui/grad-button";
+import { Input } from "@/components/ui/input";
 import { signupUser } from "@/lib/User/actions";
 import { signUpSchema } from "@/lib/User/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Image from "next/image";
-import Link from "next/link";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 
@@ -16,37 +16,45 @@ export const SignUpForm = () => {
     register,
     handleSubmit,
     setError,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(signUpSchema),
   });
 
   return (
-    <div className="w-full">
-      <form
-        ref={formRef}
-        onSubmit={handleSubmit(async () => {
-          const errors = await signupUser(new FormData(formRef.current!));
-          if (errors && Array.isArray(errors)) {
-            for (const error of errors) {
-              setError(error.path[0] as string, error);
-            }
+    <form
+      className="flex flex-col gap-6 w-full"
+      ref={formRef}
+      onSubmit={handleSubmit(async () => {
+        if (isSubmitting) {
+          return;
+        }
+
+        const errors = await signupUser(new FormData(formRef.current!));
+        if (errors && Array.isArray(errors)) {
+          for (const error of errors) {
+            setError(error.path[0] as string, error);
           }
-        })}
-        noValidate
-      >
-        <div className="mb-4">
-          <input
-            autoFocus
-            autoComplete="name"
-            type="text"
-            placeholder="Full Name"
-            aria-errormessage="fullNameError"
-            className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
-            {...register("fullName")}
-          />
+        }
+      })}
+      noValidate
+    >
+      <div>
+        <label className="sr-only" htmlFor="fullNameInput">
+          Full Name
+        </label>
+        <Input
+          id="fullNameInput"
+          autoComplete="name"
+          type="text"
+          placeholder="Full Name"
+          aria-errormessage="fullNameError"
+          aria-required
+          {...register("fullName")}
+        />
+        <small id="fullNameError" className="text-red-500 text-sm mt-1">
           {errors.fullName && (
-            <p id="fullNameError" className="text-red-500 text-sm mt-1">
+            <>
               {Array.isArray(errors.fullName) ? (
                 <>{errors.fullName[0]}</>
               ) : typeof errors.fullName.message === "string" ? (
@@ -54,20 +62,26 @@ export const SignUpForm = () => {
               ) : (
                 <>Invalid input</>
               )}
-            </p>
+            </>
           )}
-        </div>
-        <div className="mb-4">
-          <input
-            type="email"
-            autoComplete="email"
-            placeholder="Email"
-            aria-errormessage="emailError"
-            className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
-            {...register("email")}
-          />
+        </small>
+      </div>
+      <div>
+        <label className="sr-only" htmlFor="emailInput">
+          Email
+        </label>
+        <Input
+          id="emailInput"
+          type="email"
+          autoComplete="email"
+          placeholder="Email"
+          aria-errormessage="emailError"
+          aria-required
+          {...register("email")}
+        />
+        <small id="emailError" className="text-red-500 text-sm mt-1">
           {errors.email && (
-            <p id="emailError" className="text-red-500 text-sm mt-1">
+            <>
               {Array.isArray(errors.email) ? (
                 <>{errors.email[0]}</>
               ) : typeof errors.email.message === "string" ? (
@@ -75,20 +89,26 @@ export const SignUpForm = () => {
               ) : (
                 <>Invalid input</>
               )}
-            </p>
+            </>
           )}
-        </div>
-        <div className="mb-4">
-          <input
-            type="password"
-            autoComplete="new-password"
-            placeholder="Password"
-            aria-errormessage="passwordError"
-            className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
-            {...register("password")}
-          />
+        </small>
+      </div>
+      <div>
+        <label className="sr-only" htmlFor="passwordInput">
+          Password
+        </label>
+        <Input
+          id="passwordInput"
+          type="password"
+          autoComplete="new-password"
+          placeholder="Password"
+          aria-errormessage="passwordError"
+          aria-required
+          {...register("password")}
+        />
+        <small id="passwordError" className="text-red-500 text-sm mt-1">
           {errors.password && (
-            <p id="passwordError" className="text-red-500 text-sm mt-1">
+            <>
               {Array.isArray(errors.password) ? (
                 <>{errors.password[0]}</>
               ) : typeof errors.password.message === "string" ? (
@@ -96,20 +116,26 @@ export const SignUpForm = () => {
               ) : (
                 <>Invalid input</>
               )}
-            </p>
+            </>
           )}
-        </div>
-        <div className="mb-4">
-          <input
-            type="password"
-            autoComplete="new-password"
-            placeholder="Confirm Password"
-            aria-errormessage="confirmPasswordError"
-            className="w-full bg-gray-300 text-black size-12 border px-4 rounded"
-            {...register("confirmPassword")}
-          />
+        </small>
+      </div>
+      <div>
+        <label className="sr-only" htmlFor="confirmPasswordInput">
+          Confirm Password
+        </label>
+        <Input
+          id="confirmPasswordInput"
+          type="password"
+          autoComplete="new-password"
+          placeholder="Confirm Password"
+          aria-errormessage="confirmPasswordError"
+          aria-required
+          {...register("confirmPassword")}
+        />
+        <small id="confirmPasswordError" className="text-red-500 text-sm mt-1">
           {errors.confirmPassword && (
-            <p id="confirmPasswordError" className="text-red-500 text-sm mt-1">
+            <>
               {Array.isArray(errors.confirmPassword) ? (
                 <>{errors.confirmPassword[0]}</>
               ) : typeof errors.confirmPassword.message === "string" ? (
@@ -117,43 +143,18 @@ export const SignUpForm = () => {
               ) : (
                 <>Invalid input</>
               )}
-            </p>
+            </>
           )}
-        </div>
-        <div className="mb-10">
-          <GradButton variant="default" className="w-full">
-            Sign Up
-          </GradButton>
-        </div>
-        <div className="flex justify-center mb-5">
-          <p className="text-black font-semibold text-xl">or sign up with</p>
-        </div>
-        <div className="flex justify-center mb-5 space-x-10">
-          <Image
-            src="/images/facebook.png"
-            width={64}
-            height={64}
-            alt="Facebook icon"
-          />
-          <Image
-            src="/images/google-icon.png"
-            width={64}
-            height={64}
-            alt="Google icon"
-          />
-        </div>
-      </form>
-      <hr className="mt-10 mb-10" />
-      <div className="flex justify-center mb-5">
-        <p className="text-black font-semibold text-xl">Already a User?</p>
+        </small>
       </div>
-      <div className="mx-20 my-10">
-        <Link href="/signin">
-          <GradButton variant="default" className="w-full">
-            Sign In
-          </GradButton>
-        </Link>
-      </div>
-    </div>
+      <GradButton
+        disabled={isSubmitting}
+        variant="default"
+        className="mt-6 py-4 text-lg gap-3"
+      >
+        Sign Up
+        {isSubmitting && <Spinner />}
+      </GradButton>
+    </form>
   );
 };

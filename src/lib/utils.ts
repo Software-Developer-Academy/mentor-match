@@ -15,3 +15,12 @@ export function cn(...inputs: ClassValue[]) {
 */
 export const passwordRegex =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,}$/;
+
+/**
+ * Used for testing slowness or something
+ */
+export function sleep(duration: number = 5000) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, duration);
+  });
+}

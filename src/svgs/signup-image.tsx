@@ -1,7 +1,9 @@
-const SignUpImage = () => {
+import { cn } from "@/lib/utils";
+
+const SignUpImage = ({ className }: { className?: string }) => {
   return (
     <svg
-      className="signup"
+      className={cn("signup pointer-events-none touch-none", className)}
       width="854"
       height="571"
       viewBox="0 0 854 571"
