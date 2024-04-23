@@ -1,4 +1,4 @@
-import { FormPanel, ImagePanel } from "../components";
+import { FormPanel, ImagePanel, OauthBlock } from "../components";
 import { SignInForm } from "../components/signin-form";
 
 const SignInPage = () => {
@@ -6,6 +6,7 @@ const SignInPage = () => {
     <>
       <FormPanel type="signin">
         <SignInForm />
+        <OauthBlock type="sign in" />
       </FormPanel>
       <ImagePanel
         imgDirection="right"
