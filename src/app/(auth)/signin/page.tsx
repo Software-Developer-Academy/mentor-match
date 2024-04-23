@@ -1,5 +1,5 @@
-import { FormPanel, ImagePanel, OauthBlock } from "../../../components";
-import { SignInForm } from "../../../components/signin-form";
+import { FormPanel, ImagePanel, OauthBlock } from "@/components";
+import { SignInForm } from "@/components/signin-form";
 
 const SignInPage = () => {
   return (
