@@ -88,8 +88,9 @@
   body {
     @apply bg-background text-foreground;
   }
-  input {
-    @apply placeholder:text-muted-foreground/70;
+
+  a {
+    @apply font-semibold;
   }
 }
 
@@ -110,7 +111,7 @@ h4,
 h5,
 h6 {
   font-family: var(--andada-pro);
-  font-weight: bold;
+  font-weight: 800;
   font-size: 64px;
 }
 
