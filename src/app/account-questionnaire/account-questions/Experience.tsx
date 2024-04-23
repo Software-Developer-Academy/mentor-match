@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 
-const AccountQuestion1 = () => {
-  const [radioState, setRadioState] = useState("A");
+export const Experience = () => {
+  const [radioState, setRadioState] = useState("");
   const radioCheck = (currentState: string) => {
     setRadioState(currentState);
   };
@@ -11,13 +11,13 @@ const AccountQuestion1 = () => {
   return (
     <div>
       <div className="flex flex-col justify-center pb-16">
-        <h2 className="mb-6 text-2xl">What are your goals?</h2>
+        <h2 className="mb-6 text-2xl">What is your experience level?</h2>
         <RadioGroup defaultValue="option-one">
           <div
             className={
               radioState === "A"
-                ? "flex items-center space-x-2 py-3  bg-[#C7D59F]  rounded-sm transition-colors hover: cursor-pointer "
-                : "flex items-center space-x-2 py-3  bg-[#efefef] rounded-sm transition-colors hover:bg-[#e5e5e5] duration-300 cursor-pointer"
+                ? "flex items-center space-x-2 py-3 bg-[#C7D59F] rounded-sm transition-colors hover:cursor-pointer"
+                : "flex items-center space-x-2 py-3 bg-[#efefef] rounded-sm transition-colors hover:bg-[#e5e5e5] duration-300 cursor-pointer"
             }
             onClick={() => {
               radioCheck("A");
@@ -25,18 +25,18 @@ const AccountQuestion1 = () => {
           >
             <RadioGroupItem
               className="invisible"
-              value="Learn something new"
+              value="Less than 2 years"
               id="option-one"
             />
             <Label className="cursor-pointer" htmlFor="option-one">
-              Learn something new
+              Less than 2 years
             </Label>
           </div>
           <div
             className={
               radioState === "B"
-                ? "flex items-center space-x-2 py-3  bg-[#C7D59F]  rounded-sm transition-colors hover: cursor-pointer "
-                : "flex items-center space-x-2 py-3  bg-[#efefef] rounded-sm transition-colors hover:bg-[#e5e5e5] duration-300 cursor-pointer"
+                ? "flex items-center space-x-2 py-3 bg-[#C7D59F] rounded-sm transition-colors hover: cursor-pointer "
+                : "flex items-center space-x-2 py-3 bg-[#efefef] rounded-sm transition-colors hover:bg-[#e5e5e5] duration-300 cursor-pointer"
             }
             onClick={() => {
               radioCheck("B");
@@ -44,11 +44,11 @@ const AccountQuestion1 = () => {
           >
             <RadioGroupItem
               className="invisible"
-              value="Master a skill"
+              value="2 - 5 years"
               id="option-two"
             />
             <Label className="cursor-pointer" htmlFor="option-two">
-              Master a skill
+              2 - 5 years
             </Label>
           </div>
           <div
@@ -63,11 +63,11 @@ const AccountQuestion1 = () => {
           >
             <RadioGroupItem
               className="invisible"
-              value="Still trying to figure it out"
+              value="More than 5 years"
               id="option-three"
             />
             <Label className="cursor-pointer" htmlFor="option-three">
-              Still trying to figure it out
+              More than 5 years
             </Label>
           </div>
         </RadioGroup>
@@ -75,5 +75,3 @@ const AccountQuestion1 = () => {
     </div>
   );
 };
-
-export default AccountQuestion1;

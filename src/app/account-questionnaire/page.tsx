@@ -9,8 +9,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import AccountQuestion1 from "@/components/account-questions/account-question-1";
 import { useRouter } from "next/navigation";
+import { Goals } from "./account-questions/Goals";
+import { Experience } from "./account-questions/Experience";
 
 const AccountQuestionnaire = () => {
   const router = useRouter();
@@ -20,11 +21,11 @@ const AccountQuestionnaire = () => {
   };
 
   return (
-    <div className="flex h-screen">
-      <div className="basis-1/2 py-5 px-10 w-1/2">
+    <div className="flex justify-center items-center gap-24 h-full">
+      <div className="basis-1/2 px-10 max-w-[560px] py-12 mx-auto w-full">
         <div className="mb-24">
           <p
-            className="text-right text-l hover: cursor-pointer"
+            className="text-center text-l hover: cursor-pointer"
             onClick={skipQuestions}
           >
             SKIP
@@ -35,16 +36,15 @@ const AccountQuestionnaire = () => {
           <Carousel>
             <CarouselContent>
               <CarouselItem>
-                <AccountQuestion1 />
+                <Goals />
               </CarouselItem>
+
               <CarouselItem>
-                <AccountQuestion1 />
+                <Experience />
               </CarouselItem>
+
               <CarouselItem>
-                <AccountQuestion1 />
-              </CarouselItem>
-              <CarouselItem>
-                <AccountQuestion1 />
+                <Experience />
               </CarouselItem>
             </CarouselContent>
             <CarouselDots />
@@ -53,17 +53,22 @@ const AccountQuestionnaire = () => {
           </Carousel>
         </div>
       </div>
-      <div className="bg-[#00658A] flex items-center justify-center basis-3/5 p-10 rounded-l-[40%]">
-        {/* <Image /> */}
 
-        <div>
-          <h1 className="text-2xl text-white text-left">
-            &quot;<span className="text-[#b7ce63]">Education</span> is the most
-            powerful weapon which you can use to
-            <span className="text-[#b7ce63]"> change the world</span>.&quot;
-          </h1>
-          <p className="self-start text-slate-100 mt-5">-Nelson Mandela</p>
-        </div>
+      <div className="content-center max-w-[854px] relative text-white h-full px-16">
+        <h1 className="text-4xl text-white text-left">
+          &quot;<span className="text-[#b7ce63]">Education</span> is the most
+          powerful weapon which you can use to
+          <span className="text-[#b7ce63]"> change the world</span>.&quot;
+        </h1>
+
+        <p className="text-xl self-start text-slate-100 mt-5">
+          -Nelson Mandela
+        </p>
+
+        <div
+          aria-hidden="true"
+          className="absolute w-full h-[190%] short:h-[195%] tall-desktop:h-[200%] bg-[#00658A] -z-10 top-[50%] translate-y-[-50%] rounded-l-[50%] right-0"
+        ></div>
       </div>
     </div>
   );
