@@ -1,5 +1,5 @@
-import { FormPanel, ImagePanel, OauthBlock } from "../components";
-import { SignUpForm } from "../components/signup-form";
+import { FormPanel, ImagePanel, OauthBlock } from "@/components";
+import { SignUpForm } from "@/components/signup-form";
 
 const SignUp = () => {
   return (

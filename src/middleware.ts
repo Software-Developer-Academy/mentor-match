@@ -3,7 +3,7 @@ import {
   ERROR_INVALID_SESSION_SCHEMA,
   getDeserializedSessionCookie,
   SESSION_COOKIE_NAME,
-} from "./lib/tools/session";
+} from "./lib/utils/session";
 
 export async function middleware() {
   try {
