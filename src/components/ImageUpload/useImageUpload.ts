@@ -1,4 +1,4 @@
-import { imageFileSchema } from "@/lib/User/validations";
+import { imageFileSchema } from "@/lib/User/validations/files";
 import { useState } from "react";
 
 export const useImageUpload = () => {
