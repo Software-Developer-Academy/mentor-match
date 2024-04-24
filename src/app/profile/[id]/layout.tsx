@@ -1,8 +1,6 @@
 import Navbar from "@/components/Navbar/";
 
 const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
-
-  
   return (
     <>
       <Navbar />

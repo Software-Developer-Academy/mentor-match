@@ -41,7 +41,10 @@ export const NavbarItems = ({ loggedIn }: { loggedIn: boolean }) => {
                 }}
                 noValidate
               >
-                <Button type="submit" className="text-sm font-medium text-white">
+                <Button
+                  type="submit"
+                  className="text-sm font-medium text-white"
+                >
                   Log out
                 </Button>
               </form>
@@ -110,7 +113,9 @@ export const NavbarItems = ({ loggedIn }: { loggedIn: boolean }) => {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuTrigger className="relative">Explore</NavigationMenuTrigger>
+              <NavigationMenuTrigger className="relative">
+                Explore
+              </NavigationMenuTrigger>
               <NavigationMenuContent className="overflow-y-scroll md:overflow-auto max-h-screen">
                 <Explore />
               </NavigationMenuContent>

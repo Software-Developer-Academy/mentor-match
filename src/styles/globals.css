@@ -116,7 +116,9 @@ h6 {
   font-size: 64px;
 }
 
-p, a, button {
+p,
+a,
+button {
   font-family: var(--poppins);
   font-weight: 300;
   font-size: 16px;
@@ -196,7 +198,7 @@ svg.signup path.themeSecondary {
   height: var(--radix-navigation-menu-viewport-height);
 }
 
-.sidebar_section:not(:first-child){
+.sidebar_section:not(:first-child) {
   @apply mt-10;
 }
 
