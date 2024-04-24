@@ -10,7 +10,7 @@ import {
   EMAIL_ALREADY_EXISTS_MSG,
   signInSchema,
   signUpSchema,
-} from "./validations";
+} from "./validations/auth";
 
 export async function signinUser(
   data: FormData,

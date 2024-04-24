@@ -4,7 +4,7 @@ import { Spinner } from "@/components/loaders/spinner";
 import { GradButton } from "@/components/ui/grad-button";
 import { Input } from "@/components/ui/input";
 import { signupUser } from "@/lib/User/actions";
-import { signUpSchema } from "@/lib/User/validations";
+import { signUpSchema } from "@/lib/User/validations/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
