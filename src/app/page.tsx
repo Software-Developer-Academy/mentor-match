@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbar/";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
@@ -81,10 +81,10 @@ const Mentors = () => {
       {mentors.map((mentor) => (
         <CarouselItem
           key={mentor.name}
-          className="md:basis-1/2 lg:basis-1/3 flex flex-col items-center justify-start text-center"
+          className="md:basis-1/3 flex flex-col items-center justify-start md:justify-center text-center"
         >
-          <div className="w-full md:w-full flex justify-between bg-slate-100 rounded-sm">
-            <div className="w-1/2 m-5 flex flex-col items-center justify-center">
+          <div className="w-full flex md:flex-col lg:flex-row justify-between items-center bg-slate-100 rounded-sm p-5">
+            <div className="w-1/2 flex flex-col items-center justify-center">
               <Image
                 src={mentor.image}
                 alt={mentor.name}
@@ -117,7 +117,7 @@ const Mentors = () => {
                 ))}
               </div>
             </div>
-            <div className="w-1/2 flex flex-col items-center justify-center">
+            <div className="w-1/2 md:w-full lg:w-1/2 flex flex-col items-center justify-center md:mt-5 lg:mt-0">
               <h3 className="text-lg font-bold">{mentor.name}</h3>
               <p className="text-sm">{mentor.title}</p>
               <p className="text-sm">{mentor.location}</p>
@@ -203,8 +203,8 @@ export default function Home() {
                   <Mentors />
                 </CarouselContent>
               </div>
-              <CarouselPrevious className="absolute top-auto -bottom-14 left-1/3 md:ml-24" />
-              <CarouselNext className="absolute top-auto -bottom-14 right-1/3 md:mr-24" />
+              <CarouselPrevious className="absolute top-auto -bottom-20 left-1/3 md:ml-12 lg:ml-24" />
+              <CarouselNext className="absolute top-auto -bottom-20 right-1/3 md:mr-12 lg:mr-24" />
             </Carousel>
           </div>
         </section>

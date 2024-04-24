@@ -18,6 +18,10 @@ const config = {
       },
     },
     extend: {
+      screens: {
+        "tall-desktop": { raw: "(min-height: 768px) and (min-width: 1280px)" },
+        "short-desktop": { raw: "(min-height: 640px) and (min-width: 1280px)" },
+      },
       fontFamily: {
         andada: "var(--andada-pro)",
         inter: "var(--inter)",

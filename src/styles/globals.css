@@ -88,8 +88,9 @@
   body {
     @apply bg-background text-foreground;
   }
-  input {
-    @apply placeholder:text-muted-foreground/70;
+
+  a {
+    @apply font-semibold;
   }
 }
 
@@ -101,6 +102,7 @@
 
 body {
   overflow-x: hidden;
+  font-family: var(--poppins);
 }
 
 h1,
@@ -110,11 +112,11 @@ h4,
 h5,
 h6 {
   font-family: var(--andada-pro);
-  font-weight: bold;
+  font-weight: 800;
   font-size: 64px;
 }
 
-p {
+p, a, button {
   font-family: var(--poppins);
   font-weight: 300;
   font-size: 16px;
@@ -185,9 +187,17 @@ svg.signup path.themeSecondary {
   @apply bg-primary text-primary-foreground;
 }
 
+.glassmorphism {
+  @apply bg-opacity-20 bg-white backdrop-blur-md backdrop-filter;
+}
+
 .NavigationMenuViewport {
   width: var(--radix-navigation-menu-viewport-width);
   height: var(--radix-navigation-menu-viewport-height);
+}
+
+.sidebar_section:not(:first-child){
+  @apply mt-10;
 }
 
 @media screen and (min-width: 768px) {

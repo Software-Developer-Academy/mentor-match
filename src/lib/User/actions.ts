@@ -4,13 +4,13 @@ import bcrypt from "bcrypt";
 import { redirect } from "next/navigation";
 import { ZodIssue } from "zod";
 import { connectMongo } from "../db";
+import { createSession, setSessionCookie, clearSessionCookie } from "../utils/session";
 import UserModel from "./model";
 import {
   EMAIL_ALREADY_EXISTS_MSG,
   signInSchema,
   signUpSchema,
 } from "./validations";
-import { createSession, setSessionCookie } from "../tools/session";
 
 export async function signinUser(
   data: FormData,
@@ -129,4 +129,15 @@ export async function signupUser(
   }
 
   return redirect("/");
+}
+
+export async function signoutUser() {
+  try {
+    // Clear the session cookie
+    clearSessionCookie();
+  } catch (error) {
+    console.error(error);
+  }
+
+  return redirect("/signin");
 }

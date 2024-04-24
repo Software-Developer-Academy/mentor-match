@@ -1,11 +1,7 @@
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-<<<<<<< HEAD
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors-)
-
-=======
 [![All Contributors](https://img.shields.io/badge/all_contributors-14-orange.svg?style=flat-square)](#contributors-)
->>>>>>> de94ccf826f586c2f51b86ad6f1a544409200971
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## Join us in project discussion

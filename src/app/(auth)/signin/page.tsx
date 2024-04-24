@@ -1,12 +1,14 @@
-import { FormPanel, ImagePanel } from "../components";
-import { SignInForm } from "../components/signin-form";
+import { FormPanel, ImagePanel, OauthBlock } from "@/components";
+import { SignInForm } from "@/components/signin-form";
 
 const SignInPage = () => {
   return (
     <>
       <FormPanel type="signin">
         <SignInForm />
+        <OauthBlock type="sign in" />
       </FormPanel>
+
       <ImagePanel
         imgDirection="right"
         welcomeMessage="Welcome back to"

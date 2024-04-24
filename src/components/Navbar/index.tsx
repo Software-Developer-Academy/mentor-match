@@ -5,7 +5,7 @@ import { LoadingNav } from "./server";
 
 const Navbar = () => {
   return (
-    <nav className="fixed z-50 w-full p-2 bg-white">
+    <nav className="glassmorphism fixed z-50 w-full p-2 bg-white">
       <div className="lg:container w-full flex justify-between">
         <Link href="/" className="flex flex-center gap-2 items-center">
           <Image

@@ -1,3 +1,9 @@
+export const AccountLinks: { text: string; href: string; style: string }[] = [
+  { text: "Account Dashboard", href: "/profile", style: "link" },
+  { text: "Settings", href: "/settings", style: "link" },
+  { text: "Log Out", href: "/logout", style: "button" },
+];
+
 type languageProps = {
   name: string;
   href: string;
@@ -144,10 +150,4 @@ export const Technologies: {
     ],
     description: "Store data efficiently",
   },
-];
-
-export const AccountLinks: { text: string; href: string; style: string }[] = [
-  { text: "Account Dashboard", href: "/profile", style: "link" },
-  { text: "Settings", href: "/settings", style: "link" },
-  { text: "Log Out", href: "/logout", style: "button" },
 ];

@@ -3,7 +3,7 @@ import {
   ERROR_INVALID_SESSION_SCHEMA,
   getDeserializedSessionCookie,
   SESSION_COOKIE_NAME,
-} from "./lib/tools/session";
+} from "./lib/utils/session";
 
 export async function middleware() {
   try {
@@ -17,7 +17,8 @@ export async function middleware() {
       return NextResponse.next();
     }
 
-    const response = NextResponse.next();
+    //const response = NextResponse.next();
+    const response = NextResponse.redirect("/");
 
     response.cookies.delete(SESSION_COOKIE_NAME);
 
