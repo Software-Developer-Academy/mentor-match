@@ -3,8 +3,10 @@
 import bcrypt from "bcrypt";
 import { redirect } from "next/navigation";
 import { ZodIssue } from "zod";
+
 import { connectMongo } from "../db";
 import { createSession, setSessionCookie } from "../utils/session";
+
 import UserModel from "./model";
 import {
   EMAIL_ALREADY_EXISTS_MSG,

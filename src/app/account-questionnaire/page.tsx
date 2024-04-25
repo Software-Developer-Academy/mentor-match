@@ -1,6 +1,8 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import React from "react";
+
 import {
   Carousel,
   CarouselContent,
@@ -9,9 +11,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { useRouter } from "next/navigation";
-import { Goals } from "./account-questions/Goals";
+
 import { Experience } from "./account-questions/Experience";
+import { Goals } from "./account-questions/Goals";
 
 const AccountQuestionnaire = () => {
   const router = useRouter();

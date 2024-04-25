@@ -1,8 +1,10 @@
 import Link from "next/link";
+
+import { Technologies } from "@/data/navigation";
+
 import { Input } from "./ui/input";
 import { Separator } from "./ui/separator";
 
-import { Technologies } from "@/data/navigation";
 const technologies = Technologies;
 
 const Explore = () => {

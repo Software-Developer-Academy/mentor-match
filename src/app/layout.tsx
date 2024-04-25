@@ -1,9 +1,11 @@
-import type { Metadata } from "next";
+
 import { Andada_Pro, Inter, Poppins } from "next/font/google";
 
 import "@/styles/global-icons.css";
 import "@/styles/globals.css";
 import { cn } from "@/lib/utils";
+
+import type { Metadata } from "next";
 
 //defined variables for font
 const andada_pro = Andada_Pro({ subsets: ["latin"], variable: "--andada-pro" });

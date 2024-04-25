@@ -1,5 +1,6 @@
-import { passwordRegex } from "@/lib/utils";
 import { z } from "zod";
+
+import { passwordRegex } from "@/lib/utils";
 
 export const EMAIL_ALREADY_EXISTS_MSG =
   "An account with this email already exists.";
