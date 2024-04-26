@@ -136,12 +136,7 @@ export async function signupUser(
 }
 
 export async function signoutUser() {
-  try {
-    // Clear the session cookie
-    clearSessionCookie();
-  } catch (error) {
-    console.error(error);
-  }
+  clearSessionCookie();
 
   return redirect("/signin");
 }

@@ -4,7 +4,7 @@ const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Navbar />
-      <div className="container flex justify-center items-center gap-24 py-24">
+      <div className="container flex justify-center items-center gap-24">
         {children}
       </div>
     </>

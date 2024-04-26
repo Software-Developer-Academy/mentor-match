@@ -9,7 +9,6 @@ type languageProps = {
   href: string;
   icon: string;
 };
-
 export const Technologies: {
   title: string;
   languages: languageProps[];

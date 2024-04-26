@@ -198,7 +198,7 @@ export default function Home() {
               }}
               className="w-full flex flex-col items-center justify-start text-center"
             >
-              <div className="overflow_mask w-screen md:w-full">
+              <div className="overflow-mask w-screen md:w-full">
                 <CarouselContent>
                   <Mentors />
                 </CarouselContent>

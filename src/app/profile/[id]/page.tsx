@@ -1,7 +1,5 @@
-"use client";
-
 import Image from "next/image";
-import Error from "next/error";
+import { notFound } from 'next/navigation';
 
 import {
   Table,
@@ -28,7 +26,7 @@ const Profile = ({ params }: { params: { id: number } }) => {
   const mentor = mentors.find((mentor) => mentor.id === id);
 
   return mentor ? (
-    <div className="flex flex-col justify-center lg:flex-row gap-14">
+    <div className="flex flex-col justify-center lg:flex-row gap-14 py-24">
       <div className="flex flex-col w-full lg:w-1/4 items-center">
         <Image src={mentor.image} alt={mentor.name} width={200} height={200} />
         <div className="w-full mt-5">
@@ -43,7 +41,7 @@ const Profile = ({ params }: { params: { id: number } }) => {
       </div>
       <div className="w-full lg:w-1/2 bg-slate-100 rounded-sm"></div>
       <div className="w-full lg:w-1/4">
-        <div className="sidebar_section">
+        <div className="sidebar-section">
           <p>I can teach you:</p>
           <Separator className="mt-2" />
           <ul className="flex">
@@ -65,7 +63,7 @@ const Profile = ({ params }: { params: { id: number } }) => {
           </ul>
         </div>
 
-        <div className="sidebar_section">
+        <div className="sidebar-section">
           <p>Availability:</p>
           <Separator className="mt-2" />
           {mentor.availability ? (
@@ -109,7 +107,7 @@ const Profile = ({ params }: { params: { id: number } }) => {
       </div>
     </div>
   ) : (
-    <Error statusCode={404} />
+    notFound()
   );
 };
 

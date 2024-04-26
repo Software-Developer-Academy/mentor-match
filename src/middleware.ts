@@ -17,8 +17,7 @@ export async function middleware() {
       return NextResponse.next();
     }
 
-    //const response = NextResponse.next();
-    const response = NextResponse.redirect("/");
+    const response = NextResponse.next();
 
     response.cookies.delete(SESSION_COOKIE_NAME);
 

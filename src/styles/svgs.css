@@ -1,0 +1,87 @@
+/* Avatar */
+#hero-avatar1 .cls-1,
+#hero-avatar1 .cls-4 {
+  fill: #000;
+  stroke-width: 0;
+}
+
+#hero-avatar1 .cls-4 {
+  fill: none;
+}
+
+/* Homepage Image */
+#img1 {
+  transform: rotateY(180deg);
+}
+
+#img1 .cls-1 {
+  fill: #181818;
+}
+
+#img1 .cls-1,
+#img1 .cls-2,
+#img1 .cls-3 {
+  stroke-width: 0;
+}
+
+#img1 .cls-2 {
+  fill: #fffeff;
+}
+
+#img1 .cls-3 {
+  fill: #b7ce63;
+}
+
+/* Rating Stars */
+.star.primary {
+  stroke: hsl(var(--primary));
+}
+
+.star.secondary {
+  stroke: hsl(var(--secondary));
+}
+
+.star.tertiary {
+  stroke: hsl(var(--tertiary));
+}
+
+.star.primary .stop-color {
+  stop-color: hsl(var(--primary));
+}
+
+.star.secondary .stop-color {
+  stop-color: hsl(var(--secondary));
+}
+
+.star.tertiary .stop-color {
+  stop-color: hsl(var(--tertiary));
+}
+
+/* Signup page */
+svg.signup path.themeSecondary {
+  fill: hsl(var(--secondary));
+}
+
+/* 404 SVG */
+#notFound .cls-1 {
+  fill: #07668b
+}
+
+#notFound .cls-1,
+#notFound .cls-2,
+#notFound .cls-3,
+#notFound .cls-4 {
+  stroke-width: 0
+}
+
+#notFound .cls-2 {
+  fill: #b7cd62
+}
+
+#notFound .cls-3 {
+  fill: #faa31a
+}
+
+#notFound .cls-4 {
+  fill: #fff
+}
