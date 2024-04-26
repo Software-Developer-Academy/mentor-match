@@ -64,24 +64,24 @@ svg.signup path.themeSecondary {
 
 /* 404 SVG */
 #notFound .cls-1 {
-  fill: #07668b
+  fill: #07668b;
 }
 
 #notFound .cls-1,
 #notFound .cls-2,
 #notFound .cls-3,
 #notFound .cls-4 {
-  stroke-width: 0
+  stroke-width: 0;
 }
 
 #notFound .cls-2 {
-  fill: #b7cd62
+  fill: #b7cd62;
 }
 
 #notFound .cls-3 {
-  fill: #faa31a
+  fill: #faa31a;
 }
 
 #notFound .cls-4 {
-  fill: #fff
+  fill: #fff;
 }

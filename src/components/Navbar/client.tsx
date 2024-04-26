@@ -15,7 +15,13 @@ const loggedInNavLinks: NavbarTypes.NavigationProps[] = [
  */
 const loggedOutNavLinks: NavbarTypes.NavigationProps[] = [
   { text: "Explore", component: <Explore /> },
-  { text: "Log In", href: "/signin", component: "link", className: "outline-btn text-sm font-medium flex items-center justify-center"},
+  {
+    text: "Log In",
+    href: "/signin",
+    component: "link",
+    className:
+      "outline-btn text-sm font-medium flex items-center justify-center",
+  },
 ];
 
 /**
@@ -30,7 +36,7 @@ export const NavbarItems = ({ loggedIn }: { loggedIn: boolean }) => {
         <NavbarLinks navLinks={loggedInNavLinks} />
       ) : (
         <NavbarLinks navLinks={loggedOutNavLinks} />
-      )} 
+      )}
     </>
   );
 };

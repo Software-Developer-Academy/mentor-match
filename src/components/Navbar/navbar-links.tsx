@@ -43,10 +43,7 @@ export const Account = () => {
               }}
               noValidate
             >
-              <Button
-                type="submit"
-                className="text-sm font-medium text-white"
-              >
+              <Button type="submit" className="text-sm font-medium text-white">
                 Log out
               </Button>
             </form>
@@ -111,19 +108,31 @@ export const Explore = () => {
  * @param index - The index of the navigation menu item.
  * @returns The rendered navigation menu item.
  */
-const CreateNavigationMenuItem = ({ link, index }:{ link:NavbarTypes.NavigationProps, index:number }) => {
+const CreateNavigationMenuItem = ({
+  link,
+  index,
+}: {
+  link: NavbarTypes.NavigationProps;
+  index: number;
+}) => {
   return (
     <NavigationMenuItem key={index}>
       {link.component === "link" ? (
         <Link href={link.href ?? ""} legacyBehavior passHref>
-          <NavigationMenuLink className={`${navigationMenuTriggerStyle()}, ${link.className ? link.className : ""}`}>
+          <NavigationMenuLink
+            className={`${navigationMenuTriggerStyle()}, ${link.className ? link.className : ""}`}
+          >
             {link.text}
           </NavigationMenuLink>
         </Link>
       ) : (
         <>
           <NavigationMenuTrigger className="relative">
-            {link.text ? link.text : <span className="material-symbols-outlined">{link.icon}</span>}
+            {link.text ? (
+              link.text
+            ) : (
+              <span className="material-symbols-outlined">{link.icon}</span>
+            )}
           </NavigationMenuTrigger>
           <NavigationMenuContent className="overflow-y-scroll md:overflow-auto max-h-screen">
             {link.component}
@@ -131,8 +140,8 @@ const CreateNavigationMenuItem = ({ link, index }:{ link:NavbarTypes.NavigationP
         </>
       )}
     </NavigationMenuItem>
-  )
-}
+  );
+};
 
 /**
  * Renders the navigation links for the navbar.
@@ -141,20 +150,18 @@ const CreateNavigationMenuItem = ({ link, index }:{ link:NavbarTypes.NavigationP
  * @returns {JSX.Element} - The rendered navigation links.
  */
 const NavbarLinks = ({ navLinks }: NavbarTypes.NavLinksProps) => {
-
   return (
     <>
       <NavigationMenu>
         <NavigationMenuList>
-          {navLinks.map((link, index) => (
-            CreateNavigationMenuItem({ link, index })
-          ))}
+          {navLinks.map((link, index) =>
+            CreateNavigationMenuItem({ link, index }),
+          )}
         </NavigationMenuList>
         <NavigationMenuViewport className="w-screen origin-top-right fixed right-0 md:absolute" />
       </NavigationMenu>
     </>
   );
-  
 };
 
 export default NavbarLinks;
