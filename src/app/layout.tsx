@@ -1,4 +1,3 @@
-
 import { Andada_Pro, Inter, Poppins } from "next/font/google";
 
 import "@/styles/global-icons.css";

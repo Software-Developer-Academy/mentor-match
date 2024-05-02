@@ -6,7 +6,7 @@
   ],
   "parserOptions": {
     "warnOnUnsupportedTypeScriptVersion": false
-  }, 
+  },
   "plugins": ["@typescript-eslint", "import"],
   "rules": {
     "import/order": [
