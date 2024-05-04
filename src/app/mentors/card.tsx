@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { Badge } from "@/components/ui/badge";
+
 import RatingStars from "@/components/RatingStars";
+import { Badge } from "@/components/ui/badge";
 
 function Card() {
   return (

@@ -1,8 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
+import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,11 +13,9 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-
-import { getIcon } from "@/data/static";
 import { Technologies, AccountLinks } from "@/data/navigation";
+import { getIcon } from "@/data/static";
 const technologies = Technologies;
 const accountLinks = AccountLinks;
 
