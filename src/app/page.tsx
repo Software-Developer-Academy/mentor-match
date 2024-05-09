@@ -96,7 +96,7 @@ const Mentors = () => {
                 <RatingStars
                   id="mentors"
                   rating={mentor.rating}
-                  color="secondary"
+                  colorClass="secondary"
                 />
               </div>
               <div className="flex w-full mt-2 justify-center">

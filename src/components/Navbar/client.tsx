@@ -4,7 +4,7 @@ import * as NavbarTypes from "./navbar-types";
 /**
  * Represents the navigation links for a logged-in user in the Navbar component.
  */
-const loggedInNavLinks: NavbarTypes.NavigationProps[] = [
+const loggedInNavLinks: NavbarTypes.NavigationType[] = [
   { text: "Find a Mentor", href: "/mentors", component: "link" },
   { text: "Explore", component: <Explore /> },
   { icon: "person", component: <Account /> },
@@ -13,7 +13,7 @@ const loggedInNavLinks: NavbarTypes.NavigationProps[] = [
 /**
  * Represents the navigation links for the logged out state of the Navbar component.
  */
-const loggedOutNavLinks: NavbarTypes.NavigationProps[] = [
+const loggedOutNavLinks: NavbarTypes.NavigationType[] = [
   { text: "Explore", component: <Explore /> },
   {
     text: "Log In",

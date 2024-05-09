@@ -45,15 +45,18 @@
   stroke: hsl(var(--tertiary));
 }
 
-.star.primary .stop-color {
+.star.primary .stop-color,
+.star.primary .stop-color2 {
   stop-color: hsl(var(--primary));
 }
 
-.star.secondary .stop-color {
+.star.secondary .stop-color,
+.star.secondary .stop-color2 {
   stop-color: hsl(var(--secondary));
 }
 
-.star.tertiary .stop-color {
+.star.tertiary .stop-color,
+.star.tertiary .stop-color2 {
   stop-color: hsl(var(--tertiary));
 }
 

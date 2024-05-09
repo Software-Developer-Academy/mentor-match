@@ -112,7 +112,7 @@ const CreateNavigationMenuItem = ({
   link,
   index,
 }: {
-  link: NavbarTypes.NavigationProps;
+  link: NavbarTypes.NavigationType;
   index: number;
 }) => {
   return (
@@ -149,7 +149,7 @@ const CreateNavigationMenuItem = ({
  * @param {NavbarTypes.NavLinksProps} navLinks - The array of navigation links.
  * @returns {JSX.Element} - The rendered navigation links.
  */
-const NavbarLinks = ({ navLinks }: NavbarTypes.NavLinksProps) => {
+const NavbarLinks = ({ navLinks }: NavbarTypes.NavLinksType) => {
   return (
     <>
       <NavigationMenu>

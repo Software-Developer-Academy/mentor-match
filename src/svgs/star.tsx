@@ -1,8 +1,4 @@
-type StarProps = {
-  id: string;
-  fill: string;
-  colorClass?: "primary" | "secondary" | "tertiary";
-};
+import { StarProps } from "@/types";
 
 export const Star = ({ id, fill, colorClass = "tertiary" }: StarProps) => {
   return (
@@ -17,10 +13,10 @@ export const Star = ({ id, fill, colorClass = "tertiary" }: StarProps) => {
         </linearGradient>
         <linearGradient id={`${id}-half`}>
           <stop className="stop-color" offset="50%" />
-          <stop offset="50%" stopColor="transparent" />
+          <stop className="stop-color2" offset="50%" stop-opacity="0.2" />
         </linearGradient>
         <linearGradient id={`${id}-transparent`}>
-          <stop stopColor="transparent" offset="100%" />
+          <stop className="stop-color2" offset="100%" stop-opacity="0.2"  />
         </linearGradient>
       </defs>
       <path
