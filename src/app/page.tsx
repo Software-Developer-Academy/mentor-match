@@ -1,8 +1,10 @@
-import Navbar from "@/components/Navbar/";
-import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
 
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar/";
+import RatingStars from "@/components/RatingStars";
+import { Button } from "@/components/ui/button";
 import {
   Carousel,
   CarouselContent,
@@ -10,13 +12,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Button } from "@/components/ui/button";
-
-import Image1 from "@/svgs/image1";
-import RatingStars from "@/components/RatingStars";
-
 import { BenefitsData, TestimonialsData, MentorsData } from "@/data/homepage";
 import { getIcon } from "@/data/static";
+import Image1 from "@/svgs/image1";
 const benefits = BenefitsData;
 const testimonials = TestimonialsData;
 const mentors = MentorsData;
