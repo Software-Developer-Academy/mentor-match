@@ -10,12 +10,6 @@ export const SIGNUP_MAX_EMAIL_LENGTH = 200;
 export const SIGNUP_MAX_PASSWORD_LENGTH = 64;
 export const SIGNUP_MIN_PASSWORD_LENGTH = 8;
 export const SIGNUP_FULLNAME_REGEX = /^[a-zA-Z'-]+(?: [a-zA-Z'-]+)*$/;
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // Max file size 5MB for each image
-const VALID_TYPES = ["image/jpeg", "image/png", "image/gif"];
-const IMAGE_ERROR_MESSAGES = {
-  type: "Unsupported file type. Please upload an image.",
-  size: "File is too large",
-};
 
 export const signUpFullNameValdator = z
   .string()
@@ -64,18 +58,4 @@ export const signUpSchema = z
 export const signInSchema = z.object({
   email: signUpEmailValidator,
   password: signUpPasswordValidator,
-});
-
-const fileTypeSchema = z.string().refine((type) => VALID_TYPES.includes(type), {
-  message: IMAGE_ERROR_MESSAGES.type,
-});
-
-const fileSizeSchema = z
-  .number()
-  .max(MAX_FILE_SIZE, { message: IMAGE_ERROR_MESSAGES.size });
-
-export const imageFileSchema = z.object({
-  file: z.instanceof(File),
-  size: fileSizeSchema,
-  type: fileTypeSchema,
 });

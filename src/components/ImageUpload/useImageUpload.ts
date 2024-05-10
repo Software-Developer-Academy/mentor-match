@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { imageFileSchema } from "@/lib/User/validations";
+import { imageFileSchema } from "@/lib/User/validations/files";
 
 export const useImageUpload = () => {
   const [selectedImages, setSelectedImages] = useState<File[]>([]);

@@ -36,7 +36,7 @@ const Explore = () => {
 
 const Footer = () => {
   return (
-    <footer className="bg-primary text-white">
+    <footer className="bg-primary text-primary-foreground">
       <div className="container py-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 md:gap-20">
           <div className="row-start-2 md:row-start-1 col-start-1 md:col-start-1 col-span-2">
@@ -47,7 +47,7 @@ const Footer = () => {
               <Input
                 type="text"
                 placeholder="Search..."
-                className="p-2 w-full"
+                className="focus-visible:ring-offset-primary text-foreground"
               />
             </form>
           </div>
