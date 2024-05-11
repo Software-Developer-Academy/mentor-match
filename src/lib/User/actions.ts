@@ -10,6 +10,7 @@ import {
   setSessionCookie,
   clearSessionCookie,
 } from "../utils/session";
+
 import UserModel from "./model";
 import {
   EMAIL_ALREADY_EXISTS_MSG,

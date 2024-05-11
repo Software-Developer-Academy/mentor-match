@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import NotFoundSvg from "@/svgs/not-found-svg";
 
 export default function NotFound() {
