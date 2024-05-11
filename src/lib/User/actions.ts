@@ -3,6 +3,7 @@
 import bcrypt from "bcrypt";
 import { redirect } from "next/navigation";
 import { ZodIssue } from "zod";
+
 import { connectMongo } from "../db";
 import {
   createSession,
@@ -14,7 +15,7 @@ import {
   EMAIL_ALREADY_EXISTS_MSG,
   signInSchema,
   signUpSchema,
-} from "./validations";
+} from "./validations/auth";
 
 export async function signinUser(
   data: FormData,

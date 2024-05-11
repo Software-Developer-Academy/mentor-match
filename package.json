@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "eslint --fix .",
     "format": "prettier --write .",
     "format:check": "prettier . --check",
     "test": "glob -c 'node --import tsx --test' {tests,src}/**/*.test.{ts,js}"
@@ -42,8 +43,9 @@
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "autoprefixer": "^10.0.1",
-    "eslint": "^8",
+    "eslint": "^8.57.0",
     "eslint-config-next": "14.1.4",
+    "eslint-plugin-import": "^2.29.1",
     "glob": "^10.3.12",
     "postcss": "^8",
     "prettier": "^3.2.5",

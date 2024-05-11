@@ -4,6 +4,7 @@
  */
 import { connectMongo } from "@/lib/db";
 import UserModel, { User } from "@/lib/User/model";
+
 import { getDeserializedSessionCookie } from ".";
 
 export type SessionUser = Pick<User, "name" | "roles" | "_id">;

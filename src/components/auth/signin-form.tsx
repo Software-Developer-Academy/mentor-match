@@ -1,14 +1,15 @@
 "use client";
 
-import { Spinner } from "@/components/loaders/spinner";
-import { GradButton } from "@/components/ui/grad-button";
-import { Input } from "@/components/ui/input";
-import { signinUser } from "@/lib/User/actions";
-import { signInSchema } from "@/lib/User/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
+
+import { Spinner } from "@/components/loaders/spinner";
+import { GradButton } from "@/components/ui/grad-button";
+import { Input } from "@/components/ui/input";
+import { signinUser } from "@/lib/User/actions";
+import { signInSchema } from "@/lib/User/validations/auth";
 
 export const SignInForm = () => {
   const formRef = useRef<HTMLFormElement>(null);
