@@ -44,149 +44,207 @@ import { signupQuestions } from "@/data/signup-questions"
 const QuestionForm = () => {
   const formRef = useRef<HTMLFormElement>(null);
 
+  const { schema, defaultValues } = signupQuestions.reduce((acc, question) => {
+    acc.schema[question.id] = question.type === "checkbox" ? z.array(z.string()) : z.string();
+    acc.defaultValues[question.id] = question.type === "checkbox" ? [] : "";
+    return acc;
+  }, { schema: {} as Record<string, z.ZodType<any, any>>, defaultValues: {} as Record<string, any> });
+
   const formSchema = z.object({
-    q1: z.string(),
-    q2: z.string(),
-    q3: z.array(z.string()),
-    q4: z.string(),
-    q5: z.string()
+    ...schema, // Use the schema object in formSchema
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      q1: "",
-      q2: "",
-      q3: [],
-      q4: "",
-      q5: ""
+      ...defaultValues
     }
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => console.log(JSON.stringify(values));
 
   return (
-    <div className="w-full max-h-screen p-5">
-      <Carousel className="pb-5">
-        <Form {...form}>
-          <form
-            className="flex flex-col gap-6 w-full"
-            ref={formRef}
-            onSubmit={form.handleSubmit(onSubmit)}
-            noValidate
-          >
-            <CarouselContent className="max-h-[75dvh]">
-              {signupQuestions.map((question, index) => (
-                <CarouselItem key={index} className="overflow-y-auto flex justify-center">
-                  <FormField
-                    control={form.control}
-                    name={question.id as "q1" | "q2" | "q3" | "q4" | "q5"}
-                    render={({ field }) => (
-                      <FormItem className="p-5 w-1/2 my-auto">
-                        <div>
-                          <FormLabel><h5 className="text-2xl font-normal">{question.question}</h5></FormLabel>
-                          <FormDescription className="mb-10">Description</FormDescription>
-                        </div>
-                        <FormControl>
-                          <>
-                            {question.type === "radio" && (
-                              <RadioGroup
-                                onValueChange={field.onChange}
-                              >
-                                {question.options.map((option, index) => (
-                                  <FormItem 
-                                    key={index} 
-                                    className="bg-[#d9d9d9] rounded-md transition-colors duration-300 hover:bg-secondary hover:text-black checked:bg-secondary checked:text-black checked:border-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary focus:ring-offset-white overflow-hidden"
-                                  >
-                                    <FormControl>
-                                      <RadioGroupItem value={'value' in option ? option.value : ""} className="peer hidden"/>
-                                    </FormControl>
-                                    <FormLabel
-                                      className="!mt-0 py-3 px-4 w-full block text-black cursor-pointer peer-checked:bg-secondary peer-checked:text-black peer-checked:border-transparent peer-aria-checked:bg-secondary peer-aria-checked:text-black peer-aria-checked:border-transparent"
+    <>
+      <div className="w-full max-h-screen">
+        <Carousel className="pb-5">
+          <Form {...form}>
+            <form
+              className="flex flex-col gap-6"
+              ref={formRef}
+              onSubmit={form.handleSubmit(onSubmit)}
+              noValidate
+            >
+              <CarouselContent className="h-[calc(100dvh-8rem)] w-screen ml-0">
+                {signupQuestions.map((question, index) => (
+                  <CarouselItem key={index} className="overflow-y-auto flex justify-start p-10">
+                    <FormField
+                      control={form.control}
+                      name={question.id}
+                      render={({ field }) => (
+                        <FormItem className="my-auto w-full md:w-2/5">
+                          <div>
+                            <FormLabel><h5 className="text-2xl font-normal">{question.question}</h5></FormLabel>
+                            <FormDescription className="mb-10">{question.description}</FormDescription>
+                          </div>
+                          <FormControl>
+                            <>
+                              {question.type === "text" && (
+                                <Input
+                                  {...field}
+                                  type="text"
+                                  className="w-full"
+                                />
+                              )}
+                              {question.type === "radio" && (
+                                <RadioGroup
+                                  onValueChange={field.onChange}
+                                >
+                                  {question.options ? question.options.map((option, index) => (
+                                    <FormItem 
+                                      key={index} 
+                                      className="bg-[#d9d9d9] rounded-md transition-colors duration-300 hover:bg-secondary-accent hover:text-black checked:bg-secondary-accent checked:text-black checked:border-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary focus:ring-offset-white overflow-hidden"
                                     >
-                                      {'value' in option ? option.value : ""}
-                                    </FormLabel>
-                                  </FormItem>
-                                ))}
-                              </RadioGroup>
-                            )}
-                            {question.type === "checkbox" && (
-                              <div className="grid grid-cols-1 gap-5">
-                                {question.options.map((option, index) => (
-                                  <div key={index}>
-                                    <div>
-                                      <Label>{'title' in option ? option.title : ""}</Label>
-                                    </div>
-                                    {'options' in option ? option.options.map((item, index) => (
+                                      <FormControl>
+                                        <RadioGroupItem value={'value' in option ? option.value : ""} className="peer hidden"/>
+                                      </FormControl>
+                                      <FormLabel
+                                        className="!mt-0 py-3 px-4 w-full block text-black cursor-pointer peer-checked:bg-secondary-accent peer-checked:text-black peer-checked:border-transparent peer-aria-checked:bg-secondary-accent peer-aria-checked:text-black peer-aria-checked:border-transparent"
+                                      >
+                                        {'value' in option ? option.value : ""}
+                                      </FormLabel>
+                                    </FormItem>
+                                  )) : null }
+                                </RadioGroup>
+                              )}
+                              {question.type === "checkbox" && (
+                                <div className="grid grid-cols-1">
+                                  {question.options ? question.options.map((option, index) => (
+                                    <div key={index} className={'options' in option ? "mb-5" : ""}>
+                                      <div>
+                                        <Label>{'title' in option ? option.title : ""}</Label>
+                                      </div>
+                                      {'options' in option ? option.options.map((item, index) => (
+                                        <FormField
+                                          key={index}
+                                          control={form.control}
+                                          name={question.id}
+                                          render={({ field }) => {
+                                            return (
+                                              <FormItem 
+                                                key={index}
+                                                className="inline-flex m-2 ml-0 bg-[#d9d9d9] text-black rounded-md cursor-pointer transition-colors duration-300 hover:bg-secondary-accent hover:text-black checked:bg-secondary-accent checked:text-black checked:border-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary focus:ring-offset-white overflow-hidden"
+                                              >
+                                                <FormControl>
+                                                  <Checkbox
+                                                    {...field}
+                                                    name={question.id}
+                                                    value={'value' in item ? item.value : ""}
+                                                    checked={Array.isArray(field.value) ? field.value.includes(item.value) : false}
+                                                    onCheckedChange={(checked) => {
+                                                      return checked
+                                                        ? field.onChange([...(Array.isArray(field.value) ? field.value : []), item.value])
+                                                        : field.onChange(Array.isArray(field.value) ? field.value.filter((value) => value !== item.value) : [])
+                                                    }}
+                                                    className="hidden"
+                                                  />
+                                                </FormControl>
+                                                <FormLabel className="!mt-0 py-2 px-4 peer-aria-checked:bg-secondary-accent peer-aria-checked:text-black peer-aria-checked:border-transparent peer-checked:bg-secondary-accent peer-checked:text-black peer-checked:border-transparent cursor-pointer">
+                                                  {'value' in item ? item.value : ""}
+                                                </FormLabel>
+                                              </FormItem>
+                                            )
+                                          }}
+                                        />
+                                      )) 
+                                      : 
                                       <FormField
                                         key={index}
                                         control={form.control}
-                                        name={question.id as "q1" | "q2" | "q3" | "q4" | "q5"}
+                                        name={question.id}
                                         render={({ field }) => {
                                           return (
                                             <FormItem 
                                               key={index}
-                                              className="inline-flex m-2 ml-0 bg-[#d9d9d9] text-black rounded-md cursor-pointer transition-colors duration-300 hover:bg-secondary hover:text-black checked:bg-secondary checked:text-black checked:border-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary focus:ring-offset-white overflow-hidden"
+                                              className="inline-flex w-full m-2 ml-0 bg-[#d9d9d9] text-black rounded-md cursor-pointer transition-colors duration-300 hover:bg-secondary-accent hover:text-black checked:bg-secondary-accent checked:text-black checked:border-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary focus:ring-offset-white overflow-hidden"
                                             >
                                               <FormControl>
                                                 <Checkbox
                                                   {...field}
                                                   name={question.id}
-                                                  value={'value' in item ? item.value : ""}
-                                                  checked={Array.isArray(field.value) ? field.value.includes(item.value) : false}
+                                                  value={'value' in option ? option.value : ""}
+                                                  checked={Array.isArray(field.value) ? field.value.includes(option.value) : false}
                                                   onCheckedChange={(checked) => {
                                                     return checked
-                                                      ? field.onChange([...(Array.isArray(field.value) ? field.value : []), item.value])
-                                                      : field.onChange(Array.isArray(field.value) ? field.value.filter((value) => value !== item.value) : [])
+                                                      ? field.onChange([...(Array.isArray(field.value) ? field.value : []), option.value])
+                                                      : field.onChange(Array.isArray(field.value) ? field.value.filter((value) => value !== option.value) : [])
                                                   }}
                                                   className="hidden"
                                                 />
                                               </FormControl>
-                                              <FormLabel className="!mt-0 py-2 px-4 peer-aria-checked:bg-secondary peer-aria-checked:text-black peer-aria-checked:border-transparent peer-checked:bg-secondary peer-checked:text-black peer-checked:border-transparent cursor-pointer">
-                                                {'value' in item ? item.value : ""}
+                                              <FormLabel className="w-full !mt-0 py-3 px-4 peer-aria-checked:bg-secondary-accent peer-aria-checked:text-black peer-aria-checked:border-transparent peer-checked:bg-secondary-accent peer-checked:text-black peer-checked:border-transparent cursor-pointer">
+                                                {'value' in option ? option.value : ""}
                                               </FormLabel>
                                             </FormItem>
                                           )
                                         }}
                                       />
-                                    )) : ""}
-                                  </div>
-                                ))}
-                              </div>
-                            )}
-                            {question.type === "select" && (
-                              <Select onValueChange={field.onChange}>
-                                <FormControl>
-                                  <SelectTrigger>
-                                    <SelectValue placeholder="Select your preferred language" />
-                                  </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                  {question.options.map((option, index) => (
-                                    <SelectItem key={index} value={'value' in option ? option.value : ""}>
-                                      {'value' in option ? option.value : ""}
-                                    </SelectItem>
-                                  ))}
-                                </SelectContent>
-                              </Select>
-                            )}
-                          </>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <Button type="submit">Submit</Button>
-          </form>
-        </Form>
-        <CarouselDots className="mt-5" />
-        <CarouselPrevious className="fill-slate-300" />
-        <CarouselNext />
-      </Carousel>
-    </div>
+                                    }
+                                    </div>
+                                  )) : null }
+                                </div>
+                              )}
+                              {question.type === "select" && (
+                                <Select onValueChange={field.onChange}>
+                                  <FormControl>
+                                    <SelectTrigger>
+                                      <SelectValue placeholder={'placeholder' in question ? question.placeholder : ""} />
+                                    </SelectTrigger>
+                                  </FormControl>
+                                  <SelectContent>
+                                    {question.options ? question.options.map((option, index) => (
+                                      <SelectItem key={index} value={'value' in option ? option.value : ""}>
+                                        {'value' in option ? option.value : ""}
+                                      </SelectItem>
+                                    )) : null }
+                                  </SelectContent>
+                                </Select>
+                              )}
+                            </>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="w-screen px-10">
+                <Button type="submit" className="w-full md:w-2/5">Submit</Button>
+              </div>
+            </form>
+          </Form>
+          <div className="w-screen px-10">
+            <div className="flex justify-center items-center w-full md:w-2/5 relative mt-3">
+              <CarouselPrevious className="relative left-0 translate-y-[0rem]" />
+              <CarouselDots className="w-auto md:w-2/5 mx-3" />
+              <CarouselNext className="relative right-0 translate-y-[0rem]" />
+            </div>
+          </div>
+        </Carousel>
+      </div>
+      <div className="content-center hidden md:block w-1/2 absolute text-white h-screen px-16 right-0 top-0 z-10 overflow-hidden">
+        <h1 className="text-4xl text-white text-left">
+          &quot;<span className="text-secondary">Education</span> is the most powerful weapon which you can use to <span className="text-secondary"> change the world</span>.&quot;
+        </h1>
+        <p className="text-xl self-start text-slate-100 mt-5">
+          -Nelson Mandela
+        </p>
+        <div
+          aria-hidden="true"
+          className="absolute w-full h-[190%] short:h-[195%] tall-desktop:h-[200%] bg-primary -z-10 top-[50%] translate-y-[-50%] rounded-l-[50%] right-0"
+        ></div>
+      </div>
+    </>
   )
 }
 

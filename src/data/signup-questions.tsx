@@ -1,7 +1,13 @@
 export const signupQuestions = [
   {
+    id: "name",
+    question: "What name would you like to go by?",
+    type: "text",
+  },
+  {
     id: "q1",
     question: "What are your goals?",
+    description: "",
     type: "radio",
     options: [
       {
@@ -18,6 +24,7 @@ export const signupQuestions = [
   {
     id: "q2",
     question: "What is your experience level?",
+    description: "",
     type: "radio",
     options: [
       {
@@ -34,6 +41,7 @@ export const signupQuestions = [
   {
     id: "q3",
     question: "What would you like to learn?",
+    description: "Select all that apply",
     type: "checkbox",
     options: [
       {
@@ -152,7 +160,9 @@ export const signupQuestions = [
   {
     id: "q4",
     question: "What is your preferred language?",
+    description: "",
     type: "select",
+    placeholder: "Select your preferred language",
     options: [
       {
         value: "English",
@@ -180,6 +190,7 @@ export const signupQuestions = [
   {
     id: "q5",
     question: "Do you prefer virtual or in-person sessions?",
+    description: "",
     type: "radio",
     options: [
       {
@@ -187,6 +198,26 @@ export const signupQuestions = [
       },
       {
         value: "In person",
+      }
+    ]
+  },
+  {
+    id: "q6",
+    question: "This is a test checkbox question",
+    description: "Select multiple",
+    type: "checkbox",
+    options: [
+      {
+        value: "Option 1",
+      },
+      {
+        value: "Option 2",
+      },
+      {
+        value: "Option 3",
+      },
+      {
+        value: "Option 4",
       }
     ]
   }
