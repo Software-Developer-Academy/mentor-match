@@ -156,10 +156,10 @@ button {
 .sidebar-section:not(:first-child) {
   @apply mt-10;
 }
-table.tight td{
+table.tight td {
   @apply py-3 font-poppins;
 }
-table.tight td:first-child{
+table.tight td:first-child {
   @apply pl-0 font-normal;
 }
 table.tight td:last-child {

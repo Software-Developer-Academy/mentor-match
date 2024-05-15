@@ -1,7 +1,5 @@
 const FormInputSelect = () => {
-  return (
-    <div>FormInputSelect</div>
-  )
-}
+  return <div>FormInputSelect</div>;
+};
 
-export default FormInputSelect
+export default FormInputSelect;

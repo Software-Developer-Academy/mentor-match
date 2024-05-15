@@ -1,12 +1,13 @@
 import { Star } from "@/svgs/star";
 import { StarProps } from "@/types";
 
-const RatingStars = ({ 
-  id, 
-  rating = 0, 
+const RatingStars = ({
+  id,
+  rating = 0,
   colorClass = "tertiary",
   size = "medium",
-  align = "center" }: StarProps) => {
+  align = "center",
+}: StarProps) => {
   const fullStars = Math.floor(rating);
   let hasHalfStar = rating % 1 !== 0;
   const stars = Array.from({ length: 5 }, (_, i) => {
@@ -18,9 +19,30 @@ const RatingStars = ({
     }
     return "transparent";
   });
-  const starSize = size === "small" ? "w-[15px]" : size === "medium" ? "w-[20px]" : size === "large" ? "w-[25px]" : "";
-  const starGap = size === "small" ? "gap-1" : size === "medium" ? "gap-2" : size === "large" ? "gap-3" : "";
-  const starAlign = align === "left" ? "justify-start" : align === "center" ? "justify-center" : align === "right" ? "justify-end" : "";
+  const starSize =
+    size === "small"
+      ? "w-[15px]"
+      : size === "medium"
+        ? "w-[20px]"
+        : size === "large"
+          ? "w-[25px]"
+          : "";
+  const starGap =
+    size === "small"
+      ? "gap-1"
+      : size === "medium"
+        ? "gap-2"
+        : size === "large"
+          ? "gap-3"
+          : "";
+  const starAlign =
+    align === "left"
+      ? "justify-start"
+      : align === "center"
+        ? "justify-center"
+        : align === "right"
+          ? "justify-end"
+          : "";
 
   return (
     <div className={`flex items-center ${starGap} ${starAlign}`}>

@@ -5,7 +5,7 @@ export const signupQuestions: Question[] = [
     id: "name",
     question: "What name would you like to go by?",
     type: "text",
-    placeholder: "John Doe"
+    placeholder: "John Doe",
   },
   {
     id: "goal",
@@ -21,7 +21,7 @@ export const signupQuestions: Question[] = [
       },
       {
         value: "Still trying to figure it out",
-      }
+      },
     ],
   },
   {
@@ -62,7 +62,7 @@ export const signupQuestions: Question[] = [
           {
             value: "TypeScript",
           },
-        ]
+        ],
       },
       {
         title: "Backend",
@@ -79,7 +79,7 @@ export const signupQuestions: Question[] = [
           {
             value: "C#",
           },
-        ]
+        ],
       },
       {
         title: "Frameworks and Libraries",
@@ -97,9 +97,9 @@ export const signupQuestions: Question[] = [
             value: "Svelte",
           },
           {
-            value: "Next.js"
-          }
-        ]
+            value: "Next.js",
+          },
+        ],
       },
       {
         title: "Mobile App Development",
@@ -116,7 +116,7 @@ export const signupQuestions: Question[] = [
           {
             value: "Kotlin",
           },
-        ]
+        ],
       },
       {
         title: "Tech Stacks",
@@ -134,9 +134,9 @@ export const signupQuestions: Question[] = [
             value: "JAMstack",
           },
           {
-            value: "Python-Django"
-          }
-        ]
+            value: "Python-Django",
+          },
+        ],
       },
       {
         title: "Others",
@@ -154,10 +154,10 @@ export const signupQuestions: Question[] = [
             value: "Cybersecurity",
           },
           {
-            value: "Blockchain"
-          }
-        ]
-      }
+            value: "Blockchain",
+          },
+        ],
+      },
     ],
   },
   {
@@ -201,8 +201,8 @@ export const signupQuestions: Question[] = [
       },
       {
         value: "In person",
-      }
-    ]
+      },
+    ],
   },
   {
     id: "random_question",
@@ -221,7 +221,7 @@ export const signupQuestions: Question[] = [
       },
       {
         value: "Option 4",
-      }
-    ]
-  }
+      },
+    ],
+  },
 ];

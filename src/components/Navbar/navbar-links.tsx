@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -20,7 +19,6 @@ import { Technologies, AccountLinks } from "@/data/navigation";
 import { getIcon } from "@/data/static";
 import { signoutUser } from "@/lib/User/actions";
 
-
 const technologies = Technologies;
 const accountLinks = AccountLinks;
 import * as NavbarTypes from "./navbar-types";
@@ -30,7 +28,6 @@ import * as NavbarTypes from "./navbar-types";
  * @returns JSX.Element
  */
 export const Account = () => {
-  const router = useRouter();
   return (
     <ul className="grid w-screen md:w-max md:grid-cols-1 gap-row-10 p-5">
       {accountLinks.map((link) => (

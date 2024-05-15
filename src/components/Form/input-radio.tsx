@@ -71,7 +71,7 @@ const FormInputRadio = () => {
         </div>
       </RadioGroup>
     </div>
-  )
-}
+  );
+};
 
-export default FormInputRadio
+export default FormInputRadio;

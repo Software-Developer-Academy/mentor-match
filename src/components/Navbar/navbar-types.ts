@@ -27,11 +27,11 @@ export type NavigationType = {
    * The CSS class name(s) for the navigation item.
    */
   className?: string | string[];
-}
+};
 
 /**
  * Represents the props for the NavLinks component.
  */
 export type NavLinksType = {
   navLinks: NavigationType[];
-}
+};

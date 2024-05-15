@@ -13,7 +13,7 @@ export type Field = {
   placeholder?: string;
   onValueChange?: (value: string) => void;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
+};
 
 export type Question = {
   id: string;
@@ -28,4 +28,4 @@ export type Question = {
     }[];
   }[];
   placeholder?: string;
-}
+};

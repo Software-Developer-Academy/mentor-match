@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -6,7 +6,7 @@ import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Carousel,
   CarouselContent,
@@ -23,10 +23,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { signupQuestions } from "@/data/signup-questions"
+} from "@/components/ui/form";
+import { signupQuestions } from "@/data/signup-questions";
 
-import { RadioGroupComponent, CheckboxComponent, SelectComponent, TextComponent } from "./form-components";
+import {
+  RadioGroupComponent,
+  CheckboxComponent,
+  SelectComponent,
+  TextComponent,
+} from "./form-components";
 
 const AccountQuestionnaire = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -36,11 +41,18 @@ const AccountQuestionnaire = () => {
    *
    * @returns An object containing the schema and default values.
    */
-  const { schema, defaultValues } = signupQuestions.reduce((acc, question) => {
-    acc.schema[question.id] = question.type === "checkbox" ? z.array(z.string()) : z.string();
-    acc.defaultValues[question.id] = question.type === "checkbox" ? [] : "";
-    return acc;
-  }, { schema: {} as Record<string, z.ZodTypeAny>, defaultValues: {} as Record<string, [] | ""> });
+  const { schema, defaultValues } = signupQuestions.reduce(
+    (acc, question) => {
+      acc.schema[question.id] =
+        question.type === "checkbox" ? z.array(z.string()) : z.string();
+      acc.defaultValues[question.id] = question.type === "checkbox" ? [] : "";
+      return acc;
+    },
+    {
+      schema: {} as Record<string, z.ZodTypeAny>,
+      defaultValues: {} as Record<string, [] | "">,
+    },
+  );
 
   const formSchema = z.object({
     ...schema,
@@ -49,11 +61,12 @@ const AccountQuestionnaire = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      ...defaultValues
-    }
+      ...defaultValues,
+    },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => console.log(JSON.stringify(values));
+  const onSubmit = (values: z.infer<typeof formSchema>) =>
+    console.log(JSON.stringify(values));
 
   const router = useRouter();
 
@@ -74,29 +87,58 @@ const AccountQuestionnaire = () => {
             >
               <CarouselContent className="h-[calc(100dvh-8rem)] w-screen ml-0">
                 {signupQuestions.map((question, index) => (
-                  <CarouselItem key={index} className="overflow-y-auto flex justify-start p-10">
+                  <CarouselItem
+                    key={index}
+                    className="overflow-y-auto flex justify-start p-10"
+                  >
                     <FormField
                       control={form.control}
                       name={question.id}
                       render={({ field }) => (
                         <FormItem className="my-auto w-full md:w-2/5">
                           <div>
-                            <FormLabel><h5 className="text-2xl font-normal">{question.question}</h5></FormLabel>
-                            <FormDescription className="mb-10">{question.description}</FormDescription>
+                            <FormLabel>
+                              <h5 className="text-2xl font-normal">
+                                {question.question}
+                              </h5>
+                            </FormLabel>
+                            <FormDescription className="mb-10">
+                              {question.description}
+                            </FormDescription>
                           </div>
                           <FormControl>
                             <>
                               {question.type === "text" && (
-                                <TextComponent field={{ ...field, placeholder: question.placeholder }} />
+                                <TextComponent
+                                  field={{
+                                    ...field,
+                                    placeholder: question.placeholder,
+                                  }}
+                                />
                               )}
                               {question.type === "radio" && (
-                                <RadioGroupComponent field={{ ...field, onValueChange: field.onChange }} question={question} />
+                                <RadioGroupComponent
+                                  field={{
+                                    ...field,
+                                    onValueChange: field.onChange,
+                                  }}
+                                  question={question}
+                                />
                               )}
                               {question.type === "checkbox" && (
-                                <CheckboxComponent form={form} question={question} />
+                                <CheckboxComponent
+                                  form={form}
+                                  question={question}
+                                />
                               )}
                               {question.type === "select" && (
-                                <SelectComponent field={{ ...field, onValueChange: field.onChange }} question={question} />
+                                <SelectComponent
+                                  field={{
+                                    ...field,
+                                    onValueChange: field.onChange,
+                                  }}
+                                  question={question}
+                                />
                               )}
                             </>
                           </FormControl>
@@ -109,8 +151,16 @@ const AccountQuestionnaire = () => {
               </CarouselContent>
               <div className="w-screen px-10">
                 <div className="flex justify-center items-center gap-5 w-full md:w-2/5 relative">
-                  <Button type="button" onClick={skipQuestions} className="flex grow shrink-0 basis-0 bg-primary-accent">Skip</Button>
-                  <Button type="submit" className="flex grow shrink-0 basis-0">Submit</Button>
+                  <Button
+                    type="button"
+                    onClick={skipQuestions}
+                    className="flex grow shrink-0 basis-0 bg-primary-accent"
+                  >
+                    Skip
+                  </Button>
+                  <Button type="submit" className="flex grow shrink-0 basis-0">
+                    Submit
+                  </Button>
                 </div>
               </div>
             </form>
@@ -126,7 +176,9 @@ const AccountQuestionnaire = () => {
       </div>
       <div className="content-center hidden md:block w-1/2 absolute text-white h-screen px-16 right-0 top-0 z-10 overflow-hidden">
         <h1 className="text-4xl text-white text-left">
-          &quot;<span className="text-secondary">Education</span> is the most powerful weapon which you can use to <span className="text-secondary"> change the world</span>.&quot;
+          &quot;<span className="text-secondary">Education</span> is the most
+          powerful weapon which you can use to{" "}
+          <span className="text-secondary"> change the world</span>.&quot;
         </h1>
         <p className="text-xl self-start text-slate-100 mt-5">
           -Nelson Mandela
@@ -137,7 +189,7 @@ const AccountQuestionnaire = () => {
         ></div>
       </div>
     </>
-  )
+  );
 };
 
 export default AccountQuestionnaire;

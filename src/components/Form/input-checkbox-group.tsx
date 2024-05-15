@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const FormInputCheckboxGroup = () => {
-  return (
-    <div>FormInputCheckboxGroup</div>
-  )
-}
+  return <div>FormInputCheckboxGroup</div>;
+};
 
-export default FormInputCheckboxGroup
+export default FormInputCheckboxGroup;

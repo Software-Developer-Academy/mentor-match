@@ -3,12 +3,7 @@ import { notFound } from "next/navigation";
 
 import RatingStars from "@/components/RatingStars";
 import { Button } from "@/components/ui/button";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { MentorsData } from "@/data/homepage";
 const mentors = MentorsData;
 
@@ -24,11 +19,22 @@ const Profile = ({ params }: { params: { id: number } }) => {
     <div className="container flex flex-col justify-between lg:flex-row gap-14 my-24 bg-white p-10 rounded-[4px]">
       <div className="flex flex-col w-full lg:w-2/3 xl:w-3/4 items-start">
         <div className="w-full flex flex-col lg:flex-row  items-center lg:items-start">
-          <Image src={mentor.image} alt={mentor.name} width={120} height={120} />
+          <Image
+            src={mentor.image}
+            alt={mentor.name}
+            width={120}
+            height={120}
+          />
           <div className="ml-0 lg:ml-10 text-center lg:text-left">
             <h1 className="text-[2rem] mt-5 text-primary">{mentor.name}</h1>
             <div className="w-full mt-2">
-              <RatingStars id="profile" rating={mentor.rating} align="left" size="large" colorClass="tertiary" />
+              <RatingStars
+                id="profile"
+                rating={mentor.rating}
+                align="left"
+                size="large"
+                colorClass="tertiary"
+              />
             </div>
           </div>
         </div>
