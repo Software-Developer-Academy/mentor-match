@@ -5,7 +5,11 @@ import { redirect } from "next/navigation";
 import { ZodIssue } from "zod";
 
 import { connectMongo } from "../db";
-import { createSession, setSessionCookie } from "../utils/session";
+import {
+  createSession,
+  setSessionCookie,
+  clearSessionCookie,
+} from "../utils/session";
 
 import UserModel from "./model";
 import {
@@ -131,4 +135,10 @@ export async function signupUser(
   }
 
   return redirect("/");
+}
+
+export async function signoutUser() {
+  clearSessionCookie();
+
+  return redirect("/signin");
 }

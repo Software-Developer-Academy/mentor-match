@@ -80,14 +80,16 @@ export const FormPanel = ({ type, children }: FormPanelProps) => {
       )}
     >
       <div>
-        <Image
-          src="/images/Logo.png"
-          className="mx-auto mb-24"
-          width={75}
-          height={75}
-          alt="Mentor Match Logo"
-          fetchPriority="high"
-        />
+        <Link href="/">
+          <Image
+            src="/images/Logo.png"
+            className="mx-auto mb-24"
+            width={75}
+            height={75}
+            alt="Mentor Match Logo"
+            fetchPriority="high"
+          />
+        </Link>
         <div className="flex flex-col justify-center gap-12">
           <div>
             <h2 className="text-3xl">

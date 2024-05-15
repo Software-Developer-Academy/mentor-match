@@ -30,7 +30,9 @@ export default function RootLayout({
       lang="en"
       className={cn(poppins.variable, andada_pro.variable, "h-full")}
     >
-      <body className={cn(inter.className, "h-full")}>{children}</body>
+      <body className={cn(inter.className, "h-full", "bg-slate-100")}>
+        {children}
+      </body>
     </html>
   );
 }

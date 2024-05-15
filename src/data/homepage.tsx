@@ -52,7 +52,20 @@ export const TestimonialsData = [
   },
 ];
 
-export const MentorsData = [
+type Mentor = {
+  id: number;
+  name: string;
+  title: string;
+  image: string;
+  rating: number;
+  bio: string;
+  languages: string[];
+  availability: boolean;
+  location: string;
+  email: string;
+};
+
+export const MentorsData: Mentor[] = [
   {
     id: 1,
     name: "John Doe",
