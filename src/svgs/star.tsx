@@ -13,10 +13,10 @@ export const Star = ({ id, fill, colorClass = "tertiary" }: StarProps) => {
         </linearGradient>
         <linearGradient id={`${id}-half`}>
           <stop className="stop-color" offset="50%" />
-          <stop className="stop-color2" offset="50%" stop-opacity="0.2" />
+          <stop className="stop-color2" offset="50%" stopOpacity="0.2" />
         </linearGradient>
         <linearGradient id={`${id}-transparent`}>
-          <stop className="stop-color2" offset="100%" stop-opacity="0.2"  />
+          <stop className="stop-color2" offset="100%" stopOpacity="0.2"  />
         </linearGradient>
       </defs>
       <path

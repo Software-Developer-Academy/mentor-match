@@ -1,12 +1,15 @@
-export const signupQuestions = [
+import { Question } from "@/types";
+
+export const signupQuestions: Question[] = [
   {
     id: "name",
     question: "What name would you like to go by?",
     type: "text",
+    placeholder: "John Doe"
   },
   {
-    id: "q1",
-    question: "What are your goals?",
+    id: "goal",
+    question: "What is your goal?",
     description: "",
     type: "radio",
     options: [
@@ -22,7 +25,7 @@ export const signupQuestions = [
     ],
   },
   {
-    id: "q2",
+    id: "experience",
     question: "What is your experience level?",
     description: "",
     type: "radio",
@@ -39,7 +42,7 @@ export const signupQuestions = [
     ],
   },
   {
-    id: "q3",
+    id: "subjects",
     question: "What would you like to learn?",
     description: "Select all that apply",
     type: "checkbox",
@@ -158,7 +161,7 @@ export const signupQuestions = [
     ],
   },
   {
-    id: "q4",
+    id: "language",
     question: "What is your preferred language?",
     description: "",
     type: "select",
@@ -188,7 +191,7 @@ export const signupQuestions = [
     ],
   },
   {
-    id: "q5",
+    id: "session_type",
     question: "Do you prefer virtual or in-person sessions?",
     description: "",
     type: "radio",
@@ -202,7 +205,7 @@ export const signupQuestions = [
     ]
   },
   {
-    id: "q6",
+    id: "random_question",
     question: "This is a test checkbox question",
     description: "Select multiple",
     type: "checkbox",

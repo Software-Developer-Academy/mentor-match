@@ -1,21 +1,15 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
+import RatingStars from "@/components/RatingStars";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
   TableCell,
-  TableHead,
-  TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
-
-import RatingStars from "@/components/RatingStars";
 import { MentorsData } from "@/data/homepage";
-import { getIcon } from "@/data/static";
-import { Button } from "@/components/ui/button";
 const mentors = MentorsData;
 
 const Profile = ({ params }: { params: { id: number } }) => {

@@ -2,10 +2,11 @@
  * Common components among auth pages
  */
 
-import { cn } from "@/lib/utils";
-import SignUpImage from "@/svgs/signup-image";
 import Image from "next/image";
 import Link from "next/link";
+
+import { cn } from "@/lib/utils";
+import SignUpImage from "@/svgs/signup-image";
 
 type TitleMottoProps = {
   welcomeMessage: string;

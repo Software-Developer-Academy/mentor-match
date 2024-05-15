@@ -1,8 +1,9 @@
 "use client";
 
 import React from "react";
-import { useImageUpload } from "./useImageUpload";
+
 import ImagePreview from "./ImagePreview";
+import { useImageUpload } from "./useImageUpload";
 
 export const ImageUpload = () => {
   const {
