@@ -4,6 +4,8 @@
 
 @import url(svgs.css);
 
+@import url(svgs.css);
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -105,6 +107,7 @@
 body {
   overflow-x: hidden;
   font-family: var(--poppins);
+  font-family: var(--poppins);
 }
 
 h1,
@@ -130,9 +133,6 @@ button {
 
 .outline-btn {
   @apply border border-primary text-primary rounded-[4px] px-4 py-2 transition-colors ease-linear duration-200 outline-none focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50;
-}
-.outline-btn:hover {
-  @apply bg-primary text-primary-foreground;
 }
 
 .glassmorphism-20 {

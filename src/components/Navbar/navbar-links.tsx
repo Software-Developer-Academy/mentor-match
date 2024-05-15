@@ -40,7 +40,6 @@ export const Account = () => {
               className="flex flex-col w-full"
               action={() => {
                 signoutUser();
-                router.refresh();
               }}
               noValidate
             >

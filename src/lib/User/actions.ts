@@ -140,5 +140,5 @@ export async function signupUser(
 export async function signoutUser() {
   clearSessionCookie();
 
-  return redirect("/signin");
+  return redirect("/");
 }
