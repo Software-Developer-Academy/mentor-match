@@ -4,8 +4,6 @@
 
 @import url(svgs.css);
 
-@import url(svgs.css);
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -106,7 +104,6 @@
 
 body {
   overflow-x: hidden;
-  font-family: var(--poppins);
   font-family: var(--poppins);
 }
 
