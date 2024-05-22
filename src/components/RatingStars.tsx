@@ -1,6 +1,28 @@
 import { Star } from "@/svgs/star";
 import { StarProps } from "@/types";
 
+const starStyles = {
+  styleSize: {
+    small: {
+      width: "w-[15px]",
+      gap: "gap-1",
+    },
+    medium: {
+      width: "w-[20px]",
+      gap: "gap-2",
+    },
+    large: {
+      width: "w-[25px]",
+      gap: "gap-3",
+    },
+  },
+  styleAlign: {
+    left: "justify-start",
+    center: "justify-center",
+    right: "justify-end",
+  },
+};
+
 const RatingStars = ({
   id,
   rating = 0,
@@ -19,30 +41,9 @@ const RatingStars = ({
     }
     return "transparent";
   });
-  const starSize =
-    size === "small"
-      ? "w-[15px]"
-      : size === "medium"
-        ? "w-[20px]"
-        : size === "large"
-          ? "w-[25px]"
-          : "";
-  const starGap =
-    size === "small"
-      ? "gap-1"
-      : size === "medium"
-        ? "gap-2"
-        : size === "large"
-          ? "gap-3"
-          : "";
-  const starAlign =
-    align === "left"
-      ? "justify-start"
-      : align === "center"
-        ? "justify-center"
-        : align === "right"
-          ? "justify-end"
-          : "";
+  const starSize = starStyles.styleSize[size].width;
+  const starGap = starStyles.styleSize[size].gap;
+  const starAlign = starStyles.styleAlign[align];
 
   return (
     <div className={`flex items-center ${starGap} ${starAlign}`}>

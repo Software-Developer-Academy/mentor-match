@@ -33,26 +33,26 @@ import {
   TextComponent,
 } from "./form-components";
 
+/**
+ * Generates the schema and default values for the signup questions. Since the sign up form doesn't need validation, the schema and default values are empty arrays and strings.
+ *
+ * @returns An object containing the schema and default values.
+ */
+const { schema, defaultValues } = signupQuestions.reduce(
+  (acc, question) => {
+    acc.schema[question.id] =
+      question.type === "checkbox" ? z.array(z.string()) : z.string();
+    acc.defaultValues[question.id] = question.type === "checkbox" ? [] : "";
+    return acc;
+  },
+  {
+    schema: {} as Record<string, z.ZodTypeAny>,
+    defaultValues: {} as Record<string, [] | "">,
+  },
+);
+
 const AccountQuestionnaire = () => {
   const formRef = useRef<HTMLFormElement>(null);
-
-  /**
-   * Generates the schema and default values for the signup questions. Since the sign up form doesn't need validation, the schema and default values are empty arrays and strings.
-   *
-   * @returns An object containing the schema and default values.
-   */
-  const { schema, defaultValues } = signupQuestions.reduce(
-    (acc, question) => {
-      acc.schema[question.id] =
-        question.type === "checkbox" ? z.array(z.string()) : z.string();
-      acc.defaultValues[question.id] = question.type === "checkbox" ? [] : "";
-      return acc;
-    },
-    {
-      schema: {} as Record<string, z.ZodTypeAny>,
-      defaultValues: {} as Record<string, [] | "">,
-    },
-  );
 
   const formSchema = z.object({
     ...schema,
