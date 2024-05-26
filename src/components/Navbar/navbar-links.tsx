@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -29,7 +28,6 @@ import * as NavbarTypes from "./navbar-types";
  * @returns JSX.Element
  */
 export const Account = () => {
-  const router = useRouter();
   return (
     <ul className="grid w-screen md:w-max md:grid-cols-1 gap-row-10 p-5">
       {accountLinks.map((link) => (
@@ -39,7 +37,6 @@ export const Account = () => {
               className="flex flex-col w-full"
               action={() => {
                 signoutUser();
-                router.refresh();
               }}
               noValidate
             >
@@ -112,7 +109,7 @@ const CreateNavigationMenuItem = ({
   link,
   index,
 }: {
-  link: NavbarTypes.NavigationProps;
+  link: NavbarTypes.NavigationType;
   index: number;
 }) => {
   return (
@@ -149,7 +146,7 @@ const CreateNavigationMenuItem = ({
  * @param {NavbarTypes.NavLinksProps} navLinks - The array of navigation links.
  * @returns {JSX.Element} - The rendered navigation links.
  */
-const NavbarLinks = ({ navLinks }: NavbarTypes.NavLinksProps) => {
+const NavbarLinks = ({ navLinks }: NavbarTypes.NavLinksType) => {
   return (
     <>
       <NavigationMenu>

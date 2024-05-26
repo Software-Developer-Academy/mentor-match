@@ -1,7 +1,7 @@
 /**
  * Represents the properties for the Navigation component.
  */
-export interface NavigationProps {
+export type NavigationType = {
   /**
    * The text to be displayed for the navigation item.
    */
@@ -27,11 +27,11 @@ export interface NavigationProps {
    * The CSS class name(s) for the navigation item.
    */
   className?: string | string[];
-}
+};
 
 /**
  * Represents the props for the NavLinks component.
  */
-export interface NavLinksProps {
-  navLinks: NavigationProps[];
-}
+export type NavLinksType = {
+  navLinks: NavigationType[];
+};
